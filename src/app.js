@@ -23,6 +23,6 @@ app.get('/', (req, res) => {
 
 // Rutas API
 app.use('/api/pedidos', require('./routes/pedido.routes'));
-
+app.use('/api/productos',require('./routes/producto.routes'));
 // Exportar solo la app
 module.exports = app;

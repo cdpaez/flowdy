@@ -1,0 +1,26 @@
+POST http://localhost:5000/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Torta de Chocolate",
+  "descripcion": "Torta húmeda con chocolate",
+  "precio": 10.50,
+  "imagen_url": "https://miweb.com/torta.jpg"
+}
+
+###  obtener todos los productos
+GET http://localhost:5000/api/productos
+### obtener los productos por ID
+GET http://localhost:5000/api/productos/1
+### actualizar productos
+PUT http://localhost:5000/api/productos/11
+Content-Type: application/json
+
+{
+  "nombre": "Torta de Chocolate Premium",
+  "descripcion": "Mejorada con relleno extra",
+  "precio": 12.00,
+  "imagen_url": "https://miweb.com/torta-nueva.jpg"
+}
+### borrar productos
+DELETE http://localhost:5000/api/productos/1

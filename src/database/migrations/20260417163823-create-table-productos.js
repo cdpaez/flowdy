@@ -35,6 +35,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.fn('NOW')
+      },
+      imagen_url: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
 
     });

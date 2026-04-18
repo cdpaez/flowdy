@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     precio: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false
+    },
+    imagen_url: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'productos',

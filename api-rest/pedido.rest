@@ -23,3 +23,10 @@ Content-Type: application/json
     }
   ]
 }
+### obtener pedido
+GET http://localhost:5000/api/pedidos
+
+### obtener pedido especifico
+GET http://localhost:5000/api/pedidos/8
+### borrar pedido
+DELETE http://localhost:5000/api/pedidos/8
