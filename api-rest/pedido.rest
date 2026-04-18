@@ -1,0 +1,25 @@
+POST http://localhost:5000/api/pedidos
+Content-Type: application/json
+
+{
+  "cliente": {
+    "nombre": "Juan Perez",
+    "telefono": "0999999999",
+    "direccion": "Quito"
+  },
+  "pedido": {
+    "tipo_entrega": "domicilio",
+    "direccion_entrega": "Av. Siempre Viva 123",
+    "forma_pago": "efectivo"
+  },
+  "detalles": [
+    {
+      "producto_id": 1,
+      "cantidad": 2
+    },
+    {
+      "producto_id": 2,
+      "cantidad": 1
+    }
+  ]
+}
