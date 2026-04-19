@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../img/logo/inventario.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+  <link rel="stylesheet" href="../css/components/menuContextual.css">
+  <link rel="stylesheet" href="../css/components/registrarActa.css">
+  <link rel="stylesheet" href="../css/operador.css">
+  <link rel="stylesheet" href="../css/media/adaptable.css">
+  <title>Panel del Operador</title>
+</head>
+
+<body>
+  <div class="envoltorio__principal">
+
+    <header>
+      🛒 Panel del Operador
+      <!-- <a href="/dashboard.html">dashboard</a> -->
+    </header>
+
+    <main>
+      <button class="hamburger-btn" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="panel-lateral">
+
+        <div class="pestanas">
+          <h2>Menú</h2>
+          <button onclick="mostrarSeccion('ventas')">🧾 Registrar Acta</button>
+          <button onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+
+      </nav>
+
+      <section class="area-contenido">
+        <!-- Botón flotante -->
+        <button class="floating-btn">Stock</button>
+        <dialog id="dialogoBusqueda">
+          <div class="busqueda-avanzada">
+            <div class="busqueda-avanzada__inputs">
+              <input type="text" placeholder="Marca" id="filtroMarca" />
+              <input type="text" placeholder="Modelo" id="filtroModelo" />
+              <input type="text" placeholder="Procesador" id="filtroProcesador" />
+              <input type="text" placeholder="Tamano" id="filtroTamano" />
+              <input type="text" placeholder="Disco" id="filtroDisco" />
+              <input type="text" placeholder="Ram" id="filtroRam" />
+            </div>
+            <div class="busqueda-avanzada__interacciones">
+              <p id="contadorResultados">0 resultados encontrados</p>
+              <p id="contadorDisponibles">0 Disponibles</p>
+              <p id="contadorVendidos">0 Vendidos</p>
+
+              <button id="cerrarDialogo">Cerrar</button>
+              <button id="limpiarBusqueda">Limpiar</button>
+            </div>
+          </div>
+          <div class="listaProductos">
+            <table id="tablaProductos">
+              <thead>
+                <tr>
+                  <th>Codigo</th>
+                  <th>Precio</th>
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Procesador</th>
+                  <th>Tamaño</th>
+                  <th>Disco</th>
+                  <th>RAM</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Se llenará dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </dialog>
+
+        <div id="ventas" class="seccion activa">
+          <section class="container">
+            <!-- Sección de Cliente -->
+            <div class="actas">
+
+              <h2>Acta de entrega de equipos tecnológicos</h2>
+
+              <!-- Formulario para cliente nuevo (nuevo) -->
+              <form id="actaForm">
+
+                <fieldset class="fieldset-container">
+                  <legend class="legend-container">Datos del Cliente</legend>
+                  <div class="actas__cliente">
+                    <label>Nombre: <input type="text" name="nombre_cliente" required></label>
+                    <label>Cédula/RUC: <input type="text" name="cedula_ruc" required></label>
+                    <label>Teléfono: <input type="text" name="telefono" required></label>
+                    <label>Correo: <input type="email" name="correo" required></label>
+                    <label>Dirección: <input type="text" name="direccion" required></label>
+                  </div>
+                </fieldset>
+
+
+                <fieldset class="fieldset-container">
+                  <legend class="legend-container">Datos del Equipo:</legend>
+                  <div class="buscador-equipo-wrapper">
+                    <label class="busqueda-label">
+                      Buscar Equipo:
+                      <input type="text" id="buscar-equipo" class="busqueda-input" autocomplete="off" placeholder="marca o código">
+                      <ul id="resultados" class="menu-contextual"></ul>
+                    </label>
+                  </div>
+                  <div class="actas__equipos">
+                    <input type="hidden" name="equipo_id" id="equipo_id">
+                    <input type="hidden" name="codigo_prd" id="codigo_prd">
+                    <label>Marca: <input type="text" name="marca" required></label>
+                    <label>Modelo: <input type="text" name="modelo" required></label>
+                    <label>N° de Serie: <input type="text" name="numero_serie" required></label>
+                    <label>Procesador: <input type="text" name="procesador" required></label>
+                    <label>Tamaño: <input type="text" name="tamano" required></label>
+                    <label>Disco: <input type="text" name="disco" required></label>
+                    <label>Memoria RAM: <input type="text" name="memoria_ram" required></label>
+                    <label>Tipo: <input type="text" name="tipo_equipo" required></label>
+                    <label>Estado: <input type="text" name="estado" required></label>
+                    <label>Extras: <input type="text" name="extras"></label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="fieldset-container">
+                  <legend class="legend-container">Inspección del Equipo (Hardware)</legend>
+                  <div class="actas__hardware">
+                    <label>
+                      Teclado:
+                      <div class="input-group-hw">
+                        <input type="text" name="hw_teclado" required>
+                        <input type="checkbox" name="hw_teclado_check">
+                      </div>
+                    </label>
+                    <label>
+                      Mouse:
+                      <div class="input-group-hw">
+                        <input type="text" name="hw_mouse" required>
+                        <input type="checkbox" name="hw_mouse_check">
+                      </div>
+                    </label>
+                    <label>
+                      Cámara:
+                      <div class="input-group-hw">
+                        <input type="text" name="hw_camara" required>
+                        <input type="checkbox" name="hw_camara_check">
+                      </div>
+                    </label>
+                    <label>
+                      Pantalla:
+                      <div class="input-group-hw">
+                        <input type="text" name="hw_pantalla" required>
+                        <input type="checkbox" name="hw_pantalla_check">
+                      </div>
+                    </label>
+                    <label>
+                      Parlantes:
+                      <div class="input-group-hw">
+                        <input type="text" name="hw_parlantes" required>
+                        <input type="checkbox" name="hw_parlantes_check">
+                      </div>
+                    </label>
+                    <label>
+                      Batería:
+                      <div class="input-group-hw">
+                        <input type="text" name="hw_bateria" required>
+                        <input type="checkbox" name="hw_bateria_check">
+                      </div>
+                    </label>
+                    <label>
+                      Carcasa:
+                      <div class="input-group-hw">
+                        <input type="text" name="hw_carcasa" required>
+                        <input type="checkbox" name="hw_carcasa_check">
+                      </div>
+                    </label>
+                    <label>
+                      Cargador:
+                      <div class="input-group-hw">
+                        <input type="text" name="hw_cargador" required>
+                        <input type="checkbox" name="hw_cargador_check">
+                      </div>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="fieldset-container">
+                  <legend class="legend-container">Inspección del Equipo (Software)</legend>
+
+                  <div class="actas__software">
+                    <label>
+                      <input type="checkbox" name="sw_sistema_operativo">
+                      Sistema Operativo
+                    </label>
+                    <label>
+                      <input type="checkbox" name="sw_antivirus">
+                      Antivirus
+                    </label>
+                    <label>
+                      <input type="checkbox" name="sw_office">
+                      Office
+                    </label>
+                    <label>
+                      <input type="checkbox" name="sw_navegadores">
+                      Navegadores
+                    </label>
+                    <label>
+                      <input type="checkbox" name="sw_compresores">
+                      Compresores
+                    </label>
+                    <label>
+                      <input type="checkbox" name="sw_acceso_remoto">
+                      Acceso remoto
+                    </label>
+
+                    <label class="notas">
+                      Nota
+                      <input id="sw_nota" type="text" name="sw_nota" maxlength="100"
+                        placeholder="Escribe una nota breve...">
+                      <small id="contador_nota" class="contador">0 / 100</small>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="fieldset-container">
+                  <legend class="legend-container">Adicionales</legend>
+
+                  <div class="actas__adicionales">
+                    <label>
+                      Mouse:
+                      <div class="input-group-ad">
+                        <input type="text" name="ad_mouse" required>
+                        <input type="checkbox" name="ad_mouse_check">
+                      </div>
+                    </label>
+                    <label>
+                      Mochila:
+                      <div class="input-group-ad">
+                        <input type="text" name="ad_mochila" required>
+                        <input type="checkbox" name="ad_mochila_check">
+                      </div>
+                    </label>
+                    <label>
+                      Estuche:
+                      <div class="input-group-ad">
+                        <input type="text" name="ad_estuche" required>
+                        <input type="checkbox" name="ad_estuche_check">
+                      </div>
+                    </label>
+                    <label>
+                      Software 1:
+                      <div class="input-group-ad">
+                        <input type="text" name="ad_software1" required>
+                        <input type="checkbox" name="ad_software1_check">
+                      </div>
+                    </label>
+                    <label>
+                      Software 2:
+                      <div class="input-group-ad">
+                        <input type="text" name="ad_software2" required>
+                        <input type="checkbox" name="ad_software2_check">
+                      </div>
+                    </label>
+                    <label>
+                      Software 3:
+                      <div class="input-group-ad">
+                        <input type="text" name="ad_software3" required>
+                        <input type="checkbox" name="ad_software3_check">
+                      </div>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <div class="observaciones-wrapper">
+                  <label for="observaciones" class="observaciones-label">Observaciones:</label>
+                  <textarea id="observaciones" name="observaciones" class="observaciones-textarea"
+                    maxlength="162"></textarea>
+                  <span id="contadorobs" class="observaciones-contador">0 / 162</span>
+                </div>
+
+
+                <div class="forma-pago-wrapper">
+                  <h2 class="forma-pago-titulo">Forma de Pago</h2>
+
+                  <select name="forma_pago" class="forma-pago-select" required>
+                    <option value="efectivo">Efectivo</option>
+                    <option value="deposito">Depósito</option>
+                    <option value="transferencia">Transferencia</option>
+                    <option value="tarjeta">Tarjeta</option>
+                  </select>
+
+                  <label class="forma-pago-label">
+                    Precio ($):
+                    <input type="number" step="0.01" min="0" name="precio" class="forma-pago-input" required>
+                  </label>
+
+                  <fieldset class="grupo-botones">
+                    <legend class="grupo-botones-legend">Acciones</legend>
+                    <button type="submit" class="boton-guardar">Guardar Acta</button>
+                  </fieldset>
+                </div>
+
+              </form>
+            </div>
+        </div>
+
+      </section>
+
+      <!-- Toast Notification Container -->
+      <div id="toast-container" class="toast-container"></div>
+    </main>
+
+    <footer>
+      © 2025 Sistema de Inventario | Operador
+    </footer>
+
+  </div>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/operador/filtroAvanzado.js"></script>
+  <script src="../js/operador/acta.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- En tu dashboard.html -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/operador/operador.js"></script>
+
+  <script type="module" src="../js/webSocket.js"></script>
+</body>
+
+</html>

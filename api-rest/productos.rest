@@ -11,7 +11,7 @@ Content-Type: application/json
 ###  obtener todos los productos
 GET http://localhost:5000/api/productos
 ### obtener los productos por ID
-GET http://localhost:5000/api/productos/1
+GET http://localhost:5000/api/productos/5
 ### actualizar productos
 PUT http://localhost:5000/api/productos/11
 Content-Type: application/json

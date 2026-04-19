@@ -1,0 +1,193 @@
+.floating-btn {
+  position: fixed;
+  bottom: 8%;
+  right: 3%;
+  width: 15%;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 1000;
+  /* Para que esté por encima de otros elementos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-btn:hover {
+  background-color: #721c24;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* modal para busqueda avanzada */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Fondo semitransparente */
+}
+
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 800px;
+  width: 90%;
+  margin: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.busqueda-avanzada {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.busqueda-avanzada__inputs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.busqueda-avanzada__inputs input {
+  padding: .2rem .8rem;
+  width: 100px;
+}
+
+.busqueda-avanzada__interacciones {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+#contadorResultados,
+#contadorDisponibles,
+#contadorVendidos {
+  background-color: #e0f7fa;
+  color: #006064;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+#cerrarDialogo {
+  background-color: #d37474;
+  color: white;
+  border: none;
+  padding: 0.2rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+#cerrarDialogo:hover {
+  background-color: #cf2825;
+}
+
+#limpiarBusqueda {
+  background-color: #6d91bb;
+  color: white;
+  border: none;
+  padding: 0.2rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+#limpiarBusqueda:hover {
+  background-color: #134772;
+}
+
+.listaProductos {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#tablaProductos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+#tablaProductos thead {
+  background-color: #2980b9;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+#tablaProductos th,
+#tablaProductos td {
+  padding: 0.4rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+#tablaProductos tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Resaltamos visualmente el código y estado */
+#tablaProductos td:first-child {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#tablaProductos td:last-child {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Estado con colores según valor */
+#tablaProductos td:last-child::before {
+  content: '● ';
+  font-size: 0.8rem;
+}
+
+#tablaProductos td:last-child:contains("disponible") {
+  color: green;
+}
+
+#tablaProductos td:last-child:contains("vendido") {
+  color: red;
+}
+
+.estado-disponible {
+  color: green;
+  font-weight: bold;
+  transition: background-color 0.4s ease;
+}
+
+.estado-vendido {
+  color: red;
+  font-weight: bold;
+  transition: background-color 0.4s ease;
+}
+
+/* Opcional: efecto visual al cambiar */
+.estado-disponible.cambiado {
+  background-color: #d4edda; /* verde claro */
+}
+
+.estado-vendido.cambiado {
+  background-color: #f8d7da; /* rojo claro */
+}

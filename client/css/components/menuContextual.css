@@ -1,0 +1,67 @@
+/* Contenedor principal del módulo de búsqueda */
+.buscador-equipo-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+/* Etiqueta del campo */
+.busqueda-label {
+  display: block;
+  width: 100%;
+}
+
+/* Input de búsqueda */
+.busqueda-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.busqueda-input:focus {
+  border-color: #3b82f6; /* azul suave */
+}
+
+/* Lista de resultados */
+.menu-contextual {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  /* border: 1px solid #ccc; */
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 6px 6px;
+}
+
+/* Elementos de la lista */
+.menu-contextual li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menu-contextual li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Mensaje de “no encontrado” */
+.menu-contextual li:disabled,
+.menu-contextual li[disabled] {
+  color: #888;
+  cursor: default;
+  background-color: #fff;
+}

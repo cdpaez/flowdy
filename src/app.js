@@ -13,15 +13,16 @@ app.use(cors());
 // Archivos estáticos
 
 // Servir archivos estáticos desde la carpeta /frontend
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../client')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Página principal (al acceder a "/")
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
 // Rutas API
+app.use('/login', require('./routes/login.routes'));
 app.use('/api/pedidos', require('./routes/pedido.routes'));
 app.use('/api/productos',require('./routes/producto.routes'));
 // Exportar solo la app

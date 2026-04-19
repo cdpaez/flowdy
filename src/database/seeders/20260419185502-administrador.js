@@ -24,7 +24,7 @@ module.exports = {
         rol_usuario: 'admin',
         estado: 'activo',
         created_at: new Date(),
-        updated_at: new Date() 
+        updated_at: new Date()
       });
     }
 
@@ -37,7 +37,7 @@ module.exports = {
         rol_usuario: 'vendedor',
         estado: 'activo',
         created_at: new Date(),
-        updated_at: new Date() 
+        updated_at: new Date()
       });
     }
 

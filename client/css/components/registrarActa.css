@@ -1,0 +1,362 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.actas input:focus {
+  outline: none;
+  border: 1px solid #3498db;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
+}
+.actas textarea:focus {
+  outline: none;
+  border: 1px solid #3498db;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
+}
+.actas {
+  display: flex;
+  flex-direction: column;
+}
+
+.actas>h2 {
+  padding: 2rem;
+}
+
+/* seccion para los clientes */
+.actas__cliente {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.actas__cliente label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.actas__cliente input {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* seccion para los equipos */
+.fieldset-container {
+  position: relative;
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-top: 2rem;
+  background-color: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.legend-container {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  padding: 0 0.5rem;
+  margin-left: 0.5rem;
+  background-color: #fafafa;
+}
+
+.actas__equipos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.actas__equipos label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.actas__equipos input {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* seccion para la revision del hardware */
+.actas__hardware {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.actas__hardware label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.input-group-hw {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.input-group-hw input[type="text"] {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.input-group-hw input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* seccion para la revision del software */
+.actas__software {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.actas__software label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.actas__software input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.actas__software input[type="text"] {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.notas {
+  grid-column: 1 / -1;
+}
+
+/* Contador en gris (por defecto) */
+.contador {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #666;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Estados según longitud */
+.contador.warn {
+  color: #f39c12;
+}
+
+.contador.critical {
+  color: #e74c3c;
+}
+
+/* Bordes del input */
+#sw_nota.valid {
+  border: 3px solid #2ecc71;
+}
+
+#sw_nota.warn {
+  border: 3px solid #f39c12;
+}
+
+#sw_nota.critical {
+  border: 3px solid #e74c3c;
+  background-color: #fff5f5;
+}
+
+/* seccion para adicionales */
+.actas__adicionales {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.actas__adicionales label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.input-group-ad {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.input-group-ad input[type="text"] {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.input-group-ad input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* seccion para observaciones adicionales */
+/* Contenedor general */
+.observaciones-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 0;
+  font-family: sans-serif;
+}
+
+/* Etiqueta del campo */
+.observaciones-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Área de texto */
+.observaciones-textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  padding: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.observaciones-textarea:focus {
+  border-color: #3b82f6; /* azul suave */
+}
+
+/* Contador de caracteres */
+.observaciones-contador {
+  align-self: flex-end;
+  font-size: 12px;
+  color: #666;
+}
+/* seccion para formas de pago */
+/* Contenedor principal */
+.forma-pago-wrapper {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Título */
+.forma-pago-titulo {
+  font-size: 18px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* Selector de forma de pago */
+.forma-pago-select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Etiqueta e input del precio */
+.forma-pago-label {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.forma-pago-input {
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Fieldset de botones */
+.grupo-botones {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.grupo-botones-legend {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Botón */
+.boton-guardar {
+  padding: 10px 20px;
+  background-color: #3b82f6;
+  border: none;
+  color: white;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.boton-guardar:hover {
+  background-color: #2563eb;
+}

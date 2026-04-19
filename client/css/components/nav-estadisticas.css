@@ -1,0 +1,56 @@
+/* --- PANEL LATERAL --- */
+.panel-estadisticas {
+  width: 50%;
+  background-color: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  margin: 1em 0em;
+  gap: 1rem;
+  border-radius: 12px;
+}
+.panel-estadisticas button {
+
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-radius: 5px;
+}
+.panel-estadisticas button:hover {
+  background-color: #2980b9;
+}
+
+.pestanas-estadisticas{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.pestanas h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.pestanas button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-radius: 5px;
+}
+
+.pestanas button:hover {
+  background-color: #2980b9;
+}

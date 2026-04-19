@@ -1,0 +1,532 @@
+@import url(./components/btnFlotanteStock.css);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 2px solid red; */
+}
+
+/* Reutilizamos estilos del admin, pero puedes ajustar aquí también */
+.envoltorio__principal {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: clamp(1rem, 1.8vw, 3rem);
+  height: clamp(60px,4vw,200px);
+  flex-shrink: 0;
+  font-family: sans-serif;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  position: relative;
+  min-height: 0;
+}
+
+footer {
+  background: #2c3e50;
+  color: #f4f6f8;
+  text-align: center;
+  padding: 0.8rem;
+  font-size: clamp(.7rem, 1.2vw, 3rem);
+  font-family: sans-serif;
+}
+
+.panel-lateral {
+  width: 240px;
+  background: #2c3e50;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-lateral button {
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.panel-lateral button:hover {
+  background-color: #2980b9;
+}
+
+.area-contenido {
+  flex: 1;
+  padding: 2rem;
+  background-color: #ecf0f1;
+  overflow-y: auto;
+}
+
+.seccion {
+  display: none;
+  height: 100%;
+}
+
+.seccion.activa {
+  display: block;
+}
+
+.seccion__productos {
+  height: 100%;
+}
+
+.seccion__ventas {
+  height: 100%;
+
+}
+
+/* area productos */
+.tabla-productos {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
+.tabla-productos table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla-productos thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #2c3e50;
+  color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.tabla-productos.scrolled thead th {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tabla-productos th,
+.tabla-productos td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabla-productos tbody tr:hover {
+  background-color: #d6eaf8;
+  transition: background-color 0.3s ease;
+}
+
+.barra-productos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.barra-productos input[type="text"],
+.barra-productos input[type="number"] {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 15%;
+}
+
+.barra-productos button {
+  padding: 0.5rem 1rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.barra-productos button:hover {
+  background-color: #1a252f;
+}
+
+/* area guardar actas */
+.bloqueado {
+  pointer-events: auto;
+  /* para que funcione el click */
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* --- FORMULARIO DE VENTA --- */
+#form-venta {
+  height: 100%;
+  background-color: #ecf0f1;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+#bloqueo-venta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.venta-producto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.venta-producto label {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.venta-producto select,
+.venta-producto input[type="number"] {
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  min-width: 180px;
+}
+
+#agregar-producto {
+  padding: 0.5rem 1rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#agregar-producto:hover {
+  background-color: #1a252f;
+}
+
+/* --- TABLA DE VENTA --- */
+.venta-lista table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.venta-lista th,
+.venta-lista td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.venta-lista thead {
+  background-color: #3498db;
+  color: white;
+}
+
+.venta-lista tbody tr:hover {
+  background-color: #d6eaf8;
+}
+
+.venta-lista button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* --- RESUMEN --- */
+.venta-resumen {
+  margin-top: 1.5rem;
+}
+
+.venta-resumen label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.venta-resumen select {
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+#total-venta {
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.venta-resumen button[type=\"submit\"] {
+  background-color: #3498db;
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.venta-resumen button[type=\"submit\"]:hover {
+  background-color: #2980b9;
+}
+
+/* botones del formulario acta */
+.grupo-botones {
+  width: 100%;
+  border: 2px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.grupo-botones legend {
+  font-weight: bold;
+  padding: 0 10px;
+  color: #555;
+}
+
+.grupo-botones button {
+  width: 100%;
+}
+
+/* area mis estadisticas */
+/* --- FILTROS --- */
+.filtros-estadisticas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+  align-items: center;
+}
+
+.filtros-estadisticas input[type="date"] {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  min-width: 180px;
+}
+
+.filtros-estadisticas button {
+  background-color: #2c3e50;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filtros-estadisticas button:hover {
+  background-color: #1a252f;
+}
+
+/* --- GRÁFICAS --- */
+.graficas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.grafica-card {
+  background-color: #ecf0f1;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.grafica-card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+/* area perfil */
+#perfil form {
+  background-color: #ecf0f1;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+}
+
+#perfil fieldset {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+}
+
+#perfil legend {
+  font-weight: bold;
+  color: #2c3e50;
+  padding: 0 0.5rem;
+}
+
+#perfil label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+#perfil input[type="text"],
+#perfil input[type="email"],
+#perfil input[type="password"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fff;
+}
+
+#perfil input[disabled] {
+  background-color: #e0e0e0;
+  color: #555;
+  cursor: not-allowed;
+}
+
+#perfil input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: scale(1.2);
+}
+
+.acciones-perfil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.acciones-perfil button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.acciones-perfil button[type="submit"] {
+  background-color: #3498db;
+  color: white;
+}
+
+.acciones-perfil button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+#cerrar-sesion {
+  background-color: #e74c3c;
+  color: white;
+}
+
+#cerrar-sesion:hover {
+  background-color: #c0392b;
+}
+
+/* estilos para las notificaciones del operador */
+#toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 260px;
+  max-width: 350px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s forwards, fadeOut 0.4s 2.6s forwards;
+  opacity: 0;
+  transform: translateX(100%);
+  position: relative;
+}
+
+/* Tipos de notificación */
+.toast.success {
+  background-color: #2ecc71;
+  /* verde esmeralda */
+}
+
+.toast.error {
+  background-color: #e74c3c;
+  /* rojo fuerte */
+}
+
+.toast.warning {
+  background-color: #f39c12;
+  /* naranja vibrante */
+}
+
+.toast.error::before {
+  content: '❌';
+}
+
+.toast.warning::before {
+  content: '⚠️';
+}
+
+/* Animaciones */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
