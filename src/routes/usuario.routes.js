@@ -8,7 +8,7 @@ const {
   eliminarUsuario,
   cambiarEstado
   
-} = require('../controllers/dashboard/usuario.controller');
+} = require('../controllers/usuario.controller');
 
 router.post('/crear', crearUsuario);
 router.get('/obtener', obtenerUsuarios);

@@ -1,7 +1,7 @@
-const { Usuario } = require('../../database/models');
+const { Usuario } = require('../database/models');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const { forceDisconnect } = require('../../services/websocket');
+const { forceDisconnect } = require('../services/websocket');
 
 const crearUsuario = async (req, res) => {
   try {

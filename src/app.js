@@ -25,5 +25,6 @@ app.get('/', (req, res) => {
 app.use('/login', require('./routes/login.routes'));
 app.use('/api/pedidos', require('./routes/pedido.routes'));
 app.use('/api/productos',require('./routes/producto.routes'));
+app.use('/usuarios', require('./routes/usuario.routes'));
 // Exportar solo la app
 module.exports = app;

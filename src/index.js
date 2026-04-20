@@ -4,7 +4,7 @@ const globalConstants = require('./const/globalConstants')
 const app = require('./app');
 const { sequelize } = require('./database/models');
 const PORT = globalConstants.PORT;
-//const { setupWebSocket } = require('./services/websocket');
+const { setupWebSocket } = require('./services/websocket');
 
 (async () => {
   try {
@@ -18,7 +18,7 @@ const PORT = globalConstants.PORT;
       console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     });
 
-    //setupWebSocket(server); // Integra WS con tu servidor HTTP
+    setupWebSocket(server); // Integra WS con tu servidor HTTP
 
 
   } catch (error) {

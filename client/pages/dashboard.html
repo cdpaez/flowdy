@@ -29,8 +29,7 @@
   <div class="envoltorio__principal">
 
     <header>
-      🧾 DASHBOARD
-      <!-- <a href="/operador.html">operador</a> -->
+      PANEL DE ADMINISTRADOR
     </header>
 
     <main>
@@ -43,10 +42,10 @@
         <div class="pestanas">
           <h2>Menú</h2>
 
-          <button onclick="mostrarSeccion('productos',this)">📦 Equipos</button>
-          <button onclick="mostrarSeccion('actas',this)">🧾 Actas</button>
-          <button onclick="mostrarSeccion('estadisticas',this)">📊 Estadísticas</button>
-          <button onclick="mostrarSeccion('usuarios',this)">👤 Usuarios</button>
+          <button onclick="mostrarSeccion('productos',this)">Productos</button>
+          <button onclick="mostrarSeccion('actas',this)"> Pedidos</button>
+          <button onclick="mostrarSeccion('estadisticas',this)"> Estadísticas</button>
+          <button onclick="mostrarSeccion('usuarios',this)"> Usuarios</button>
           <button id="logout-btn">Cerrar sesión</button>
 
         </div>
@@ -56,7 +55,7 @@
       <section class="area-contenido">
 
         <div id="productos" class="seccion activa">
-          <h2>📦 Gestión de Equipos</h2>
+          <h2>PRODUCTOS</h2>
           <!-- Filtros y botón agregar -->
           <div class="barra-productos">
             <input type="text" id="buscador-productos" placeholder="codigo o precio">

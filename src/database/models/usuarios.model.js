@@ -26,11 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'vendedor',
       allowNull: false
     },
-    estado: {
-      type: DataTypes.ENUM('activo', 'inactivo'),
-      defaultValue: 'activo',
-      allowNull: false
-    }
   }, {
     paranoid: true,           // habilita soft deletes (usa deletedAt)
     tableName: 'usuarios',

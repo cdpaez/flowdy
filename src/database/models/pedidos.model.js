@@ -5,34 +5,38 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
+
     cliente_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    fecha_pedido: {
+
+    fecha: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      defaultValue: DataTypes.NOW
     },
-    fecha_entrega: {
-      type: DataTypes.DATE,
-      allowNull: false
+
+    total: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+      defaultValue: 0
     },
+
     estado: {
       type: DataTypes.STRING,
+      allowNull: false,
       defaultValue: 'pendiente'
     },
-    tipo_entrega: {
+
+    direccion_entrega: {
       type: DataTypes.STRING,
-      allowNull: false // domicilio | retiro
-    },
-    direccion_entrega: DataTypes.STRING,
-    forma_pago: {
-      type: DataTypes.STRING,
-      defaultValue: 'efectivo'
+      allowNull: false
     }
+
   }, {
     tableName: 'pedidos',
-    timestamps: true
+    timestamps: false
   });
 
   return Pedido;
