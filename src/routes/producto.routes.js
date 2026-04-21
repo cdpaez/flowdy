@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const upload = require('../middlewares/upload');
+
 const {
   getProductos,
   getProductoById,
@@ -16,10 +18,10 @@ router.get('/', getProductos);
 router.get('/:id', getProductoById);
 
 // POST crear producto
-router.post('/', crearProducto);
+router.post('/', upload.single('imagen'),crearProducto);
 
 // PUT actualizar producto
-router.put('/:id', actualizarProducto);
+router.put('/:id',upload.single('imagen'), actualizarProducto);
 
 // DELETE eliminar producto
 router.delete('/:id', eliminarProducto);

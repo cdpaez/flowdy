@@ -39,54 +39,68 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-// 🔗 CLIENTE - PEDIDO
+// 🔗 CLIENTE → PEDIDOS
 db.Cliente.hasMany(db.Pedido, {
   foreignKey: 'cliente_id',
+  as: 'pedidos',
   onDelete: 'CASCADE'
 });
 
 db.Pedido.belongsTo(db.Cliente, {
-  foreignKey: 'cliente_id'
+  foreignKey: 'cliente_id',
+  as: 'cliente'
 });
 
-// 🔗 PEDIDO - DETALLE
+
+// 🔗 PEDIDO → DETALLES
 db.Pedido.hasMany(db.DetallePedido, {
   foreignKey: 'pedido_id',
+  as: 'detalles',
   onDelete: 'CASCADE'
 });
 
 db.DetallePedido.belongsTo(db.Pedido, {
-  foreignKey: 'pedido_id'
+  foreignKey: 'pedido_id',
+  as: 'pedido'
 });
 
-// 🔗 PRODUCTO - DETALLE
+
+// 🔗 PRODUCTO → DETALLES
 db.Producto.hasMany(db.DetallePedido, {
   foreignKey: 'producto_id',
+  as: 'detallesPedido',
   onDelete: 'CASCADE'
 });
 
 db.DetallePedido.belongsTo(db.Producto, {
-  foreignKey: 'producto_id'
+  foreignKey: 'producto_id',
+  as: 'producto'
 });
 
-//📂 Categoría → Productos
+
+// 📂 CATEGORIA → PRODUCTOS
 db.Categoria.hasMany(db.Producto, {
   foreignKey: 'categoria_id',
+  as: 'productos',
   onDelete: 'CASCADE'
 });
 
 db.Producto.belongsTo(db.Categoria, {
-  foreignKey: 'categoria_id'
+  foreignKey: 'categoria_id',
+  as: 'categoria'
 });
 
-//💳 Pedido → Pagos
+
+// 💳 PEDIDO → PAGOS
 db.Pedido.hasMany(db.Pago, {
   foreignKey: 'pedido_id',
+  as: 'pagos',
   onDelete: 'CASCADE'
 });
 
 db.Pago.belongsTo(db.Pedido, {
-  foreignKey: 'pedido_id'
+  foreignKey: 'pedido_id',
+  as: 'pedido'
 });
 
 // Exportar

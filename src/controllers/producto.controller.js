@@ -1,16 +1,32 @@
 const db = require('../database/models');
-const { Producto } = db;
+const { Producto, Categoria } = db;
 
-// 🔹 Crear producto
+// 🔹 Crear producto con imagen
 const crearProducto = async (req, res) => {
   try {
-    const { nombre, descripcion, precio, imagen_url } = req.body;
+    const {
+      nombre,
+      categoria_id,
+      descripcion,
+      precio,
+      stock,
+      es_nuevo,
+      es_popular,
+      activo
+    } = req.body;
+
+    const imagen = req.file ? req.file.path : null;
 
     const producto = await Producto.create({
       nombre,
+      categoria_id,
       descripcion,
       precio,
-      imagen_url
+      stock,
+      es_nuevo,
+      es_popular,
+      activo,
+      imagen
     });
 
     res.status(201).json(producto);
@@ -23,8 +39,18 @@ const crearProducto = async (req, res) => {
 // 🔹 Obtener todos los productos
 const getProductos = async (req, res) => {
   try {
-    const productos = await Producto.findAll();
+    const productos = await Producto.findAll({
+      include: [
+        {
+          model: Categoria,
+          as: 'categoria',
+          attributes: ['id', 'nombre']
+        }
+      ]
+    });
+
     res.json(productos);
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -48,30 +74,33 @@ const getProductoById = async (req, res) => {
   }
 };
 
-// 🔹 Actualizar producto
+// 🔹 actualizar producto
 const actualizarProducto = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, descripcion, precio, imagen_url } = req.body;
 
     const producto = await Producto.findByPk(id);
-
     if (!producto) {
-      return res.status(404).json({ mensaje: 'Producto no encontrado' });
+      return res.status(404).json({ mensaje: 'No encontrado' });
     }
 
+    const imagen = req.file ? req.file.path : producto.imagen;
+
     await producto.update({
-      nombre,
-      descripcion,
-      precio,
-      imagen_url
+      ...req.body,
+      imagen
     });
 
-    res.json({ mensaje: 'Producto actualizado', producto });
+    res.json(producto);
 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+};
+
+module.exports = {
+  crearProducto,
+  actualizarProducto
 };
 
 // 🔹 Eliminar producto

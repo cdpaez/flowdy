@@ -12,19 +12,30 @@ app.use(cors());
 
 // Archivos estáticos
 
-// Servir archivos estáticos desde la carpeta /frontend
+// Servir archivos estáticos desde la carpeta /client
 app.use(express.static(path.join(__dirname, '../client')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Página principal (al acceder a "/")
+//app.get('/', (req, res) => {
+//  res.sendFile(path.join(__dirname, '../client/index.html'));
+//});
+
+// Landing
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/index.html'));
+  res.sendFile(path.join(__dirname, '../client/landing/index.html'));
+});
+
+// Admin login
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/admin/index.html'));
 });
 
 // Rutas API
 app.use('/login', require('./routes/login.routes'));
-app.use('/api/pedidos', require('./routes/pedido.routes'));
+app.use('/api/categorias', require('./routes/categoria.routes'));
 app.use('/api/productos',require('./routes/producto.routes'));
+app.use('/api/pedidos', require('./routes/pedido.routes'));
 app.use('/usuarios', require('./routes/usuario.routes'));
 // Exportar solo la app
 module.exports = app;

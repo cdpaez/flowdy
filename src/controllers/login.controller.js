@@ -4,7 +4,7 @@ const { mapperUserLogin } = require('../mappers/usuario.mapper');
 const bcrypt = require('bcrypt');
 
 const login = async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { email, password } = req.body;
 
   if (!email || !password) { // ✅ Valida que existan los campos

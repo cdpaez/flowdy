@@ -1,5 +1,3 @@
-const { FOREIGNKEYS } = require("sequelize/lib/query-types");
-
 module.exports = (sequelize, DataTypes) => {
   const Producto = sequelize.define('Producto', {
     id: {
@@ -36,8 +34,15 @@ module.exports = (sequelize, DataTypes) => {
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0,
+      validate: {
+        min: 0
+      }
     },
+    activo: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {
     tableName: 'productos',
     timestamps: false

@@ -91,33 +91,29 @@
           </dialog>
 
           <div class="tabla-productos">
-
             <table>
               <thead>
                 <tr>
-                  <th>Codigo</th>
-                  <th>Stock</th>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Descripción</th>
                   <th>Precio</th>
-                  <th>Marca</th>
-                  <th>Modelo</th>
-                  <th>Serie</th>
-                  <th>Procesador</th>
-                  <th>Tamano</th>
-                  <th>Disco</th>
-                  <th>RAM</th>
-                  <th>Tipo</th>
-                  <th>Estado</th>
-                  <th>Observaciones</th>
-                  <th>Fecha</th>
+                  <th>Stock</th>
+                  <th>Imagen</th>
+                  <th>Nuevo</th>
+                  <th>Popular</th>
+                  <th>Activo</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
               </tbody>
             </table>
-
           </div>
+
           <div id="paginacion" class="paginacion"></div>
+
           <!-- Modal para agregar/editar producto -->
           <div class="modal" id="modal-producto">
             <div class="modal-contenido">
@@ -126,20 +122,43 @@
 
               <div id="loader-modal" class="loader" style="display: none;"></div>
 
-              <form id="form-modal-producto" data-editando="false">
-                <input type="text" id="codigo_prd" name="codigo_prd" placeholder="codigo" min="0" max="50" required>
-                <!-- <input type="number" id="stock" name="stock" placeholder="stock" min="0" max="50" required> -->
-                <input type="number" id="precio" name="precio" placeholder="precio" step="0.01" required>
-                <input type="text" id="marca" name="marca" placeholder="marca" required>
-                <input type="text" id="modelo" name="modelo" placeholder="modelo" required>
-                <input type="text" id="serie" name="serie" placeholder="# serie" required>
-                <input type="text" id="procesador" name="procesador" placeholder="Procesador" required>
-                <input type="text" id="tamano" name="tamano" placeholder="tamano" required>
-                <input type="text" id="disco" name="disco" placeholder="disco" required>
-                <input type="text" id="ram" name="ram" placeholder="ram" required>
-                <input type="text" id="tipo" name="tipo" placeholder="tipo" required>
-                <input type="text" id="estado" name="estado" placeholder="estado" required>
-                <input type="extras" id="extras" name="extras" placeholder="Observaciones" required>
+              <form id="form-modal-producto">
+
+                <input type="text" id="nombre" placeholder="Nombre del producto" required>
+
+                <select id="categoria_id" required>
+                  <option value="">Seleccionar categoría</option>
+                </select>
+
+                <textarea id="descripcion" placeholder="Descripción"></textarea>
+
+                <input type="number" id="precio" placeholder="Precio" step="0.01" required>
+
+                <input type="number" id="stock" placeholder="Stock" min="0">
+                <!-- 📷 Imagen del producto -->
+                
+                <label>Imagen del producto</label>
+                <input type="file" id="imagen" accept="image/*">
+
+                <!-- preview -->
+                <div class="preview-imagen">
+                  <img id="preview-imagen" src="" style="max-width:120px; display:none;">
+                </div>
+
+                <label>
+                  <input type="checkbox" id="es_nuevo">
+                  Producto nuevo
+                </label>
+
+                <label>
+                  <input type="checkbox" id="es_popular">
+                  Producto popular
+                </label>
+
+                <label>
+                  <input type="checkbox" id="activo">
+                  Visible en la tienda
+                </label>
 
                 <div class="acciones-modal">
                   <button type="submit">Guardar</button>
@@ -320,11 +339,10 @@
   </div>
 
   <!-- mis scripts -->
-  <script src="../js/dashboard/actas.js"></script>
+
   <script src="../js/dashboard/usuario.js"></script>
   <script src="../js/dashboard/productos.js"></script>
   <script src="../js/dashboard/dashboard.js"></script>
-  <script src="../js/dashboard/chart.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/dashboard/nav-stats.js"></script>
 

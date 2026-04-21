@@ -1,4 +1,4 @@
-const GestorEquipos = (() => {
+const GestorProductos = (() => {
     let todosLosProductos = [];
     let paginaActual = 1;
     const productosPorPagina = 20;
@@ -7,6 +7,7 @@ const GestorEquipos = (() => {
     const tablaProductos = document.querySelector('.tabla-productos tbody');
 
     const init = () => {
+        initPreviewImagen();
         document.getElementById('abrir-modal').addEventListener('click', abrirModalCreacion);
         document.getElementById('form-modal-producto').addEventListener('submit', manejarSubmitProducto);
         document.querySelector('.cerrar-modal').addEventListener('click', cerrarModal);
@@ -19,6 +20,7 @@ const GestorEquipos = (() => {
         document.getElementById('buscador-productos').addEventListener('input', buscarProductos);
         document.getElementById('limpiarBusqueda').addEventListener('click', limpiarBusqueda);
         document.querySelectorAll('.busqueda-avanzada input').forEach(i => i.addEventListener('input', filtrarProductos));
+        cargarCategorias();
         cargarProductos().then(() => {
             mostrarContador(
                 todosLosProductos.length,
@@ -28,6 +30,26 @@ const GestorEquipos = (() => {
         });
         conectarWebSocket();
         manejarDialogoBusqueda();
+
+    };
+
+    const initPreviewImagen = () => {
+        const inputImagen = document.getElementById('imagen');
+        const preview = document.getElementById('preview-imagen');
+
+        if (!inputImagen || !preview) return;
+
+        inputImagen.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            } else {
+                preview.src = '';
+                preview.style.display = 'none';
+            }
+        });
     };
 
     const abrirModalCreacion = () => {
@@ -37,7 +59,7 @@ const GestorEquipos = (() => {
         form.removeAttribute('data-id');
         document.getElementById('titulo-modal-producto').textContent = 'Agregar Nuevo Producto';
         document.getElementById('modal-producto').style.display = 'flex';
-        document.getElementById('codigo_prd').focus();
+        document.getElementById('nombre').focus();
     };
 
     const cerrarModal = () => {
@@ -58,15 +80,55 @@ const GestorEquipos = (() => {
         }
     };
 
+    const cargarCategorias = async () => {
+        try {
+
+            const res = await fetch('/api/categorias');
+            const categorias = await res.json();
+
+            const select = document.getElementById('categoria_id');
+
+            select.innerHTML = '<option value="">Seleccionar categoría</option>';
+
+            categorias.forEach(categoria => {
+
+                const option = document.createElement('option');
+                option.value = categoria.id;
+                option.textContent = categoria.nombre;
+
+                select.appendChild(option);
+
+            });
+
+        } catch (error) {
+
+            console.error(error);
+            mostrarToast('❌ Error cargando categorías', 'error');
+
+        }
+    };
+
     const cargarProductos = async () => {
         try {
-            const res = await fetch('/equipos/obtener');
-            if (!res.ok) throw new Error('Error al obtener productos');
+            const res = await fetch('/api/productos');
+
+            if (!res.ok) {
+                throw new Error('Error al obtener productos');
+            }
+
             todosLosProductos = await res.json();
+
             mostrarProductos(todosLosProductos);
+
         } catch (error) {
             console.error(error);
-            tablaProductos.innerHTML = `<tr><td colspan="7">Error al cargar productos: ${error.message}</td></tr>`;
+
+            tablaProductos.innerHTML = `
+            <tr>
+                <td colspan="11">Error al cargar productos: ${error.message}</td>
+            </tr>
+        `;
+
             mostrarToast('❌ Error al cargar productos', 'error');
         }
     };
@@ -112,27 +174,48 @@ const GestorEquipos = (() => {
     };
 
     const mostrarProductos = (productos) => {
+        console.log(productos);
         tablaProductos.innerHTML = '';
+
         if (productos.length === 0) {
-            tablaProductos.innerHTML = '<tr><td colspan="7">No se encontraron productos</td></tr>';
+            tablaProductos.innerHTML = '<tr><td colspan="11">No se encontraron productos</td></tr>';
             return;
         }
+
         const inicio = (paginaActual - 1) * productosPorPagina;
         const fin = inicio + productosPorPagina;
+
         productos.slice(inicio, fin).forEach(p => {
+
+            const estadoStock = p.stock > 0 ? 'stock-disponible' : 'stock-agotado';
+            const activo = p.activo ? '✅' : 'no';
+            const nuevo = p.es_nuevo ? '⭐' : 'no';
+            const popular = p.es_popular ? '🔥' : 'no';
+
             const fila = document.createElement('tr');
-            const claseStock = p.stock.toLowerCase() === 'disponible' ? 'stock-disponible' : 'stock-vendido';
+
             fila.innerHTML = `
-        <td>${p.codigo_prd}</td><td class="${claseStock}">${p.stock}</td><td>${p.precio}</td>
-        <td>${p.marca}</td><td>${p.modelo}</td><td>${p.numero_serie}</td><td>${p.procesador}</td>
-        <td>${p.tamano}</td><td>${p.disco}</td><td>${p.memoria_ram}</td><td>${p.tipo_equipo}</td>
-        <td>${p.estado}</td><td>${p.extras}</td><td>${new Date(p.fecha).toLocaleDateString()}</td>
+        <td>${p.id}</td>
+        <td>${p.nombre}</td>
+        <td>${p.categoria?.nombre || '-'}</td>
+        <td>${p.descripcion ?? ''}</td>
+        <td>$${p.precio}</td>
+        <td class="${estadoStock}">${p.stock}</td>
+        <td>
+            ${p.imagen ? `<img src="${p.imagen}" width="50">` : '—'}
+        </td>
+        <td>${nuevo}</td>
+        <td>${popular}</td>
+        <td>${activo}</td>
         <td class="acciones">
-          <button class="btn-editar" data-id="${p.id}">✏️ Editar</button>
-          <button class="btn-eliminar" data-id="${p.id}">🗑️ Eliminar</button>
-        </td>`;
+            <button class="btn-editar" data-id="${p.id}">✏️</button>
+            <button class="btn-eliminar" data-id="${p.id}">🗑️</button>
+        </td>
+        `;
+
             tablaProductos.appendChild(fila);
         });
+
         asignarEventosBotones();
         mostrarPaginacion(productos);
     };
@@ -160,43 +243,40 @@ const GestorEquipos = (() => {
 
     const editarProducto = async (id) => {
         try {
+
             const token = sessionStorage.getItem('token');
-            const res = await fetch(`/equipos/obtener/${id}`, {
+
+            const res = await fetch(`/api/productos/${id}`, {
                 headers: { Authorization: token }
             });
 
-            const { data: producto } = await res.json();
+            const producto = await res.json();
 
             const form = document.getElementById('form-modal-producto');
+
             form.dataset.modo = 'edicion';
             form.dataset.id = id;
+
             document.getElementById('titulo-modal-producto').textContent = 'Editar Producto';
 
-            // 🧠 Mapeo preciso: campo del modelo → ID del input
-            const mapeo = {
-                codigo_prd: 'codigo_prd',
-                precio: 'precio',
-                marca: 'marca',
-                modelo: 'modelo',
-                numero_serie: 'serie',
-                procesador: 'procesador',
-                tamano: 'tamano',
-                disco: 'disco',
-                memoria_ram: 'ram',
-                tipo_equipo: 'tipo',
-                estado: 'estado',
-                extras: 'extras'
-            };
+            // cargar datos en el formulario
+            document.getElementById('nombre').value = producto.nombre || '';
+            document.getElementById('categoria_id').value = producto.categoria_id || '';
+            document.getElementById('descripcion').value = producto.descripcion || '';
+            document.getElementById('precio').value = producto.precio || '';
+            document.getElementById('stock').value = producto.stock || '';
 
-            Object.entries(mapeo).forEach(([campoModelo, idInput]) => {
-                const input = document.getElementById(idInput);
-                if (input) input.value = producto[campoModelo] || '';
-            });
+            document.getElementById('es_nuevo').checked = producto.es_nuevo || false;
+            document.getElementById('es_popular').checked = producto.es_popular || false;
+            document.getElementById('activo').checked = producto.activo || false;
 
             document.getElementById('modal-producto').style.display = 'flex';
+
         } catch (e) {
+
             console.error(e);
             mostrarToast(`❌ ${e.message}`, 'error');
+
         }
     };
 
@@ -206,7 +286,7 @@ const GestorEquipos = (() => {
         if (!confirm) return;
         try {
             const token = sessionStorage.getItem('token');
-            const res = await fetch(`/equipos/eliminar/${id}`, {
+            const res = await fetch(`/api/productos/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: token }
             });
@@ -238,37 +318,43 @@ const GestorEquipos = (() => {
 
     const manejarSubmitProducto = async (e) => {
         e.preventDefault();
+
         const form = e.target;
         const esEdicion = form.dataset.modo === 'edicion';
         const token = sessionStorage.getItem('token');
         const loader = document.getElementById('loader-modal');
+
         try {
             loader.style.display = 'block';
             form.querySelector('button[type="submit"]').disabled = true;
 
             const datos = {
-                codigo_prd: form.codigo_prd.value,
+                nombre: form.nombre.value.trim(),
+                categoria_id: parseInt(form.categoria_id.value),
+                descripcion: form.descripcion.value.trim(),
                 precio: parseFloat(form.precio.value),
-                marca: form.marca.value.trim(),
-                modelo: form.modelo.value.trim(),
-                numero_serie: form.serie.value.trim(),
-                procesador: form.procesador.value.trim(),
-                tamano: form.tamano.value.trim(),
-                disco: form.disco.value.trim(),
-                memoria_ram: form.ram.value.trim(),
-                tipo_equipo: form.tipo.value.trim(),
-                estado: form.estado.value.trim(),
-                extras: form.extras.value.trim()
+                stock: parseInt(form.stock.value) || 0,
+                es_nuevo: form.es_nuevo?.checked || false,
+                es_popular: form.es_popular?.checked || false,
+                activo: form.activo?.checked ?? true
             };
 
-            if (datos.precio <= 0) throw new Error('Precio debe ser positivo');
+            if (!datos.nombre) throw new Error('El nombre es obligatorio');
+            if (!datos.categoria_id) throw new Error('Debe seleccionar una categoría');
+            if (datos.precio <= 0) throw new Error('El precio debe ser mayor a 0');
 
-            const url = esEdicion ? `/equipos/actualizar/${form.dataset.id}` : '/equipos/crear';
+            const url = esEdicion
+                ? `/api/productos/${form.dataset.id}`
+                : `/api/productos`;
+
             const method = esEdicion ? 'PUT' : 'POST';
 
             const res = await fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json', Authorization: token },
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token
+                },
                 body: JSON.stringify(datos)
             });
 
@@ -277,11 +363,16 @@ const GestorEquipos = (() => {
                 throw new Error(err.error || 'Error en la solicitud');
             }
 
-            mostrarToast(esEdicion ? '✅ Producto actualizado' : '✅ Producto creado', 'success');
+            mostrarToast(
+                esEdicion ? '✅ Producto actualizado' : '✅ Producto creado',
+                'success'
+            );
+
             cerrarModal();
             cargarProductos();
-        } catch (e) {
-            mostrarToast(`❌ ${e.message}`, 'error');
+
+        } catch (error) {
+            mostrarToast(`❌ ${error.message}`, 'error');
         } finally {
             loader.style.display = 'none';
             form.querySelector('button[type="submit"]').disabled = false;
@@ -391,4 +482,4 @@ const GestorEquipos = (() => {
     return { init };
 })();
 
-document.addEventListener('DOMContentLoaded', GestorEquipos.init);
+document.addEventListener('DOMContentLoaded', GestorProductos.init);
