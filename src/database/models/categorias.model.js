@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     const Categoria = sequelize.define('Categoria', {
         id: {
             type: DataTypes.INTEGER,
-            primaryKEY: true,
+            primaryKey: true,
             autoIncrement: true
         },
         nombre: {

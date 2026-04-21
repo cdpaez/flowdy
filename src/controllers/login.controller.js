@@ -4,16 +4,17 @@ const { mapperUserLogin } = require('../mappers/usuario.mapper');
 const bcrypt = require('bcrypt');
 
 const login = async (req, res) => {
-  const { correo, password } = req.body;
+  console.log(req.body);
+  const { email, password } = req.body;
 
-  if (!correo || !password) { // ✅ Valida que existan los campos
+  if (!email || !password) { // ✅ Valida que existan los campos
     return res.status(400).json({ mensaje: 'Faltan correo o contraseña' });
   }
 
   try {
     const usuario = await Usuario.findOne(
       {
-        where: { correo }
+        where: { email }
       });
 
     if (!usuario) {

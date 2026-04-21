@@ -12,10 +12,10 @@ const LoginModule = (function () {
         loginForm.addEventListener("submit", async function (e) {
             e.preventDefault();
 
-            const correo = document.getElementById("correo").value;
+            const email = document.getElementById("correo").value;
             const password = document.getElementById("password").value;
 
-            const loginData = { correo, password };
+            const loginData = { email, password };
 
             try {
                 const res = await fetch('/login', {

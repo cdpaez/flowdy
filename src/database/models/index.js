@@ -69,6 +69,25 @@ db.DetallePedido.belongsTo(db.Producto, {
   foreignKey: 'producto_id'
 });
 
+//📂 Categoría → Productos
+db.Categoria.hasMany(db.Producto, {
+  foreignKey: 'categoria_id',
+  onDelete: 'CASCADE'
+});
+
+db.Producto.belongsTo(db.Categoria, {
+  foreignKey: 'categoria_id'
+});
+
+//💳 Pedido → Pagos
+db.Pedido.hasMany(db.Pago, {
+  foreignKey: 'pedido_id',
+  onDelete: 'CASCADE'
+});
+
+db.Pago.belongsTo(db.Pedido, {
+  foreignKey: 'pedido_id'
+});
 
 // Exportar
 db.sequelize = sequelize;

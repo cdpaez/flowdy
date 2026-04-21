@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    correo: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -21,18 +21,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    rol_usuario: {
-      type: DataTypes.ENUM('admin', 'vendedor'),
+    rol: {
+      type: DataTypes.ENUM('admin', 'lector'),
       defaultValue: 'vendedor',
       allowNull: false
     },
+    estado: {
+      type: DataTypes.ENUM('activo', 'inactivo'),
+      allowNull: false,
+      defaultValue: 'activo'
+    },
   }, {
-    paranoid: true,           // habilita soft deletes (usa deletedAt)
     tableName: 'usuarios',
-    timestamps: true,         // <--- activa createdAt y updatedAt
-    createdAt: 'created_at',  // <--- si quieres personalizar el nombre de la columna
-    updatedAt: 'updated_at',
-    deletedAt: 'deleted_at'
+    timestamps: false
   });
 
   return Usuario;

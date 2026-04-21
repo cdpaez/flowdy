@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    precio_unitario: { // 🔥 NUEVO CAMPO
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false
+    },
     subtotal: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false

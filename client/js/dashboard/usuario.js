@@ -81,16 +81,16 @@ const UsuariosModule = (() => {
 
     const validarFormulario = () => {
         const nombre = document.getElementById('nombre-usuario').value.trim();
-        const correo = document.getElementById('correo-usuario').value.trim();
+        const email = document.getElementById('correo-usuario').value.trim();
         const rol = document.getElementById('rol-usuario').value;
         const password = document.getElementById('contrasena-usuario').value;
 
-        if (!nombre || !correo || !rol) {
+        if (!nombre || !email || !rol) {
             mostrarToast('Todos los campos son obligatorios', 'error');
             return false;
         }
 
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             mostrarToast('Correo electrónico inválido', 'error');
             return false;
         }
@@ -111,8 +111,8 @@ const UsuariosModule = (() => {
         try {
             const formData = {
                 nombre: document.getElementById('nombre-usuario').value.trim(),
-                correo: document.getElementById('correo-usuario').value.trim(),
-                rol_usuario: document.getElementById('rol-usuario').value.toLowerCase(),
+                email: document.getElementById('correo-usuario').value.trim(),
+                rol: document.getElementById('rol-usuario').value.toLowerCase(),
                 ...(document.getElementById('contrasena-usuario').value && {
                     password: document.getElementById('contrasena-usuario').value
                 })
@@ -124,8 +124,8 @@ const UsuariosModule = (() => {
                 ? '/usuarios/crear'
                 : `/usuarios/actualizar/${state.usuarioActual.id}`;
 
-            if (method === 'PUT' && formData.correo === state.usuarioActual.correo) {
-                delete formData.correo;
+            if (method === 'PUT' && formData.email === state.usuarioActual.email) {
+                delete formData.email;
             }
 
             const res = await fetch(endpoint, {
@@ -181,9 +181,9 @@ const UsuariosModule = (() => {
 
         state.usuariosFiltrados = state.usuarios.filter(usuario => {
             const matchNombre = usuario.nombre.toLowerCase().includes(busqueda);
-            const matchCorreo = usuario.correo.toLowerCase().includes(busqueda);
+            const matchEmail = usuario.email.toLowerCase().includes(busqueda);
             const matchEstado = estado ? usuario.estado === estado : true;
-            return (matchNombre || matchCorreo) && matchEstado;
+            return (matchNombre || matchEmail) && matchEstado;
         });
 
         if (state.usuariosFiltrados.length === 0) {
@@ -200,8 +200,8 @@ const UsuariosModule = (() => {
             fila.innerHTML = `
         <td>${usuario.id}</td>
         <td>${usuario.nombre}</td>
-        <td>${usuario.correo}</td>
-        <td><span class="badge ${usuario.rol_usuario}">${usuario.rol_usuario}</span></td>
+        <td>${usuario.email}</td>
+        <td><span class="badge ${usuario.rol}">${usuario.rol}</span></td>
         <td class="estado-toggle">
           <label class="switch">
             <input type="checkbox" ${usuario.estado === 'activo' ? 'checked' : ''} data-id="${usuario.id}">
@@ -280,8 +280,8 @@ const UsuariosModule = (() => {
             state.modo = 'editar';
 
             document.getElementById('nombre-usuario').value = usuario.nombre;
-            document.getElementById('correo-usuario').value = usuario.correo;
-            document.getElementById('rol-usuario').value = usuario.rol_usuario;
+            document.getElementById('correo-usuario').value = usuario.email;
+            document.getElementById('rol-usuario').value = usuario.rol;
             document.getElementById('contrasena-usuario').value = '';
             document.getElementById('contrasena-usuario').removeAttribute('required');
 

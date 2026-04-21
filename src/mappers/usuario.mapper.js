@@ -1,8 +1,8 @@
 function mapperUserLogin(userRaw) {
   return {
     id: userRaw.id,
-    correo: userRaw.correo,
-    rol: userRaw.rol_usuario
+    email: userRaw.email,
+    rol: userRaw.rol
   };
 }
 module.exports = { mapperUserLogin };
