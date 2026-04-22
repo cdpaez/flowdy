@@ -52,7 +52,7 @@ const login = async (req, res) => {
 
     // determinar la ruta de redirecion basada en roles
     let redirectPath = 'pages/dashboard.html'; // Valor por defecto
-    if (userMapped.rol === 'vendedor') {
+    if (userMapped.rol === 'lector') {
       redirectPath = 'pages/operador.html'; // Redirigir a la página de operador si el rol es operador
     }
     // Usuario encontrado

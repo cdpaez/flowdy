@@ -189,7 +189,7 @@
           <div class="filtros-ventas">
             <input type="date" id="fecha-inicio" placeholder="Desde">
             <input type="date" id="fecha-fin" placeholder="Hasta">
-            <input type="text" id="buscador-ventas" placeholder="cedula, codigo o vendedor">
+            <input type="text" id="buscador-ventas" placeholder="precio, cedula o nombre cliente">
             <!-- <button id="exportar-ventas">📁 Exportar</button> -->
           </div>
           <div class="tabla-actas">
@@ -198,6 +198,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Cliente</th>
+                  <th>Cédula</th>
                   <th>Fecha</th>
                   <th>Estado</th>
                   <th>Detalles</th>
@@ -212,7 +213,7 @@
           <div id="modalActa" class="modal__acta hidden">
             <div class="modal-content">
               <span id="cerrarModal" class="cerrar">&times;</span>
-              <h2>Detalle del Acta</h2>
+              <h2>Detalles del pedido</h2>
               <div id="detalleActa">
                 <!-- Aquí se llenarán los datos dinámicamente -->
               </div>

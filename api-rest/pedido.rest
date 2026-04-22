@@ -4,12 +4,12 @@ Content-Type: application/json
 
 {
   "cliente": {
-    "nombre": "Mario",
-    "apellido": "Hurtado",
+    "nombre": "Jack",
+    "apellido": "Quisiluiza",
     "telefono": "0999999999",
-    "email": "mario@test.com",
-    "direccion": "Carcelen",
-    "cedula_ruc": "1717171717"
+    "email": "jack@test.com",
+    "direccion": "Calderon",
+    "cedula_ruc": "1717171720"
   },
   "pedido": {
     "direccion_entrega": "Av. 6 de Diciembre 789"
@@ -17,11 +17,11 @@ Content-Type: application/json
   "detalles": [
     {
       "producto_id": 1,
-      "cantidad": 3
+      "cantidad": 2
     },
     {
       "producto_id": 2,
-      "cantidad": 3
+      "cantidad": 4
     }
   ]
 }

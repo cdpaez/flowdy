@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowdy - Comida Saludable</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../landing/styles.css">
+    <script src="../landing/JSF.js"></script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="flowdy-container">
+                <button class="menu-btn" onclick="toggleMenu()">
+                    <span>☰</span> FLOWDY
+                </button>
+                <nav id="menu" class="dropdown-menu">
+                    <a href="flowdy2.html">Inicio</a>
+                    <a href="menu2.html">Menú</a>
+                    <a href="quienes somos 2.html">Quiénes somos</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="nav-center">
+            <a href="flowdy2.html" class="logo-link">
+                <div class="logo-circle">
+                    <img src="img/isotipo blancoisotipo.png" alt="Logo Flowdy" class="logo">
+                </div>
+            </a>
+        </div>
+
+        <div class="nav-right">
+            <button class="icon-btn cart-btn" onclick="openCart()">
+                <img src="img/carrito.png" alt="Carrito" class="nav-icon">
+                <span class="cart-badge" id="cartCount">0</span>
+            </button>
+            <button class="icon-btn account-btn" onclick="openLogin()">
+                <img src="img/registro.png" alt="Cuenta" class="nav-icon">
+            </button>
+        </div>
+    </header>
+
+    <div class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="img/video.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <main>
+        <section class="hero-section">
+            <h1 class="main-title">Entrena Rico, <span class="highlight">Vive Fit</span></h1>
+            <p class="subtitle">Comida saludable preparada con ingredientes frescos y naturales, deliciosamente simple.
+            </p>
+        </section>
+
+        <section class="gustico-section">
+            <div class="section-header">
+                <h2 class="gustico-title">Date ese <span class="highlight">Gustico</span></h2>
+                <p class="gustico-subtitle">Descubre nuestras deliciosas opciones</p>
+            </div>
+
+            <div class="menu-categories">
+                <div class="category-card">
+                    <a href="menu2.html#Principal" class="category-link">
+                        <div class="category-image-container">
+                            <img src="img/3.png" alt="Platos principales">
+                        </div>
+                        <div class="category-info">
+                            <h3>Platos Principales</h3>
+                            <p>Almuerzos y cenas balanceados</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="category-card">
+                    <a href="menu2.html#Postres" class="category-link">
+                        <div class="category-image-container">
+                            <img src="img/28.jpg" alt="Postres saludables">
+                        </div>
+                        <div class="category-info">
+                            <h3>Postres Saludables</h3>
+                            <p>Dulces sin culpa</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="best-sellers">
+            <div class="section-header">
+                <h2>Lo más <span class="highlight">Popular</span></h2>
+                <p>Los favoritos de nuestros clientes</p>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="img/v.jpg" alt="Brownie gourmet">
+                        <div class="product-badge">Más vendido</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Brownie gourmet</h3>
+                        <p>Brownie con crema y fresas frescas</p>
+                        <div class="price-add">
+                            <span class="price">$2.50</span>
+                            <button class="add-btn" data-id="brownie" data-name="Brownie gourmet" data-price="2.50"
+                                data-image="img/v.jpg">
+                                Agregar
+                            </button>
+                        </div>
+                        <div class="delivery-info">Envío gratis Calderón</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="img/s.jpg" alt="Bolo gourmet">
+                    </div>
+                    <div class="product-info">
+                        <h3>Bolo gourmet</h3>
+                        <p>Bolo de yogurt con fresa natural</p>
+                        <div class="price-add">
+                            <span class="price">$1.50</span>
+                            <button class="add-btn" data-id="bolo" data-name="Bolo gourmet" data-price="1.50"
+                                data-image="img/s.jpg">
+                                Agregar
+                            </button>
+                        </div>
+                        <div class="delivery-info">Envío gratis Calderón</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="img/16052025-platillo3.jpg" alt="Desayuno energético">
+                        <div class="product-badge">Nuevo</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Desayuno energético</h3>
+                        <p>Pancakes de proteína con frutas</p>
+                        <div class="price-add">
+                            <span class="price">$3.00</span>
+                            <button class="add-btn" data-id="desayuno" data-name="Desayuno energético" data-price="3.00"
+                                data-image="img/16052025-platillo3.jpg">
+                                Agregar
+                            </button>
+                        </div>
+                        <div class="delivery-info">Envío gratis Calderón</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="img/9.png" alt="Tacos saludables">
+                    </div>
+                    <div class="product-info">
+                        <h3>Tacos saludables</h3>
+                        <p>Tacos de jamón + huevo orgánico</p>
+                        <div class="price-add">
+                            <span class="price">$3.00</span>
+                            <button class="add-btn" data-id="tacos" data-name="Tacos saludables" data-price="3.00"
+                                data-image="img/9.png">
+                                Agregar
+                            </button>
+                        </div>
+                        <div class="delivery-info">Envío gratis Calderón</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="img/24.jpg" alt="Rollos de canela">
+                    </div>
+                    <div class="product-info">
+                        <h3>Rollos de canela</h3>
+                        <p>Mini rollos integrales x unidad</p>
+                        <div class="price-add">
+                            <span class="price">$1.00</span>
+                            <button class="add-btn" data-id="rollos" data-name="Rollos de canela" data-price="1.00"
+                                data-image="img/24.jpg">
+                                Agregar
+                            </button>
+                        </div>
+                        <div class="delivery-info">Envío gratis Calderón</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="img/2.jpg" alt="Bizcochos artesanales">
+                    </div>
+                    <div class="product-info">
+                        <h3>Bizcochos artesanales</h3>
+                        <p>Zanahoria, banano, vainilla</p>
+                        <div class="price-add">
+                            <span class="price">$3.50</span>
+                            <button class="add-btn" data-id="bizcochos" data-name="Bizcochos artesanales"
+                                data-price="3.50" data-image="img/2.jpg">
+                                Agregar
+                            </button>
+                        </div>
+                        <div class="delivery-info">Envío gratis Calderón</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="delivery-platforms">
+            <div class="section-header">
+                <h2>Pídelo <span class="highlight">en</span></h2>
+                <p>Elige tu plataforma preferida</p>
+            </div>
+
+            <div class="platforms-grid">
+                <a href="https://www.rappi.com.ec/" target="_blank" class="platform-card">
+                    <img src="img/Rappi Logo.png" alt="Rappi">
+                </a>
+
+                <a href="https://www.ubereats.com/ec" target="_blank" class="platform-card">
+                    <img src="img/pngfind.com-uber-png-6831369.png" alt="Uber Eats">
+                </a>
+
+                <a href="https://www.pedidosya.com.ec/" target="_blank" class="platform-card">
+                    <img src="img/Pedidos Ya Logo.png" alt="Pedidos Ya">
+                </a>
+            </div>
+        </section>
+
+        <section class="content-article">
+            <div class="section-header">
+                <h2>Conoce más sobre <span class="highlight">alimentación saludable</span></h2>
+                <p>Tips y recetas para tu bienestar</p>
+            </div>
+
+            <div class="article-content">
+                <article class="article-card">
+                    <a href="https://books.google.com.ec/books?hl=en&lr=&id=VI3ODwAAQBAJ&oi=fnd&pg=PT22&dq=propiedades+de+los+germinados+&ots=tqB0fZu3w3&sig=nsPFAZJf2U8wQ6OqUx-qWqnTBXo&redir_esc=y#v=onepage&q=propiedades%20de%20los%20germinados&f=false"
+                        target="_blank">
+                        <div class="article-image">
+                            <img src="img/germinados.jpg" alt="Germinados">
+                        </div>
+                        <div class="article-info">
+                            <h3>Ventajas nutricionales de los germinados</h3>
+                            <p>Descubre por qué los germinados son un superalimento</p>
+                            <span class="read-more">Leer más →</span>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="article-card">
+                    <a href="https://www.youtube.com/watch?v=qVyun2HW6GU" target="_blank">
+                        <div class="article-image">
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/qVyun2HW6GU?si=ujPLUcL7Mw7DIIiN"
+                                    title="Video sobre germinados"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="article-info">
+                            <h3>Germinados o brotes: Beneficios y preparación</h3>
+                            <p>Aprende a preparar tus propios germinados en casa</p>
+                            <span class="read-more">Ver video →</span>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </section>
+    </main>
+    <div id="overlay" onclick="closeAll()"></div>
+    <aside id="cartPanel" class="side-panel">
+
+
+        <div class="panel-header">
+            <h2>Tu carrito</h2>
+            <button onclick="closeAll()">✕</button>
+        </div>
+
+        <div class="panel-content" id="cartItems">
+            <p>Tu carrito está vacío</p>
+        </div>
+
+        <div class="cart-summary">
+
+            <div class="row">
+                <span>Subtotal</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+
+            <div class="row">
+                <label>
+
+                    Envío:
+                    <select id="shipping">
+                        <option value="0">Calderón (Gratis)</option>
+                        <option value="1">Otro sector (+$1)</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="row total">
+                <strong>Total</strong>
+                <strong id="total">$0.00</strong>
+            </div>
+
+            <div class="panel-footer">
+                <button class="primary-btn">Ir a pagar</button>
+            </div>
+
+        </div>
+
+    </aside>
+    <!-- OVERLAY -->
+    <div id="overlay"></div>
+
+    <!-- MODAL LOGIN / REGISTRO -->
+    <div id="loginModal" class="modal">
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <img src="img/isotipo blancoisotipo.png" alt="Flowdy">
+                <button class="close-modal" onclick="closeAll()">✕</button>
+            </div>
+
+            <!-- LOGIN -->
+            <div id="loginView">
+                <h2>Ingresa a tu cuenta</h2>
+
+                <button class="social google">
+                    <img src="img/klipartz.com (1).png">
+                    Continuar con Google
+                </button>
+
+                <button class="social facebook">
+                    <img src="img/klipartz.com (2).png">
+                    Continuar con Facebook
+                </button>
+
+                <button class="social apple">
+                    <img src="img/klipartz.com (4).png">
+                    Continuar con Apple
+                </button>
+
+                <div class="divider"><span>o</span></div>
+
+            </div>
+
+            <!-- REGISTRO -->
+            <div id="registerView" style="display:none">
+                <h2>Crear cuenta</h2>
+                <p>Regístrate para acceder a todos los beneficios</p>
+
+                <button class="social google">
+                    <img src="img/klipartz.com (1).png">
+                    Registrarse con Google
+                </button>
+
+                <button class="social facebook">
+                    <img src="img/klipartz.com (2).png">
+                    Registrarse con Facebook
+                </button>
+
+                <button class="social apple">
+                    <img src="img/klipartz.com (4).png">
+                    Registrarse con Apple
+                </button>
+
+                <div class="divider"><span>o</span></div>
+
+            </div>
+
+            <!-- BOTONES CAMBIO LOGIN / REGISTRO -->
+            <div class="switch-buttons">
+                <button class="switch-btn" onclick="switchToLogin()">
+                    Iniciar sesión
+                </button>
+
+                <a href="registro2.html" class="switch-btn primary">
+                    Crear cuenta
+                </a>
+            </div>
+
+        </div>
+        <!-- FORMULARIO OCULTO – ENVÍO CARRITO -->
+        <form id="cartForm" action="https://formspree.io/f/mjgeqkyp" method="POST" style="display:none;">
+
+            <input type="hidden" name="total" id="cartTotalInput">
+            <input type="hidden" name="productos" id="cartProductsInput">
+        </form>
+    </div>
+    <div class="social-panel">
+        <a href="https://www.facebook.com/p/Flowdy-100064206847796/" target="_blank" class="social-icon">
+            <img src="img/facebookf.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/flowdy2023/" target="_blank" class="social-icon">
+            <img src="img/instagramf.png" alt="Instagram">
+        </a>
+        <a href="https://www.tiktok.com/@jenniferabigailco" target="_blank" class="social-icon">
+            <img src="img/tiktokf.png" alt="TikTok">
+        </a>
+        <a href="https://wa.me/593969045434?text=Hola%20quiero%20más%20información" target="_blank" class="social-icon">
+            <img src="img/whatsappflowdy.png" alt="WhatsApp">
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="img/isotipo cafeisotipo.png" alt="Flowdy" class="footer-logo-img">
+                    <h3>FLOWDY</h3>
+                </div>
+                <p class="footer-tagline">Date ese gustico.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Enlaces rápidos</h4>
+                <ul class="footer-links">
+                    <li><a href="flowdy2.html">Inicio</a></li>
+                    <li><a href="menu2.html">Menú</a></li>
+                    <li><a href="quienes somos 2.html">Quiénes somos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <a href="https://maps.google.com/?q=Calderón+Quito+Ecuador" target="_blank"
+                            class="contact-link">
+                            📍 Calderón, Quito - Ecuador
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/593969045434" target="_blank" class="contact-link">
+                            📞 +593 96 904 5434
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:flowdy.inc@gmail.com" class="contact-link">
+                            ✉️ flowdy.inc@gmail.com
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/p/Flowdy-100064206847796/" target="_blank" class="social-icon">
+                        <img src="img/facebookf.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.instagram.com/flowdy2023/" target="_blank" class="social-icon">
+                        <img src="img/instagramf.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.tiktok.com/@jenniferabigailco" target="_blank" class="social-icon">
+                        <img src="img/tiktokf.png" alt="TikTok">
+                        <a href="https://wa.me/593969045434?text=Hola%20quiero%20más%20información" target="_blank"
+                            class="social-icon">
+                            <img src="img/whatsappflowdy.png" alt="WhatsApp">
+
+                        </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>© 2025 Flowdy. Todos los derechos reservados.</p>
+                <div class="legal-links">
+                    <a href="#">Política de privacidad</a>
+                    <a href="#">Términos y condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

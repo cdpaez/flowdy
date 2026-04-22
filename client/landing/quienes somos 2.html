@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowdy - Quiénes Somos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="JSF.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="flowdy-container">
+                <button class="menu-btn" onclick="toggleMenu()">
+                    <span>☰</span> FLOWDY
+                </button>
+                <nav id="menu" class="dropdown-menu">
+                    <a href="flowdy2.html">Inicio</a>
+                    <a href="menu2.html">Menú</a>
+                    <a href="quienes somos 2.html">Quiénes somos</a>
+                </nav>
+            </div>
+        </div>
+        
+        <div class="nav-center">
+            <a href="flowdy2.html" class="logo-link">
+                <div class="logo-circle">
+                    <img src="img/isotipo blancoisotipo.png" alt="Logo Flowdy" class="logo">
+                </div>
+            </a>
+        </div>
+        
+        <div class="nav-right">
+            <button class="icon-btn cart-btn" onclick="openCart()">
+                <img src="img/carrito.png" alt="Carrito" class="nav-icon">
+                <span class="cart-badge" id="cartCount">0</span>
+            </button>
+            <button class="icon-btn account-btn" onclick="openLogin()">
+                <img src="img/registro.png" alt="Cuenta" class="nav-icon">
+            </button>
+        </div>
+    </header>
+
+    <main class="about-container">
+        <section class="about-hero">
+            <div class="section-header">
+                <h1 class="about-title">Quién <span class="highlight">soy</span></h1>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Hola, soy <strong>Jennifer Abigail Correa</strong>. Desde muy joven he sido una apasionada de la cocina y del estilo de vida saludable.
+                        Mi amor por la alimentación consciente y el mundo <em>fit</em> creció junto a mi experiencia como entrenadora,
+                        donde descubrí la importancia de nutrir el cuerpo no solo con ejercicio, sino también con alimentos que aporten bienestar real.
+                    </p>
+                    
+                    <p>
+                        Durante la pandemia, viví momentos muy duros en lo económico y en lo emocional, como muchas personas. En medio de esa etapa tan compleja,
+                        decidí transformar mi tiempo, mis conocimientos y mis ganas de salir adelante en algo que pudiera ayudarme y, al mismo tiempo,
+                        aportar a los demás. Así nació <strong><em>Flowdy</em></strong>, un emprendimiento dedicado a crear comidas y postres saludables
+                        elaborados con <span class="highlight-text">semillas, germinados e ingredientes naturales</span> que aportan energía, sabor y bienestar.
+                    </p>
+                    
+                    <p>
+                        Desde entonces, gracias al apoyo de cada persona que ha creído en mí y en mis recetas, he logrado formar una comunidad hermosa
+                        y una clientela fiel que ha crecido con el tiempo. Sin embargo, mi sueño siempre ha sido llevar Flowdy mucho más allá. Por eso,
+                        ahora doy el paso hacia el mundo digital, con la intención de expandirme, llegar a más personas y compartir mi pasión desde cualquier lugar.
+                        <span class="highlight-text"><strong>Te doy la bienvenida a mi página</strong></span>, creada con cariño para que puedas conocer mi trabajo y disfrutar
+                        de cada propuesta saludable que preparo.
+                    </p>
+                </div>
+                
+                <div class="profile-image-container">
+                    <div class="profile-placeholder">
+                        <img src="img/16052025-FERsh.png" alt="Jennifer Abigail Correa" class="profile-image">
+                        <p>Jennifer Abigail Correa</p>
+                        <p class="profile-role">Fundadora de Flowdy</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mission-values">
+            <div class="mission-values-grid">
+                <div class="mission-card">
+                    <div class="mission-header">
+                        <div class="mission-icon">🎯</div>
+                        <h2>Misión</h2>
+                    </div>
+                    <div class="mission-content">
+                        <p>
+                            Mi misión es ofrecer alimentos y postres saludables que acompañen a las personas en su vida diaria, ayudándolas a mantener un equilibrio
+                            entre nutrición, sabor y bienestar. Busco que cada preparación combine ingredientes naturales, creatividad y técnica para brindar opciones
+                            reales y accesibles que sumen energía y alegría a cada día.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="values-card">
+                    <div class="values-header">
+                        <div class="values-icon">💚</div>
+                        <h2>Valores</h2>
+                    </div>
+                    <div class="values-content">
+                        <ul class="values-list">
+                            <li>
+                                <span class="value-icon">🥗</span>
+                                <div>
+                                    <h4>Salud</h4>
+                                    <p>Priorizo ingredientes nutritivos que aportan beneficios reales al cuerpo.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="value-icon">⭐</span>
+                                <div>
+                                    <h4>Calidad</h4>
+                                    <p>Cuido cada receta y proceso para garantizar un producto confiable y delicioso.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="value-icon">🤝</span>
+                                <div>
+                                    <h4>Honestidad</h4>
+                                    <p>Trabajo con transparencia en cada ingrediente y preparación.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="value-icon">❤️</span>
+                                <div>
+                                    <h4>Pasión</h4>
+                                    <p>Cocino con dedicación y amor por lo que hago.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="value-icon">👥</span>
+                                <div>
+                                    <h4>Comunidad</h4>
+                                    <p>Valoro profundamente a cada cliente que me acompaña en este camino.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="value-icon">💡</span>
+                                <div>
+                                    <h4>Innovación</h4>
+                                    <p>Busco nuevas ideas, combinaciones y recetas que mantengan viva mi creatividad.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="commitment-section">
+            <div class="section-header">
+                <h2>Mi <span class="highlight">Compromiso</span></h2>
+                <p>Con cada producto que preparo</p>
+            </div>
+            
+            <div class="commitment-grid">
+                <div class="commitment-card">
+                    <div class="commitment-icon">🌱</div>
+                    <h3>Ingredientes Naturales</h3>
+                    <p>Uso solo ingredientes frescos, orgánicos y de la más alta calidad en todas mis preparaciones.</p>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon">👩‍🍳</div>
+                    <h3>Elaboración Artesanal</h3>
+                    <p>Cada producto es hecho a mano con atención al detalle y mucho cuidado en su preparación.</p>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon">💪</div>
+                    <h3>Salud y Bienestar</h3>
+                    <p>Creo que comer saludable debe ser delicioso, por eso combino nutrición con sabor excepcional.</p>
+                </div>
+                
+                <div class="commitment-card">
+                    <div class="commitment-icon">🚚</div>
+                    <h3>Servicio Confiable</h3>
+                    <p>Entrego cada pedido con puntualidad y cuidado, asegurando que llegue fresco y perfecto.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="overlay" onclick="closeAll()"></div>
+    <aside id="cartPanel" class="side-panel">
+
+
+        <div class="panel-header">
+            <h2>Tu carrito</h2>
+            <button onclick="closeAll()">✕</button>
+        </div>
+
+        <div class="panel-content" id="cartItems">
+            <p>Tu carrito está vacío</p>
+        </div>
+
+        <div class="cart-summary"> 
+
+            <div class="row">
+                <span>Subtotal</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+
+            <div class="row">
+                <label>
+
+                    Envío:
+                    <select id="shipping">
+                        <option value="0">Calderón (Gratis)</option>
+                        <option value="1">Otro sector (+$1)</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="row total">
+                <strong>Total</strong>
+                <strong id="total">$0.00</strong>
+            </div>
+
+            <div class="panel-footer">
+                <button class="primary-btn">Ir a pagar</button>
+            </div>
+
+        </div>
+
+    </aside>
+   <!-- OVERLAY -->
+<div id="overlay"></div>
+
+<!-- MODAL LOGIN / REGISTRO -->
+<div id="loginModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <img src="img/isotipo blancoisotipo.png" alt="Flowdy">
+            <button class="close-modal" onclick="closeAll()">✕</button>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="loginView">
+            <h2>Ingresa a tu cuenta</h2>
+
+            <button class="social google">
+                <img src="img/klipartz.com (1).png">
+                Continuar con Google
+            </button>
+
+            <button class="social facebook">
+                <img src="img/klipartz.com (2).png">
+                Continuar con Facebook
+            </button>
+
+            <button class="social apple">
+                <img src="img/klipartz.com (4).png">
+                Continuar con Apple
+            </button>
+
+            <div class="divider"><span>o</span></div>
+
+        </div>
+
+        <!-- REGISTRO -->
+        <div id="registerView" style="display:none">
+            <h2>Crear cuenta</h2>
+            <p>Regístrate para acceder a todos los beneficios</p>
+
+            <button class="social google">
+                <img src="img/klipartz.com (1).png">
+                Registrarse con Google
+            </button>
+
+            <button class="social facebook">
+                <img src="img/klipartz.com (2).png">
+                Registrarse con Facebook
+            </button>
+
+            <button class="social apple">
+                <img src="img/klipartz.com (4).png">
+                Registrarse con Apple
+            </button>
+
+            <div class="divider"><span>o</span></div>
+
+        </div>
+
+        <!-- BOTONES CAMBIO LOGIN / REGISTRO -->
+        <div class="switch-buttons">
+            <button class="switch-btn" onclick="switchToLogin()">
+                Iniciar sesión
+            </button>
+
+            <a href="registro2.html" class="switch-btn primary">
+                Crear cuenta
+            </a>
+        </div>
+
+    </div>
+<!-- FORMULARIO OCULTO – ENVÍO CARRITO -->
+<form id="cartForm"
+      action="https://formspree.io/f/mjgeqkyp"
+      method="POST"
+      style="display:none;">
+
+    <input type="hidden" name="total" id="cartTotalInput">
+    <input type="hidden" name="productos" id="cartProductsInput">
+</form>
+</div>
+    <div class="social-panel">
+        <a href="https://www.facebook.com/p/Flowdy-100064206847796/" target="_blank" class="social-icon">
+            <img src="img/facebookf.png" alt="Facebook">
+        </a>
+            <a href="https://www.instagram.com/flowdy2023/" target="_blank" class="social-icon">
+                <img src="img/instagramf.png" alt="Instagram">
+        </a>
+            <a href="https://www.tiktok.com/@jenniferabigailco" target="_blank" class="social-icon">
+                <img src="img/tiktokf.png" alt="TikTok">
+        </a>
+        <a href="https://wa.me/593969045434?text=Hola%20quiero%20más%20información" target="_blank" class="social-icon">
+                <img src="img/whatsappflowdy.png" alt="WhatsApp">
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="img/isotipo cafeisotipo.png" alt="Flowdy" class="footer-logo-img">
+                    <h3>FLOWDY</h3>
+                </div>
+                <p class="footer-tagline">Date ese gustico.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Enlaces rápidos</h4>
+                <ul class="footer-links">
+                    <li><a href="flowdy2.html">Inicio</a></li>
+                    <li><a href="menu2.html">Menú</a></li>
+                    <li><a href="quienes somos 2.html">Quiénes somos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <a href="https://maps.google.com/?q=Calderón+Quito+Ecuador" target="_blank" class="contact-link">
+                            📍 Calderón, Quito - Ecuador
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/593969045434" target="_blank" class="contact-link">
+                            📞 +593 96 904 5434
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:flowdy.inc@gmail.com" class="contact-link">
+                            ✉️ flowdy.inc@gmail.com
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/p/Flowdy-100064206847796/" target="_blank" class="social-icon">
+                        <img src="img/facebookf.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.instagram.com/flowdy2023/" target="_blank" class="social-icon">
+                        <img src="img/instagramf.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.tiktok.com/@jenniferabigailco" target="_blank" class="social-icon">
+                        <img src="img/tiktokf.png" alt="TikTok">
+                    <a href="https://wa.me/593969045434?text=Hola%20quiero%20más%20información" target="_blank" class="social-icon">
+                        <img src="img/whatsappflowdy.png" alt="WhatsApp">
+      
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>© 2025 Flowdy. Todos los derechos reservados.</p>
+                <div class="legal-links">
+                    <a href="#">Política de privacidad</a>
+                    <a href="#">Términos y condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
