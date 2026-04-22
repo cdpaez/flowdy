@@ -21,6 +21,11 @@ module.exports = {
         onDelete: 'CASCADE'
       },
 
+      estado_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+
       fecha: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -31,12 +36,6 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
         defaultValue: 0
-      },
-
-      estado: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: 'pendiente'
       },
 
       direccion_entrega: {

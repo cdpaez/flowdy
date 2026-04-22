@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('clientes', {
+    await queryInterface.createTable('estados_pedido', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -15,42 +15,21 @@ module.exports = {
         allowNull: false
       },
 
-      apellido: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-
-      telefono: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-
-      email: {
+      color: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
 
-      direccion: {
+      orden: {
         type: Sequelize.STRING,
         allowNull: false
       },
-
-      cedula_ruc: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-
-      fecha_registro: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      }
 
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('clientes');
+    await queryInterface.dropTable('estados_pedido');
   }
 };

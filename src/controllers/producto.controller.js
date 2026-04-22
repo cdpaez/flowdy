@@ -1,32 +1,19 @@
 const db = require('../database/models');
 const { Producto, Categoria } = db;
+const { subirImagen, eliminarImagen } = require('../services/uploadImage');
 
-// 🔹 Crear producto con imagen
 const crearProducto = async (req, res) => {
   try {
-    const {
-      nombre,
-      categoria_id,
-      descripcion,
-      precio,
-      stock,
-      es_nuevo,
-      es_popular,
-      activo
-    } = req.body;
+    let imagenUrl = null;
 
-    const imagen = req.file ? req.file.path : null;
+    if (req.file) {
+      const result = await subirImagen(req.file);
+      imagenUrl = result.secure_url;
+    }
 
     const producto = await Producto.create({
-      nombre,
-      categoria_id,
-      descripcion,
-      precio,
-      stock,
-      es_nuevo,
-      es_popular,
-      activo,
-      imagen
+      ...req.body,
+      imagen: imagenUrl
     });
 
     res.status(201).json(producto);
@@ -35,6 +22,8 @@ const crearProducto = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+module.exports = { crearProducto };
 
 // 🔹 Obtener todos los productos
 const getProductos = async (req, res) => {
@@ -74,24 +63,38 @@ const getProductoById = async (req, res) => {
   }
 };
 
-// 🔹 actualizar producto
+// 🔹 Actualizar producto
 const actualizarProducto = async (req, res) => {
   try {
     const { id } = req.params;
 
     const producto = await Producto.findByPk(id);
+
     if (!producto) {
-      return res.status(404).json({ mensaje: 'No encontrado' });
+      return res.status(404).json({ error: 'Producto no encontrado' });
     }
 
-    const imagen = req.file ? req.file.path : producto.imagen;
+    let imagenUrl = producto.imagen;
+
+    // 🔥 si llega nueva imagen
+    if (req.file) {
+      // eliminar anterior
+      await eliminarImagen(producto.imagen);
+
+      // subir nueva
+      const result = await subirImagen(req.file);
+      imagenUrl = result.secure_url;
+    }
 
     await producto.update({
       ...req.body,
-      imagen
+      imagen: imagenUrl
     });
 
-    res.json(producto);
+    res.json({
+      message: 'Producto actualizado',
+      producto
+    });
 
   } catch (error) {
     res.status(500).json({ error: error.message });

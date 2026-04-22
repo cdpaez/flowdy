@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
 
+    estado_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+
     fecha: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -21,12 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       defaultValue: 0
-    },
-
-    estado: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 'pendiente'
     },
 
     direccion_entrega: {

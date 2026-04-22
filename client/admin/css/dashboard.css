@@ -50,7 +50,7 @@ footer {
 
 /* --- PANEL LATERAL --- */
 .panel-lateral {
-  width: 240px;
+  width: 15%;
   background: #2c3e50;
   color: white;
   padding: 1rem;
@@ -254,7 +254,7 @@ dialog {
 }
 
 .tabla-productos table {
-  width: max-content;
+  width: 100%;
   border-collapse: collapse;
   background-color: #ecf0f1;
   border-radius: 8px;

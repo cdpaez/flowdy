@@ -1,5 +1,5 @@
 const db = require('../database/models');
-const { Pedido, DetallePedido, Producto, Cliente } = db;
+const { Pedido, DetallePedido, Producto, Cliente, Categoria, Pago, EstadoPedido } = db;
 
 const crearPedido = async (req, res) => {
   const t = await db.sequelize.transaction();
@@ -10,19 +10,31 @@ const crearPedido = async (req, res) => {
     // 1. Crear cliente
     const nuevoCliente = await Cliente.create({
       nombre: cliente.nombre,
+      apellido: cliente.apellido,
       telefono: cliente.telefono,
-      direccion: cliente.direccion
+      email: cliente.email,
+      direccion: cliente.direccion,
+      cedula_ruc: cliente.cedula_ruc
     }, { transaction: t });
+
+    let totalPedido = 0;
+
+    // 🔹 Obtener estado "pendiente"
+    const estadoPendiente = await EstadoPedido.findOne({
+      where: { nombre: 'pendiente' },
+      transaction: t
+    });
+
+    if (!estadoPendiente) {
+      throw new Error('Estado pendiente no existe');
+    }
 
     // 2. Crear pedido
     const nuevoPedido = await Pedido.create({
       cliente_id: nuevoCliente.id,
-      tipo_entrega: pedido.tipo_entrega,
       direccion_entrega: pedido.direccion_entrega,
-      forma_pago: pedido.forma_pago,
-      fecha_pedido: new Date(),
-      fecha_entrega: new Date(),
-      estado: 'pendiente'
+      estado_id: estadoPendiente.id,
+      total: 0
     }, { transaction: t });
 
     // 3. Crear detalles
@@ -33,21 +45,32 @@ const crearPedido = async (req, res) => {
         throw new Error(`Producto ${item.producto_id} no existe`);
       }
 
-      const subtotal = producto.precio * item.cantidad;
+      const precio = parseFloat(producto.precio);
+      const cantidad = item.cantidad;
+      const subtotal = precio * cantidad;
+
+      totalPedido += subtotal;
 
       await DetallePedido.create({
         pedido_id: nuevoPedido.id,
-        producto_id: item.producto_id,
-        cantidad: item.cantidad,
+        producto_id: producto.id,
+        cantidad,
+        precio_unitario: precio,
         subtotal
       }, { transaction: t });
     }
+
+    // 4. Actualizar total
+    await nuevoPedido.update({
+      total: totalPedido
+    }, { transaction: t });
 
     await t.commit();
 
     res.status(201).json({
       mensaje: 'Pedido creado correctamente',
-      pedido_id: nuevoPedido.id
+      pedido_id: nuevoPedido.id,
+      total: totalPedido
     });
 
   } catch (error) {
@@ -60,15 +83,39 @@ const getPedidos = async (req, res) => {
   try {
     const pedidos = await Pedido.findAll({
       include: [
-        { model: Cliente },
+        {
+          model: Cliente,
+          as: 'cliente'
+        },
+        {
+          model: EstadoPedido,
+          as: 'estado'
+        },
         {
           model: DetallePedido,
-          include: [Producto]
+          as: 'detalles',
+          include: [
+            {
+              model: Producto,
+              as: 'producto',
+              include: [
+                {
+                  model: Categoria,
+                  as: 'categoria'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          model: Pago,
+          as: 'pagos'
         }
       ]
     });
 
     res.json(pedidos);
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -93,9 +140,42 @@ const getPedidoById = async (req, res) => {
     }
 
     res.json(pedido);
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+};
+
+const actualizarEstadoPedido = async (req, res) => {
+
+  const { id } = req.params;
+  const { estado_id } = req.body;
+
+  try {
+
+    const pedido = await db.Pedido.findByPk(id);
+
+    if (!pedido) {
+      return res.status(404).json({
+        error: 'Pedido no encontrado'
+      });
+    }
+
+    pedido.estado_id = estado_id;
+    await pedido.save();
+
+    res.json({
+      mensaje: 'Estado actualizado'
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      error: error.message
+    });
+
+  }
+
 };
 
 const eliminarPedido = async (req, res) => {
@@ -121,5 +201,6 @@ module.exports = {
   getPedidos,
   getPedidoById,
   crearPedido,
+  actualizarEstadoPedido,
   eliminarPedido
 };

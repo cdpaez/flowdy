@@ -103,6 +103,17 @@ db.Pago.belongsTo(db.Pedido, {
   as: 'pedido'
 });
 
+// 📌 ESTADOS_PEDIDOS → PEDIDOS
+db.EstadoPedido.hasMany(db.Pedido, {
+  foreignKey: 'estado_id',
+  as: 'pedidos'
+});
+
+db.Pedido.belongsTo(db.EstadoPedido, {
+  foreignKey: 'estado_id',
+  as: 'estado'
+});
+
 // Exportar
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

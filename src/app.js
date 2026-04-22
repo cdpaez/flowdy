@@ -34,8 +34,34 @@ app.get('/admin', (req, res) => {
 // Rutas API
 app.use('/login', require('./routes/login.routes'));
 app.use('/api/categorias', require('./routes/categoria.routes'));
-app.use('/api/productos',require('./routes/producto.routes'));
+app.use('/api/productos', require('./routes/producto.routes'));
 app.use('/api/pedidos', require('./routes/pedido.routes'));
+app.use('/api/estados-pedidos', require('./routes/estadosPedido.routes'));
 app.use('/usuarios', require('./routes/usuario.routes'));
+
+// Error de multer (archivos pesados)
+const multer = require('multer');
+
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({
+        error: 'La imagen es demasiado grande. Máximo permitido: 5MB'
+      });
+    }
+  }
+
+  next(err);
+});
+
+// Error general
+app.use((err, req, res, next) => {
+  console.error('🔥 Error:', err.message);
+
+  res.status(500).json({
+    error: 'Error interno del servidor'
+  });
+});
+
 // Exportar solo la app
 module.exports = app;

@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     rol: {
       type: DataTypes.ENUM('admin', 'lector'),
-      defaultValue: 'vendedor',
+      defaultValue: 'lector',
       allowNull: false
     },
     estado: {

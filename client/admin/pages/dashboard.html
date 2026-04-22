@@ -55,12 +55,12 @@
       <section class="area-contenido">
 
         <div id="productos" class="seccion activa">
-          <h2>PRODUCTOS</h2>
+          <h2>Productos</h2>
           <!-- Filtros y botón agregar -->
           <div class="barra-productos">
-            <input type="text" id="buscador-productos" placeholder="codigo o precio">
+            <input type="text" id="buscador-productos" placeholder="nombre o precio">
             <div class="barra-productos__contenedor-botones">
-              <button id="abrirDialogo">Aplicar Filtros</button>
+              <!-- <button id="abrirDialogo">Aplicar Filtros</button> -->
               <button id="abrir-modal">+ Agregar producto</button>
               <button id="importar-datos">📦 Importar</button>
             </div>
@@ -136,7 +136,7 @@
 
                 <input type="number" id="stock" placeholder="Stock" min="0">
                 <!-- 📷 Imagen del producto -->
-                
+
                 <label>Imagen del producto</label>
                 <input type="file" id="imagen" accept="image/*">
 
@@ -185,7 +185,7 @@
         </div>
 
         <div id="actas" class="seccion">
-          <h2>🧾Actas</h2>
+          <h2>🧾Pedidos</h2>
           <div class="filtros-ventas">
             <input type="date" id="fecha-inicio" placeholder="Desde">
             <input type="date" id="fecha-fin" placeholder="Hasta">
@@ -193,17 +193,15 @@
             <!-- <button id="exportar-ventas">📁 Exportar</button> -->
           </div>
           <div class="tabla-actas">
-            <table>
+            <table id="tabla-pedidos">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Fecha</th>
+                  <th>ID</th>
                   <th>Cliente</th>
-                  <th>Equipo</th>
-                  <th>Vendedor</th>
-                  <th>Forma de Pago</th>
-                  <th>Precio</th>
-                  <th>Acciones</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+                  <th>Detalles</th>
+                  <th>Total</th>
                 </tr>
               </thead>
               <tbody id="tabla-actas"></tbody>
@@ -342,6 +340,7 @@
 
   <script src="../js/dashboard/usuario.js"></script>
   <script src="../js/dashboard/productos.js"></script>
+  <script src="../js/dashboard/pedidos.js"></script>
   <script src="../js/dashboard/dashboard.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/dashboard/nav-stats.js"></script>

@@ -5,7 +5,8 @@ const {
   getPedidos,
   getPedidoById,
   crearPedido,
-  eliminarPedido
+  eliminarPedido,
+  actualizarEstadoPedido
 } = require('../controllers/pedido.controller');
 
 // GET todos
@@ -16,6 +17,9 @@ router.get('/:id', getPedidoById);
 
 // POST crear pedido
 router.post('/', crearPedido);
+
+// PUT actualizar estado
+router.put('/:id/estado', actualizarEstadoPedido);
 
 // DELETE
 router.delete('/:id', eliminarPedido);

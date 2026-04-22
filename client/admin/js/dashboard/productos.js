@@ -6,33 +6,6 @@ const GestorProductos = (() => {
 
     const tablaProductos = document.querySelector('.tabla-productos tbody');
 
-    const init = () => {
-        initPreviewImagen();
-        document.getElementById('abrir-modal').addEventListener('click', abrirModalCreacion);
-        document.getElementById('form-modal-producto').addEventListener('submit', manejarSubmitProducto);
-        document.querySelector('.cerrar-modal').addEventListener('click', cerrarModal);
-        document.getElementById('importar-datos').addEventListener('click', () => {
-            document.getElementById('modal-importar').style.display = 'flex';
-        });
-        document.getElementById('modal-importar').addEventListener('click', cerrarModalImportar);
-        document.addEventListener('keydown', cerrarModalEscape);
-        document.getElementById('form-importar').addEventListener('submit', importarProductos);
-        document.getElementById('buscador-productos').addEventListener('input', buscarProductos);
-        document.getElementById('limpiarBusqueda').addEventListener('click', limpiarBusqueda);
-        document.querySelectorAll('.busqueda-avanzada input').forEach(i => i.addEventListener('input', filtrarProductos));
-        cargarCategorias();
-        cargarProductos().then(() => {
-            mostrarContador(
-                todosLosProductos.length,
-                todosLosProductos.filter(p => p.stock === 'disponible').length,
-                todosLosProductos.filter(p => p.stock === 'vendido').length
-            );
-        });
-        conectarWebSocket();
-        manejarDialogoBusqueda();
-
-    };
-
     const initPreviewImagen = () => {
         const inputImagen = document.getElementById('imagen');
         const preview = document.getElementById('preview-imagen');
@@ -138,7 +111,7 @@ const GestorProductos = (() => {
         const resultados = !termino
             ? todosLosProductos
             : todosLosProductos.filter(p =>
-                p.codigo_prd.toLowerCase().includes(termino) ||
+                p.nombre.toLowerCase().includes(termino) ||
                 p.precio.toString().includes(termino)
             );
         paginaActual = 1;
@@ -322,26 +295,29 @@ const GestorProductos = (() => {
         const form = e.target;
         const esEdicion = form.dataset.modo === 'edicion';
         const token = sessionStorage.getItem('token');
+
         const loader = document.getElementById('loader-modal');
 
         try {
             loader.style.display = 'block';
             form.querySelector('button[type="submit"]').disabled = true;
 
-            const datos = {
-                nombre: form.nombre.value.trim(),
-                categoria_id: parseInt(form.categoria_id.value),
-                descripcion: form.descripcion.value.trim(),
-                precio: parseFloat(form.precio.value),
-                stock: parseInt(form.stock.value) || 0,
-                es_nuevo: form.es_nuevo?.checked || false,
-                es_popular: form.es_popular?.checked || false,
-                activo: form.activo?.checked ?? true
-            };
+            const datos = new FormData();
 
-            if (!datos.nombre) throw new Error('El nombre es obligatorio');
-            if (!datos.categoria_id) throw new Error('Debe seleccionar una categoría');
-            if (datos.precio <= 0) throw new Error('El precio debe ser mayor a 0');
+            datos.append('nombre', document.getElementById('nombre').value);
+            datos.append('categoria_id', document.getElementById('categoria_id').value);
+            datos.append('descripcion', document.getElementById('descripcion').value);
+            datos.append('precio', document.getElementById('precio').value);
+            datos.append('stock', document.getElementById('stock').value);
+
+            datos.append('es_nuevo', document.getElementById('es_nuevo').checked);
+            datos.append('es_popular', document.getElementById('es_popular').checked);
+            datos.append('activo', document.getElementById('activo').checked);
+
+            const fileInput = document.getElementById('imagen');
+            if (fileInput.files[0]) {
+                datos.append('imagen', fileInput.files[0]);
+            }
 
             const url = esEdicion
                 ? `/api/productos/${form.dataset.id}`
@@ -352,19 +328,22 @@ const GestorProductos = (() => {
             const res = await fetch(url, {
                 method,
                 headers: {
-                    'Content-Type': 'application/json',
                     Authorization: token
                 },
-                body: JSON.stringify(datos)
+                body: datos
             });
 
             if (!res.ok) {
                 const err = await res.json();
-                throw new Error(err.error || 'Error en la solicitud');
+                throw new Error(err.error || 'Error en la operación');
             }
 
+            const result = await res.json();
+
             mostrarToast(
-                esEdicion ? '✅ Producto actualizado' : '✅ Producto creado',
+                esEdicion
+                    ? '✅ Producto actualizado correctamente'
+                    : '✅ Producto creado correctamente',
                 'success'
             );
 
@@ -372,7 +351,9 @@ const GestorProductos = (() => {
             cargarProductos();
 
         } catch (error) {
+            console.error(error);
             mostrarToast(`❌ ${error.message}`, 'error');
+
         } finally {
             loader.style.display = 'none';
             form.querySelector('button[type="submit"]').disabled = false;
@@ -429,20 +410,20 @@ const GestorProductos = (() => {
         document.getElementById('contadorVendidos').textContent = `${vendidos} Vendidos`;
     };
 
-    const manejarDialogoBusqueda = () => {
-        const dialogo = document.getElementById("dialogoBusqueda");
-        const abrir = document.getElementById("abrirDialogo");
-        const cerrar = document.getElementById("cerrarDialogo");
+    // const manejarDialogoBusqueda = () => {
+    //     const dialogo = document.getElementById("dialogoBusqueda");
+    //     const abrir = document.getElementById("abrirDialogo");
+    //     const cerrar = document.getElementById("cerrarDialogo");
 
-        abrir.addEventListener("click", () => dialogo.showModal());
-        cerrar.addEventListener("click", () => dialogo.close());
-        dialogo.addEventListener("click", (e) => {
-            const rect = dialogo.getBoundingClientRect();
-            if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
-                dialogo.close();
-            }
-        });
-    };
+    //     abrir.addEventListener("click", () => dialogo.showModal());
+    //     cerrar.addEventListener("click", () => dialogo.close());
+    //     dialogo.addEventListener("click", (e) => {
+    //         const rect = dialogo.getBoundingClientRect();
+    //         if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+    //             dialogo.close();
+    //         }
+    //     });
+    // };
 
     const conectarWebSocket = () => {
         const token = sessionStorage.getItem('token');
@@ -478,6 +459,33 @@ const GestorProductos = (() => {
         ws.addEventListener('error', (e) => {
             console.error('[WS] Error en WebSocket:', e);
         });
+    };
+
+    const init = () => {
+        initPreviewImagen();
+        document.getElementById('abrir-modal').addEventListener('click', abrirModalCreacion);
+        document.getElementById('form-modal-producto').addEventListener('submit', manejarSubmitProducto);
+        document.querySelector('.cerrar-modal').addEventListener('click', cerrarModal);
+        document.getElementById('importar-datos').addEventListener('click', () => {
+            document.getElementById('modal-importar').style.display = 'flex';
+        });
+        document.getElementById('modal-importar').addEventListener('click', cerrarModalImportar);
+        document.addEventListener('keydown', cerrarModalEscape);
+        document.getElementById('form-importar').addEventListener('submit', importarProductos);
+        document.getElementById('buscador-productos').addEventListener('input', buscarProductos);
+        document.getElementById('limpiarBusqueda').addEventListener('click', limpiarBusqueda);
+        document.querySelectorAll('.busqueda-avanzada input').forEach(i => i.addEventListener('input', filtrarProductos));
+        cargarCategorias();
+        cargarProductos().then(() => {
+            mostrarContador(
+                todosLosProductos.length,
+                todosLosProductos.filter(p => p.stock === 'disponible').length,
+                todosLosProductos.filter(p => p.stock === 'vendido').length
+            );
+        });
+        conectarWebSocket();
+        // manejarDialogoBusqueda();
+
     };
     return { init };
 })();
