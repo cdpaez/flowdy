@@ -8,14 +8,34 @@ const crearPedido = async (req, res) => {
     const { cliente, pedido, detalles } = req.body;
 
     // 1. Crear cliente
-    const nuevoCliente = await Cliente.create({
-      nombre: cliente.nombre,
-      apellido: cliente.apellido,
-      telefono: cliente.telefono,
-      email: cliente.email,
-      direccion: cliente.direccion,
-      cedula_ruc: cliente.cedula_ruc
-    }, { transaction: t });
+    let clienteDB = await Cliente.findOne({
+      where: { cedula_ruc: cliente.cedula_ruc },
+      transaction: t
+    });
+
+    if (!clienteDB) {
+
+      clienteDB = await Cliente.create({
+        nombre: cliente.nombre,
+        apellido: cliente.apellido,
+        telefono: cliente.telefono,
+        email: cliente.email,
+        direccion: cliente.direccion,
+        cedula_ruc: cliente.cedula_ruc
+      }, { transaction: t });
+
+    } else {
+
+      // opcional: actualizar datos si cambiaron
+      await clienteDB.update({
+        nombre: cliente.nombre,
+        apellido: cliente.apellido,
+        telefono: cliente.telefono,
+        email: cliente.email,
+        direccion: cliente.direccion
+      }, { transaction: t });
+
+    }
 
     let totalPedido = 0;
 
@@ -31,7 +51,7 @@ const crearPedido = async (req, res) => {
 
     // 2. Crear pedido
     const nuevoPedido = await Pedido.create({
-      cliente_id: nuevoCliente.id,
+      cliente_id: clienteDB.id,
       direccion_entrega: pedido.direccion_entrega,
       estado_id: estadoPendiente.id,
       total: 0

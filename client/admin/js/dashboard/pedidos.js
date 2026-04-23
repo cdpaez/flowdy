@@ -112,6 +112,7 @@ const gestorPedidos = (() => {
             fila.innerHTML = `
             <td>${pedido.id}</td>
             <td>${pedido.cliente.nombre} ${pedido.cliente.apellido}</td>
+            <td>${pedido.cliente.telefono}</td>
             <td>${pedido.cliente.cedula_ruc}</td>
             <td>${formatearFecha(pedido.fecha)}</td>
             <td>
