@@ -1,0 +1,58 @@
+/* ============================================
+   PANEL FLOTANTE DE REDES SOCIALES COMPARTIDO ENTRE PÁGINAS
+   ============================================ */
+
+.social-panel {
+    position: fixed;
+    right: 0px;
+    bottom: 80px;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 14px;
+    padding: 20px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+    box-shadow: 0 5px 20px var(--shadow-light);
+}
+
+
+/* Links */
+.social-panel a {
+    width: 44px;         
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;    
+    cursor: pointer;
+}
+
+/* Iconos */
+.social-panel img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Hover */
+.social-panel a:hover img {
+    transform: scale(1.15);
+    opacity: 0.85;
+}
+
+/* Estado oculto */
+.social-panel.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(20px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Estado visible */
+.social-panel {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}

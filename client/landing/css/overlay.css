@@ -1,0 +1,55 @@
+/* ===========================
+   OVERLAY (ÚNICO Y CONTROLADO)
+=========================== */
+
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 900; /* IMPORTANTE */
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===========================
+   OVERLAY
+=========================== */
+
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cart-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.cart-item img {
+    width: 80px;        /* tamaño controlado */
+    height: 80px;
+    object-fit: cover; /* recorta sin deformar */
+    border-radius: 10px;
+    flex-shrink: 0;    /* evita que se estire */
+}
+
+

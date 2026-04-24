@@ -1,0 +1,50 @@
+
+/* ===========================
+   MODAL CONTENEDOR
+=========================== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1100;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===========================
+   MODAL LOGIN – ESTILO PRO
+=========================== */
+
+.modal-box {
+    background: #f9f8f4;
+    width: 420px;
+    max-width: 90%;
+    padding: 30px;
+    border-radius: 22px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    animation: modalFade 0.3s ease;
+}
+
+/* Animación suave */
+@keyframes modalFade {
+    from {
+        transform: translateY(20px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
