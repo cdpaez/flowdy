@@ -4,24 +4,28 @@ Content-Type: application/json
 
 {
   "cliente": {
-    "nombre": "armando",
+    "nombre": "Jose",
     "apellido": "paspuezan",
     "telefono": "0999999999",
-    "email": "carman@gmail.com",
+    "email": "Jose@gmail.com",
     "direccion": "Calderon",
-    "cedula_ruc": "1717171726"
+    "cedula_ruc": "1717171789"
   },
   "pedido": {
-    "direccion_entrega": "Av. 6 de Diciembre 789"
+    "direccion_entrega": "Cacha 789"
   },
   "detalles": [
     {
       "producto_id": 1,
-      "cantidad": 20
+      "cantidad": 5
     },
     {
       "producto_id": 2,
-      "cantidad": 20
+      "cantidad": 5
+    },
+    {
+      "producto_id": 3,
+      "cantidad": 5
     }
   ]
 }

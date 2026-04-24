@@ -1,0 +1,21 @@
+/* Sección Hero (Bienvenida) */
+.hero-section {
+    padding: 80px 40px;
+    text-align: center;
+    background-color: var(--background-white);
+}
+
+.main-title {
+    font-size: 6rem;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.subtitle {
+    font-size: 2.2rem;
+    color: var(--text-medium);
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}

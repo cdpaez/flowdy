@@ -1,0 +1,23 @@
+
+/* Sección "Date ese gustico" */
+.gustico-section {
+    padding: 80px 40px;
+    background-color: var(--background-light);
+    text-align: center;
+}
+
+.gustico-section .section-header {
+    margin-bottom: 60px;
+}
+
+.gustico-title {
+    font-size: 5.2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.gustico-subtitle {
+    color: var(--text-medium);
+    font-size: 1.8rem;
+}

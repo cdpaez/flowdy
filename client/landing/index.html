@@ -7,7 +7,33 @@
     <title>Flowdy - Comida Saludable</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../landing/css/styles.css">
+
+    <!-- estilos personalizados -->
+
+    <link rel="stylesheet" href="../landing/css/components/botones.css">
+
+    <link rel="stylesheet" href="../landing/css/media/responsive.css">
+
+    <link rel="stylesheet" href="../landing/css/components/carrusel.css">
+
+    <link rel="stylesheet" href="../landing/css/components/heroSection.css">
+
+    <link rel="stylesheet" href="../landing/css/components/gustico.css">
+
+    <link rel="stylesheet" href="../landing/css/components/menu.css">
+
+    <link rel="stylesheet" href="../landing/css/components/masVendidos.css">
+
+    <link rel="stylesheet" href="../landing/css/components/carrito.css">
+    <link rel="stylesheet" href="../landing/css/divisor.css">
+    <link rel="stylesheet" href="../landing/css/redesSociales.css">
+    <link rel="stylesheet" href="../landing/css/modal.css">
+    <link rel="stylesheet" href="../landing/css/logoCarrito.css">
+    <link rel="stylesheet" href="../landing/css/overlay.css">
+    <link rel="stylesheet" href="../landing/css/footer.css">
+    <link rel="stylesheet" href="../landing/css/panelFlotante.css">
+    <link rel="stylesheet" href="../landing/css/header.css">
+    <link rel="stylesheet" href="../landing/css/index.css">
     <script src="../landing/js/JSF.js"></script>
 </head>
 
@@ -39,13 +65,10 @@
                 <img src="../landing/assets/images/utils/carrito.png" alt="Carrito" class="nav-icon">
                 <span class="cart-badge" id="cartCount">0</span>
             </button>
-            <button class="icon-btn account-btn" onclick="openLogin()">
-                <img src="../landing/assets/images/utils/registro.png" alt="Cuenta" class="nav-icon">
-            </button>
         </div>
     </header>
 
-    <!-- componente carrusel servicios -->
+    <!-- componente carrusel -->
     <div class="carrusel-servicios">
         <button class="carrusel-btn-servicios prev">&#10094;</button>
         <div class="carrusel-items-servicios">
@@ -83,20 +106,9 @@
             </div>
 
             <div class="menu-categories">
-                <div class="category-card">
-                    <a href="../landing/pages/menu.html#Principal" class="category-link">
-                        <div class="category-image-container">
-                            <img src="../landing/assets/images/platos/3.png" alt="Platos principales">
-                        </div>
-                        <div class="category-info">
-                            <h3>Platos Principales</h3>
-                            <p>Almuerzos y cenas balanceados</p>
-                        </div>
-                    </a>
-                </div>
 
                 <div class="category-card">
-                    <a href="../landing/pages/menu.html#Postres" class="category-link">
+                    <a href="#Postres" class="category-link">
                         <div class="category-image-container">
                             <img src="../landing/assets/images/platos/28.jpg" alt="Postres saludables">
                         </div>
@@ -109,13 +121,25 @@
             </div>
         </section>
 
-        <section class="best-sellers">
+        <section class="best-sellers" id="Postres">
             <div class="section-header">
                 <h2>Lo más <span class="highlight">Popular</span></h2>
                 <p>Los favoritos de nuestros clientes</p>
             </div>
 
             <div class="product-grid" id="productGrid">
+
+            </div>
+
+        </section>
+
+        <section class="menu-fit" id="menu">
+            <div class="section-header">
+                <h2>Disfruta de <span class="highlight">Nuestro menú</span></h2>
+                <p>Variedad de platillos a tu disposición</p>
+            </div>
+
+            <div class="product-grid" id="productGrid1">
 
             </div>
 

@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flowdy - Quiénes Somos</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
-    <script src="../js/JSF.js"></script>
+    
+    <link rel="stylesheet" href="../css/quienesSomos.css">
+
+
+    
 </head>
 <body>
     <header class="navbar">
@@ -230,88 +233,10 @@
         </div>
 
     </aside>
-   <!-- OVERLAY -->
-<div id="overlay"></div>
+    
+    <!-- OVERLAY -->
+    <div id="overlay"></div>
 
-<!-- MODAL LOGIN / REGISTRO -->
-<div id="loginModal" class="modal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-            <img src="img/isotipo blancoisotipo.png" alt="Flowdy">
-            <button class="close-modal" onclick="closeAll()">✕</button>
-        </div>
-
-        <!-- LOGIN -->
-        <div id="loginView">
-            <h2>Ingresa a tu cuenta</h2>
-
-            <button class="social google">
-                <img src="img/klipartz.com (1).png">
-                Continuar con Google
-            </button>
-
-            <button class="social facebook">
-                <img src="img/klipartz.com (2).png">
-                Continuar con Facebook
-            </button>
-
-            <button class="social apple">
-                <img src="img/klipartz.com (4).png">
-                Continuar con Apple
-            </button>
-
-            <div class="divider"><span>o</span></div>
-
-        </div>
-
-        <!-- REGISTRO -->
-        <div id="registerView" style="display:none">
-            <h2>Crear cuenta</h2>
-            <p>Regístrate para acceder a todos los beneficios</p>
-
-            <button class="social google">
-                <img src="img/klipartz.com (1).png">
-                Registrarse con Google
-            </button>
-
-            <button class="social facebook">
-                <img src="img/klipartz.com (2).png">
-                Registrarse con Facebook
-            </button>
-
-            <button class="social apple">
-                <img src="img/klipartz.com (4).png">
-                Registrarse con Apple
-            </button>
-
-            <div class="divider"><span>o</span></div>
-
-        </div>
-
-        <!-- BOTONES CAMBIO LOGIN / REGISTRO -->
-        <div class="switch-buttons">
-            <button class="switch-btn" onclick="switchToLogin()">
-                Iniciar sesión
-            </button>
-
-            <a href="registro2.html" class="switch-btn primary">
-                Crear cuenta
-            </a>
-        </div>
-
-    </div>
-<!-- FORMULARIO OCULTO – ENVÍO CARRITO -->
-<form id="cartForm"
-      action="https://formspree.io/f/mjgeqkyp"
-      method="POST"
-      style="display:none;">
-
-    <input type="hidden" name="total" id="cartTotalInput">
-    <input type="hidden" name="productos" id="cartProductsInput">
-</form>
-</div>
     <div class="social-panel">
         <a href="https://www.facebook.com/p/Flowdy-100064206847796/" target="_blank" class="social-icon">
             <img src="img/facebookf.png" alt="Facebook">
@@ -396,5 +321,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- scripts -->
+     <script src="../js/JSF.js"></script>
+
 </body>
 </html>

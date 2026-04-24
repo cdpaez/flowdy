@@ -1,0 +1,40 @@
+
+/* ===========================
+   BOTONES CAMBIO LOGIN / REGISTRO
+=========================== */
+
+.switch-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+}
+
+.switch-btn {
+    flex: 1;
+    padding: 13px;
+    border-radius: 30px;
+    border: 1px solid #c9a85d;
+    background: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color:  inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-btn:hover {
+    background: #f2f2f2;
+}
+
+.switch-btn.primary {
+    background: #c9a85d;
+    color: #fff;
+    border: none;
+}
+
+.switch-btn.primary:hover {
+    background: #b9974f;
+}
