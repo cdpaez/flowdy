@@ -7,7 +7,7 @@ const WebSocketModule = (function () {
         if (!token) return;
 
         const wsBaseURL = window.location.hostname === 'localhost'
-            ? 'ws://localhost:3000'
+            ? 'ws://localhost:5001'
             : 'wss://copter-2-0-0.onrender.com';
 
         socket = new WebSocket(`${wsBaseURL}/ws?token=${token}`);

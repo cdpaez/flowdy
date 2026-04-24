@@ -804,18 +804,91 @@ img {
    PÁGINA PRINCIPAL (FLOWDY2.HTML)
    ============================================ */
 
-/* Video */
-.video-container {
-    width: 100%;
-    height: 471px;
-    overflow: hidden;
-    position: relative;
+/*
+    carrusel-servicios
+**/
+
+.carrusel-servicios {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border: 2px solid black;
 }
 
-.video-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.carrusel-items-servicios {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-servicios {
+  height: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: .5em;
+  font-family: monospace;
+}
+
+.slide-servicios img {
+  width: 100%;
+  object-fit: contain;
+  aspect-ratio: 1/1;
+}
+
+.slide-servicios h2 {
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  margin: 0rem 0rem 2rem 0rem;
+}
+
+.slide-servicios p {
+  margin: 2rem 0rem 0rem 0rem;
+  font-weight: bold;
+  font-size: .9em;
+  color: white;
+}
+
+.carrusel-btn-servicios {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #A82272;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 10px;
+  opacity: 0.8;
+}
+
+.carrusel-btn-servicios:hover {
+  background: #DB0085;
+  opacity: 1;
+}
+
+.carrusel-btn-servicios.prev {
+  left: 10px;
+  z-index: 100;
+  opacity: 0;
+}
+
+.carrusel-btn-servicios.next {
+  right: 10px;
+  z-index: 100;
+  opacity: 0;
 }
 
 /* Sección Hero (Bienvenida) */

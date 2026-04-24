@@ -45,10 +45,28 @@
         </div>
     </header>
 
-    <div class="video-container">
-        <video autoplay loop muted playsinline>
-            <source src="../landing/assets/video/video.mp4" type="video/mp4">
-        </video>
+    <!-- componente carrusel servicios -->
+    <div class="carrusel-servicios">
+        <button class="carrusel-btn-servicios prev">&#10094;</button>
+        <div class="carrusel-items-servicios">
+
+            <div class="slide-servicios">
+                <img src="../landing/assets/images/platos/16052025-platillo1.jpg" alt="">
+            </div>
+
+            <div class="slide-servicios">
+
+                <img src="../landing/assets/images/platos/16052025-platillo2.jpg" alt="">
+            </div>
+
+            <div class="slide-servicios">
+
+                <img src="../landing/assets/images/platos/16052025-platillo3.jpg" alt="">
+            </div>
+            <!-- ... más slides -->
+
+        </div>
+        <button class="carrusel-btn-servicios next">&#10095;</button>
     </div>
 
     <main>
@@ -97,71 +115,12 @@
                 <p>Los favoritos de nuestros clientes</p>
             </div>
 
-            <div class="product-grid" id="productGrid"></div>
-                
+            <div class="product-grid" id="productGrid">
+
+            </div>
+
         </section>
 
-        <section class="delivery-platforms">
-            <div class="section-header">
-                <h2>Pídelo <span class="highlight">en</span></h2>
-                <p>Elige tu plataforma preferida</p>
-            </div>
-
-            <div class="platforms-grid">
-                <a href="https://www.rappi.com.ec/" target="_blank" class="platform-card">
-                    <img src="../landing/assets/images/logos/Rappi Logo.png" alt="Rappi">
-                </a>
-
-                <a href="https://www.ubereats.com/ec" target="_blank" class="platform-card">
-                    <img src="../landing/assets/images/logos/pngfind.com-uber-png-6831369.png" alt="Uber Eats">
-                </a>
-
-                <a href="https://www.pedidosya.com.ec/" target="_blank" class="platform-card">
-                    <img src="../landing/assets/images/logos/Pedidos Ya Logo.png" alt="Pedidos Ya">
-                </a>
-            </div>
-        </section>
-
-        <section class="content-article">
-            <div class="section-header">
-                <h2>Conoce más sobre <span class="highlight">alimentación saludable</span></h2>
-                <p>Tips y recetas para tu bienestar</p>
-            </div>
-
-            <div class="article-content">
-                <article class="article-card">
-                    <a href="https://books.google.com.ec/books?hl=en&lr=&id=VI3ODwAAQBAJ&oi=fnd&pg=PT22&dq=propiedades+de+los+germinados+&ots=tqB0fZu3w3&sig=nsPFAZJf2U8wQ6OqUx-qWqnTBXo&redir_esc=y#v=onepage&q=propiedades%20de%20los%20germinados&f=false"
-                        target="_blank">
-                        <div class="article-image">
-                            <img src="../landing/assets/images/platos/germinados.jpg" alt="Germinados">
-                        </div>
-                        <div class="article-info">
-                            <h3>Ventajas nutricionales de los germinados</h3>
-                            <p>Descubre por qué los germinados son un superalimento</p>
-                            <span class="read-more">Leer más →</span>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="article-card">
-                    <a href="https://www.youtube.com/watch?v=qVyun2HW6GU" target="_blank">
-                        <div class="article-image">
-                            <div class="video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/qVyun2HW6GU?si=ujPLUcL7Mw7DIIiN"
-                                    title="Video sobre germinados"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-                                    allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="article-info">
-                            <h3>Germinados o brotes: Beneficios y preparación</h3>
-                            <p>Aprende a preparar tus propios germinados en casa</p>
-                            <span class="read-more">Ver video →</span>
-                        </div>
-                    </a>
-                </article>
-            </div>
-        </section>
     </main>
 
     <div id="overlay" onclick="closeAll()"></div>
@@ -211,83 +170,6 @@
     <!-- OVERLAY -->
     <div id="overlay"></div>
 
-    <!-- MODAL LOGIN / REGISTRO -->
-    <div id="loginModal" class="modal">
-
-        <div class="modal-box">
-
-            <div class="modal-header">
-                <img src="../landing/assets/images/logos/isotipo blancoisotipo.png" alt="Flowdy">
-                <button class="close-modal" onclick="closeAll()">✕</button>
-            </div>
-
-            <!-- LOGIN -->
-            <div id="loginView">
-                <h2>Ingresa a tu cuenta</h2>
-
-                <button class="social google">
-                    <img src="../landing/assets/images/redes/klipartz.com (1).png">
-                    Continuar con Google
-                </button>
-
-                <button class="social facebook">
-                    <img src="../landing/assets/images/redes/klipartz.com (2).png">
-                    Continuar con Facebook
-                </button>
-
-                <button class="social apple">
-                    <img src="../landing/assets/images/redes/klipartz.com (4).png">
-                    Continuar con Apple
-                </button>
-
-                <div class="divider"><span>o</span></div>
-
-            </div>
-
-            <!-- REGISTRO -->
-            <div id="registerView" style="display:none">
-                <h2>Crear cuenta</h2>
-                <p>Regístrate para acceder a todos los beneficios</p>
-
-                <button class="social google">
-                    <img src="../landing/assets/images/redes/klipartz.com (1).png">
-                    Registrarse con Google
-                </button>
-
-                <button class="social facebook">
-                    <img src="../landing/assets/images/redes/klipartz.com (2).png">
-                    Registrarse con Facebook
-                </button>
-
-                <button class="social apple">
-                    <img src="../landing/assets/images/redes/klipartz.com (4).png">
-                    Registrarse con Apple
-                </button>
-
-                <div class="divider"><span>o</span></div>
-
-            </div>
-
-            <!-- BOTONES CAMBIO LOGIN / REGISTRO -->
-            <div class="switch-buttons">
-                <button class="switch-btn" onclick="switchToLogin()">
-                    Iniciar sesión
-                </button>
-
-                <a href="../landing/pages/registro2.html" class="switch-btn primary">
-                    Crear cuenta
-                </a>
-            </div>
-
-        </div>
-        <!-- FORMULARIO OCULTO – ENVÍO CARRITO -->
-        <form id="cartForm" action="https://formspree.io/f/mjgeqkyp" method="POST" style="display:none;">
-
-            <input type="hidden" name="total" id="cartTotalInput">
-            <input type="hidden" name="productos" id="cartProductsInput">
-        </form>
-    </div>
-
     <div class="social-panel">
         <a href="https://www.facebook.com/p/Flowdy-100064206847796/" target="_blank" class="social-icon">
             <img src="../landing/assets/images/redes/facebookf.png" alt="Facebook">
@@ -307,7 +189,8 @@
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">
-                    <img src="../landing/assets/images/logos/isotipo blancoisotipo.png" alt="Flowdy" class="footer-logo-img">
+                    <img src="../landing/assets/images/logos/isotipo blancoisotipo.png" alt="Flowdy"
+                        class="footer-logo-img">
                     <h3>FLOWDY</h3>
                 </div>
                 <p class="footer-tagline">Date ese gustico.</p>
@@ -376,6 +259,7 @@
     </footer>
 
     <script src="../landing/js/obtenerProductos.js"></script>
+    <script src="../landing/js/carruselServicios.js"></script>
 </body>
 
 </html>

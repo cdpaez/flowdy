@@ -101,11 +101,6 @@ const actualizarProducto = async (req, res) => {
   }
 };
 
-module.exports = {
-  crearProducto,
-  actualizarProducto
-};
-
 // 🔹 Eliminar producto
 const eliminarProducto = async (req, res) => {
   try {
