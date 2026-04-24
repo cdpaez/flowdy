@@ -8,7 +8,8 @@ const {
   getProductoById,
   crearProducto,
   actualizarProducto,
-  eliminarProducto
+  eliminarProducto,
+  cambiarEstadoProducto
 } = require('../controllers/producto.controller');
 
 // GET todos
@@ -22,6 +23,8 @@ router.post('/', upload.single('imagen'),crearProducto);
 
 // PUT actualizar producto
 router.put('/:id',upload.single('imagen'), actualizarProducto);
+
+router.patch('/:id/activo', cambiarEstadoProducto);
 
 // DELETE eliminar producto
 router.delete('/:id', eliminarProducto);

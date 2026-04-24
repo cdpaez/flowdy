@@ -97,117 +97,8 @@
                 <p>Los favoritos de nuestros clientes</p>
             </div>
 
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../landing/assets/images/platos/v.jpg" alt="Brownie gourmet">
-                        <div class="product-badge">Más vendido</div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Brownie gourmet</h3>
-                        <p>Brownie con crema y fresas frescas</p>
-                        <div class="price-add">
-                            <span class="price">$2.50</span>
-                            <button class="add-btn" data-id="brownie" data-name="Brownie gourmet" data-price="2.50"
-                                data-image="../landing/assets/images/platos/v.jpg">
-                                Agregar
-                            </button>
-                        </div>
-                        <div class="delivery-info">Envío gratis Calderón</div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../landing/assets/images/platos/s.jpg" alt="Bolo gourmet">
-                    </div>
-                    <div class="product-info">
-                        <h3>Bolo gourmet</h3>
-                        <p>Bolo de yogurt con fresa natural</p>
-                        <div class="price-add">
-                            <span class="price">$1.50</span>
-                            <button class="add-btn" data-id="bolo" data-name="Bolo gourmet" data-price="1.50"
-                                data-image="../landing/assets/images/platos/s.jpg">
-                                Agregar
-                            </button>
-                        </div>
-                        <div class="delivery-info">Envío gratis Calderón</div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../landing/assets/images/platos/16052025-platillo3.jpg" alt="Desayuno energético">
-                        <div class="product-badge">Nuevo</div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Desayuno energético</h3>
-                        <p>Pancakes de proteína con frutas</p>
-                        <div class="price-add">
-                            <span class="price">$3.00</span>
-                            <button class="add-btn" data-id="desayuno" data-name="Desayuno energético" data-price="3.00"
-                                data-image="../landing/assets/images/platos/16052025-platillo3.jpg">
-                                Agregar
-                            </button>
-                        </div>
-                        <div class="delivery-info">Envío gratis Calderón</div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../landing/assets/images/platos/9.png" alt="Tacos saludables">
-                    </div>
-                    <div class="product-info">
-                        <h3>Tacos saludables</h3>
-                        <p>Tacos de jamón + huevo orgánico</p>
-                        <div class="price-add">
-                            <span class="price">$3.00</span>
-                            <button class="add-btn" data-id="tacos" data-name="Tacos saludables" data-price="3.00"
-                                data-image="../landing/assets/images/platos/9.png">
-                                Agregar
-                            </button>
-                        </div>
-                        <div class="delivery-info">Envío gratis Calderón</div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../landing/assets/images/platos/24.jpg" alt="Rollos de canela">
-                    </div>
-                    <div class="product-info">
-                        <h3>Rollos de canela</h3>
-                        <p>Mini rollos integrales x unidad</p>
-                        <div class="price-add">
-                            <span class="price">$1.00</span>
-                            <button class="add-btn" data-id="rollos" data-name="Rollos de canela" data-price="1.00"
-                                data-image="../landing/assets/images/platos/24.jpg">
-                                Agregar
-                            </button>
-                        </div>
-                        <div class="delivery-info">Envío gratis Calderón</div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../landing/assets/images/platos/2.jpg" alt="Bizcochos artesanales">
-                    </div>
-                    <div class="product-info">
-                        <h3>Bizcochos artesanales</h3>
-                        <p>Zanahoria, banano, vainilla</p>
-                        <div class="price-add">
-                            <span class="price">$3.50</span>
-                            <button class="add-btn" data-id="bizcochos" data-name="Bizcochos artesanales"
-                                data-price="3.50" data-image="../landing/assets/images/platos/2.jpg">
-                                Agregar
-                            </button>
-                        </div>
-                        <div class="delivery-info">Envío gratis Calderón</div>
-                    </div>
-                </div>
-            </div>
+            <div class="product-grid" id="productGrid"></div>
+                
         </section>
 
         <section class="delivery-platforms">
@@ -483,6 +374,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="../landing/js/obtenerProductos.js"></script>
 </body>
 
 </html>

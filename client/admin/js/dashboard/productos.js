@@ -1,57 +1,22 @@
 const GestorProductos = (() => {
+
+    /* ==============================
+       1. ESTADO DEL MODULO
+       ============================== */
     let todosLosProductos = [];
     let paginaActual = 1;
     const productosPorPagina = 20;
     let busquedaAvanzadaRealizada = false;
 
+    /* ==============================
+       2. SELECTORES DEL DOM
+       ============================== */
+
     const tablaProductos = document.querySelector('.tabla-productos tbody');
 
-    const initPreviewImagen = () => {
-        const inputImagen = document.getElementById('imagen');
-        const preview = document.getElementById('preview-imagen');
-
-        if (!inputImagen || !preview) return;
-
-        inputImagen.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-
-            if (file) {
-                preview.src = URL.createObjectURL(file);
-                preview.style.display = 'block';
-            } else {
-                preview.src = '';
-                preview.style.display = 'none';
-            }
-        });
-    };
-
-    const abrirModalCreacion = () => {
-        const form = document.getElementById('form-modal-producto');
-        form.reset();
-        form.dataset.modo = 'creacion';
-        form.removeAttribute('data-id');
-        document.getElementById('titulo-modal-producto').textContent = 'Agregar Nuevo Producto';
-        document.getElementById('modal-producto').style.display = 'flex';
-        document.getElementById('nombre').focus();
-    };
-
-    const cerrarModal = () => {
-        document.getElementById('modal-producto').style.display = 'none';
-        document.getElementById('form-modal-producto').reset();
-    };
-
-    const cerrarModalImportar = (e) => {
-        const modal = document.getElementById('modal-importar');
-        if (e.target === modal || e.target.classList.contains('cerrar-modal')) {
-            modal.style.display = 'none';
-        }
-    };
-
-    const cerrarModalEscape = (e) => {
-        if (e.key === 'Escape') {
-            document.getElementById('modal-importar').style.display = 'none';
-        }
-    };
+    /* ==============================
+       3. FUNCIONES DE DATOS (API)
+       ============================== */
 
     const cargarCategorias = async () => {
         try {
@@ -106,114 +71,6 @@ const GestorProductos = (() => {
         }
     };
 
-    const buscarProductos = (e) => {
-        const termino = e.target.value.toLowerCase().trim();
-        const resultados = !termino
-            ? todosLosProductos
-            : todosLosProductos.filter(p =>
-                p.nombre.toLowerCase().includes(termino) ||
-                p.precio.toString().includes(termino)
-            );
-        paginaActual = 1;
-        mostrarProductos(resultados);
-    };
-
-    const filtrarProductos = () => {
-        const filtros = ['marca', 'modelo', 'procesador', 'tamano', 'disco', 'ram'].reduce((acc, f) => {
-            acc[f] = document.getElementById(`filtro${f.charAt(0).toUpperCase() + f.slice(1)}`).value.toLowerCase();
-            return acc;
-        }, {});
-        const resultados = todosLosProductos.filter(p =>
-            (!filtros.marca || p.marca.toLowerCase().includes(filtros.marca)) &&
-            (!filtros.modelo || p.modelo.toLowerCase().includes(filtros.modelo)) &&
-            (!filtros.procesador || p.procesador.toLowerCase().includes(filtros.procesador)) &&
-            (!filtros.tamano || p.tamano.includes(filtros.tamano)) &&
-            (!filtros.disco || p.disco.toLowerCase().includes(filtros.disco)) &&
-            (!filtros.ram || p.memoria_ram.toLowerCase().includes(filtros.ram))
-        );
-        busquedaAvanzadaRealizada = true;
-        paginaActual = 1;
-        mostrarProductos(resultados);
-        mostrarContador(resultados.length, resultados.filter(p => p.stock === 'disponible').length, resultados.filter(p => p.stock === 'vendido').length);
-    };
-
-    const limpiarBusqueda = () => {
-        if (!busquedaAvanzadaRealizada) return;
-        document.querySelectorAll('.busqueda-avanzada input').forEach(i => i.value = '');
-        paginaActual = 1;
-        mostrarProductos(todosLosProductos);
-        mostrarContador(todosLosProductos.length, todosLosProductos.filter(p => p.stock === 'disponible').length, todosLosProductos.filter(p => p.stock === 'vendido').length);
-        busquedaAvanzadaRealizada = false;
-    };
-
-    const mostrarProductos = (productos) => {
-        console.log(productos);
-        tablaProductos.innerHTML = '';
-
-        if (productos.length === 0) {
-            tablaProductos.innerHTML = '<tr><td colspan="11">No se encontraron productos</td></tr>';
-            return;
-        }
-
-        const inicio = (paginaActual - 1) * productosPorPagina;
-        const fin = inicio + productosPorPagina;
-
-        productos.slice(inicio, fin).forEach(p => {
-
-            const estadoStock = p.stock > 0 ? 'stock-disponible' : 'stock-agotado';
-            const activo = p.activo ? '✅' : 'no';
-            const nuevo = p.es_nuevo ? '⭐' : 'no';
-            const popular = p.es_popular ? '🔥' : 'no';
-
-            const fila = document.createElement('tr');
-
-            fila.innerHTML = `
-        <td>${p.id}</td>
-        <td>${p.nombre}</td>
-        <td>${p.categoria?.nombre || '-'}</td>
-        <td>${p.descripcion ?? ''}</td>
-        <td>$${p.precio}</td>
-        <td class="${estadoStock}">${p.stock}</td>
-        <td>
-            ${p.imagen ? `<img src="${p.imagen}" width="50">` : '—'}
-        </td>
-        <td>${nuevo}</td>
-        <td>${popular}</td>
-        <td>${activo}</td>
-        <td class="acciones">
-            <button class="btn-editar" data-id="${p.id}">✏️</button>
-            <button class="btn-eliminar" data-id="${p.id}">🗑️</button>
-        </td>
-        `;
-
-            tablaProductos.appendChild(fila);
-        });
-
-        asignarEventosBotones();
-        mostrarPaginacion(productos);
-    };
-
-    const mostrarPaginacion = (productos) => {
-        const totalPaginas = Math.ceil(productos.length / productosPorPagina);
-        const contenedor = document.getElementById('paginacion');
-        contenedor.innerHTML = '';
-        for (let i = 1; i <= totalPaginas; i++) {
-            const btn = document.createElement('button');
-            btn.textContent = i;
-            if (i === paginaActual) btn.classList.add('activa');
-            btn.addEventListener('click', () => {
-                paginaActual = i;
-                mostrarProductos(productos);
-            });
-            contenedor.appendChild(btn);
-        }
-    };
-
-    const asignarEventosBotones = () => {
-        document.querySelectorAll('.btn-editar').forEach(btn => btn.addEventListener('click', () => editarProducto(btn.dataset.id)));
-        document.querySelectorAll('.btn-eliminar').forEach(btn => btn.addEventListener('click', () => eliminarProducto(btn.dataset.id)));
-    };
-
     const editarProducto = async (id) => {
         try {
 
@@ -241,7 +98,6 @@ const GestorProductos = (() => {
 
             document.getElementById('es_nuevo').checked = producto.es_nuevo || false;
             document.getElementById('es_popular').checked = producto.es_popular || false;
-            document.getElementById('activo').checked = producto.activo || false;
 
             document.getElementById('modal-producto').style.display = 'flex';
 
@@ -252,7 +108,6 @@ const GestorProductos = (() => {
 
         }
     };
-
 
     const eliminarProducto = async (id) => {
         const confirm = await confirmarEliminacion();
@@ -312,7 +167,6 @@ const GestorProductos = (() => {
 
             datos.append('es_nuevo', document.getElementById('es_nuevo').checked);
             datos.append('es_popular', document.getElementById('es_popular').checked);
-            datos.append('activo', document.getElementById('activo').checked);
 
             const fileInput = document.getElementById('imagen');
             if (fileInput.files[0]) {
@@ -360,15 +214,6 @@ const GestorProductos = (() => {
         }
     };
 
-    const mostrarToast = (mensaje, tipo = 'success') => {
-        const container = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        toast.className = `toast ${tipo}`;
-        toast.textContent = mensaje;
-        container.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
-    };
-
     const importarProductos = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -404,26 +249,82 @@ const GestorProductos = (() => {
         }
     };
 
+    /* ==============================
+       4. FUNCIONES DE RENDERIZADO
+       ============================== */
+    const mostrarProductos = (productos) => {
+        console.log(productos);
+        tablaProductos.innerHTML = '';
+
+        if (productos.length === 0) {
+            tablaProductos.innerHTML = '<tr><td colspan="11">No se encontraron productos</td></tr>';
+            return;
+        }
+
+        const inicio = (paginaActual - 1) * productosPorPagina;
+        const fin = inicio + productosPorPagina;
+
+        productos.slice(inicio, fin).forEach(p => {
+
+            const estadoStock = p.stock > 0 ? 'stock-disponible' : 'stock-agotado';
+            const nuevo = p.es_nuevo ? '⭐' : '❌';
+            const popular = p.es_popular ? '🔥' : '❌';
+
+            const fila = document.createElement('tr');
+
+            fila.innerHTML = `
+        <td>${p.id}</td>
+        <td>${p.nombre}</td>
+        <td>${p.categoria?.nombre || '-'}</td>
+        <td>${p.descripcion ?? ''}</td>
+        <td>$${p.precio}</td>
+        <td class="${estadoStock}">${p.stock}</td>
+        <td>
+            ${p.imagen ? `<img src="${p.imagen}" width="50">` : '—'}
+        </td>
+        <td>${nuevo}</td>
+        <td>${popular}</td>
+        <td>
+            <input 
+                type="checkbox" 
+                class="toggle-activo" 
+                data-id="${p.id}" 
+                ${p.activo ? 'checked' : ''}
+            >
+        </td>
+        <td class="acciones">
+            <button class="btn-editar" data-id="${p.id}">✏️</button>
+            <button class="btn-eliminar" data-id="${p.id}">🗑️</button>
+        </td>
+        `;
+
+            tablaProductos.appendChild(fila);
+        });
+
+        asignarEventosBotones();
+        asignarEventosToggleActivo();
+        mostrarPaginacion(productos);
+    };
+
+    const mostrarToast = (mensaje, tipo = 'success') => {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast ${tipo}`;
+        toast.textContent = mensaje;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    };
+
     const mostrarContador = (total, disponibles, vendidos) => {
         document.getElementById('contadorResultados').textContent = `${total} resultados encontrados`;
         document.getElementById('contadorDisponibles').textContent = `${disponibles} Disponibles`;
         document.getElementById('contadorVendidos').textContent = `${vendidos} Vendidos`;
     };
 
-    // const manejarDialogoBusqueda = () => {
-    //     const dialogo = document.getElementById("dialogoBusqueda");
-    //     const abrir = document.getElementById("abrirDialogo");
-    //     const cerrar = document.getElementById("cerrarDialogo");
 
-    //     abrir.addEventListener("click", () => dialogo.showModal());
-    //     cerrar.addEventListener("click", () => dialogo.close());
-    //     dialogo.addEventListener("click", (e) => {
-    //         const rect = dialogo.getBoundingClientRect();
-    //         if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
-    //             dialogo.close();
-    //         }
-    //     });
-    // };
+    /* ==============================
+       5. FUNCIONES DE CONTROL
+       ============================== */
 
     const conectarWebSocket = () => {
         const token = sessionStorage.getItem('token');
@@ -461,6 +362,160 @@ const GestorProductos = (() => {
         });
     };
 
+    const abrirModalCreacion = () => {
+        const form = document.getElementById('form-modal-producto');
+        form.reset();
+        form.dataset.modo = 'creacion';
+        form.removeAttribute('data-id');
+        document.getElementById('titulo-modal-producto').textContent = 'Agregar Nuevo Producto';
+        document.getElementById('modal-producto').style.display = 'flex';
+        document.getElementById('nombre').focus();
+    };
+
+    const cerrarModal = () => {
+        document.getElementById('modal-producto').style.display = 'none';
+        document.getElementById('form-modal-producto').reset();
+    };
+
+    const cerrarModalImportar = (e) => {
+        const modal = document.getElementById('modal-importar');
+        if (e.target === modal || e.target.classList.contains('cerrar-modal')) {
+            modal.style.display = 'none';
+        }
+    };
+
+    const cerrarModalEscape = (e) => {
+        if (e.key === 'Escape') {
+            document.getElementById('modal-importar').style.display = 'none';
+        }
+    };
+
+    const manejarDialogoBusqueda = () => {
+        const dialogo = document.getElementById("dialogoBusqueda");
+        const abrir = document.getElementById("abrirDialogo");
+        const cerrar = document.getElementById("cerrarDialogo");
+
+        abrir.addEventListener("click", () => dialogo.showModal());
+        cerrar.addEventListener("click", () => dialogo.close());
+        dialogo.addEventListener("click", (e) => {
+            const rect = dialogo.getBoundingClientRect();
+            if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+                dialogo.close();
+            }
+        });
+    };
+
+    const asignarEventosBotones = () => {
+        document.querySelectorAll('.btn-editar').forEach(btn => btn.addEventListener('click', () => editarProducto(btn.dataset.id)));
+        document.querySelectorAll('.btn-eliminar').forEach(btn => btn.addEventListener('click', () => eliminarProducto(btn.dataset.id)));
+    };
+
+    const mostrarPaginacion = (productos) => {
+        const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+        const contenedor = document.getElementById('paginacion');
+        contenedor.innerHTML = '';
+        for (let i = 1; i <= totalPaginas; i++) {
+            const btn = document.createElement('button');
+            btn.textContent = i;
+            if (i === paginaActual) btn.classList.add('activa');
+            btn.addEventListener('click', () => {
+                paginaActual = i;
+                mostrarProductos(productos);
+            });
+            contenedor.appendChild(btn);
+        }
+    };
+
+    const buscarProductos = (e) => {
+        const termino = e.target.value.toLowerCase().trim();
+        const resultados = !termino
+            ? todosLosProductos
+            : todosLosProductos.filter(p =>
+                p.nombre.toLowerCase().includes(termino) ||
+                p.precio.toString().includes(termino)
+            );
+        paginaActual = 1;
+        mostrarProductos(resultados);
+    };
+
+    const filtrarProductos = () => {
+        const filtros = ['marca', 'modelo', 'procesador', 'tamano', 'disco', 'ram'].reduce((acc, f) => {
+            acc[f] = document.getElementById(`filtro${f.charAt(0).toUpperCase() + f.slice(1)}`).value.toLowerCase();
+            return acc;
+        }, {});
+        const resultados = todosLosProductos.filter(p =>
+            (!filtros.marca || p.marca.toLowerCase().includes(filtros.marca)) &&
+            (!filtros.modelo || p.modelo.toLowerCase().includes(filtros.modelo)) &&
+            (!filtros.procesador || p.procesador.toLowerCase().includes(filtros.procesador)) &&
+            (!filtros.tamano || p.tamano.includes(filtros.tamano)) &&
+            (!filtros.disco || p.disco.toLowerCase().includes(filtros.disco)) &&
+            (!filtros.ram || p.memoria_ram.toLowerCase().includes(filtros.ram))
+        );
+        busquedaAvanzadaRealizada = true;
+        paginaActual = 1;
+        mostrarProductos(resultados);
+        mostrarContador(resultados.length, resultados.filter(p => p.stock === 'disponible').length, resultados.filter(p => p.stock === 'vendido').length);
+    };
+
+    const limpiarBusqueda = () => {
+        if (!busquedaAvanzadaRealizada) return;
+        document.querySelectorAll('.busqueda-avanzada input').forEach(i => i.value = '');
+        paginaActual = 1;
+        mostrarProductos(todosLosProductos);
+        mostrarContador(todosLosProductos.length, todosLosProductos.filter(p => p.stock === 'disponible').length, todosLosProductos.filter(p => p.stock === 'vendido').length);
+        busquedaAvanzadaRealizada = false;
+    };
+
+    const initPreviewImagen = () => {
+        const inputImagen = document.getElementById('imagen');
+        const preview = document.getElementById('preview-imagen');
+
+        if (!inputImagen || !preview) return;
+
+        inputImagen.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            } else {
+                preview.src = '';
+                preview.style.display = 'none';
+            }
+        });
+    };
+
+    const asignarEventosToggleActivo = () => {
+
+        document.querySelectorAll('.toggle-activo').forEach(check => {
+
+            check.addEventListener('change', async (e) => {
+
+                const id = e.target.dataset.id;
+                const activo = e.target.checked;
+
+                try {
+
+                    await fetch(`/api/productos/${id}/activo`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ activo })
+                    });
+
+                } catch (error) {
+                    console.error('Error actualizando estado', error);
+                }
+
+            });
+
+        });
+
+    };
+    /* ==============================
+       6. INICIALIZACION
+       ============================== */
     const init = () => {
         initPreviewImagen();
         document.getElementById('abrir-modal').addEventListener('click', abrirModalCreacion);
@@ -487,7 +542,9 @@ const GestorProductos = (() => {
         // manejarDialogoBusqueda();
 
     };
+
     return { init };
+
 })();
 
 document.addEventListener('DOMContentLoaded', GestorProductos.init);

@@ -1062,6 +1062,23 @@ img {
     margin-top: auto;
 }
 
+.product-image{
+    position: relative;
+}
+
+/* esquina izquierda */
+.badge-popular{
+    width: 120px;
+    left: 10px;
+    background: var(--primary-color);
+}
+
+/* esquina derecha */
+.badge-nuevo{
+    right: 10px;
+    background: var(--primary-color);
+}
+
 /* Plataformas de Delivery */
 .delivery-platforms {
     padding: 80px 40px;

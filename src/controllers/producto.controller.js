@@ -126,10 +126,37 @@ const eliminarProducto = async (req, res) => {
   }
 };
 
+/*
+  cambia unicamente el estado activo, no elimina físicamente el producto
+*/
+const cambiarEstadoProducto = async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const { activo } = req.body;
+
+    const producto = await Producto.findByPk(id);
+
+    if (!producto) {
+      return res.status(404).json({ mensaje: 'Producto no encontrado' });
+    }
+
+    producto.activo = activo;
+    await producto.save();
+
+    res.json({ mensaje: 'Estado actualizado', activo });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error actualizando estado' });
+  }
+};
+
 module.exports = {
   crearProducto,
   getProductos,
   getProductoById,
   actualizarProducto,
-  eliminarProducto
+  eliminarProducto,
+  cambiarEstadoProducto
 };

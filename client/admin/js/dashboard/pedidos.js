@@ -137,27 +137,6 @@ const gestorPedidos = (() => {
         });
 
     };
-    /**
-     * Convierte fecha ISO a formato legible
-     * 2026-04-22T16:00:55.535Z -> 22/04/2026 16:00
-     */
-    const formatearFecha = (fechaISO) => {
-
-        const fecha = new Date(fechaISO);
-
-        const dia = fecha.getDate().toString().padStart(2, '0');
-        const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-        const anio = fecha.getFullYear();
-
-        const horas = fecha.getHours().toString().padStart(2, '0');
-        const minutos = fecha.getMinutes().toString().padStart(2, '0');
-
-        return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
-    };
-
-    /* ==============================
-       5. FUNCIONES DE CONTROL
-       ============================== */
 
     const mostrarDetallesPedido = (pedidoId) => {
         const pedido = pedidos.find(p => p.id == pedidoId);
@@ -188,15 +167,36 @@ const gestorPedidos = (() => {
             <h3>Total: $${pedido.total}</h3> `;
         modal.classList.remove('hidden');
     };
+    /**
+     * Convierte fecha ISO a formato legible
+     * 2026-04-22T16:00:55.535Z -> 22/04/2026 16:00
+     */
+    const formatearFecha = (fechaISO) => {
+
+        const fecha = new Date(fechaISO);
+
+        const dia = fecha.getDate().toString().padStart(2, '0');
+        const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+        const anio = fecha.getFullYear();
+
+        const horas = fecha.getHours().toString().padStart(2, '0');
+        const minutos = fecha.getMinutes().toString().padStart(2, '0');
+
+        return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
+    };
+
+    /* ==============================
+       5. FUNCIONES DE CONTROL
+       ============================== */
+
+    
     const cerrarModal = () => {
         modal.classList.add('hidden');
     };
 
-
-
     /**
- * Evita ejecutar una función demasiadas veces seguidas
- */
+     * Evita ejecutar una función demasiadas veces seguidas
+     */
     const debounce = (func, delay = 300) => {
 
         let timeout;
