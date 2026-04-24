@@ -52,6 +52,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error("Error cargando productos:", error);
     }
-    console.log(contenedor);
-
+    
 });
