@@ -64,20 +64,6 @@ db.DetallePedido.belongsTo(db.Pedido, {
   as: 'pedido'
 });
 
-
-// 🔗 PRODUCTO → DETALLES
-db.Producto.hasMany(db.DetallePedido, {
-  foreignKey: 'producto_id',
-  as: 'detallesPedido',
-  onDelete: 'CASCADE'
-});
-
-db.DetallePedido.belongsTo(db.Producto, {
-  foreignKey: 'producto_id',
-  as: 'producto'
-});
-
-
 // 📂 CATEGORIA → PRODUCTOS
 db.Categoria.hasMany(db.Producto, {
   foreignKey: 'categoria_id',

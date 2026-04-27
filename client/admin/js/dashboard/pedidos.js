@@ -156,17 +156,18 @@ const gestorPedidos = (() => {
                 </thead> 
                 <tbody> ${pedido.detalles.map(detalle => ` 
                     <tr> 
-                        <td>${detalle.producto.nombre}</td> 
-                        <td>${detalle.producto.categoria.nombre}</td> 
-                        <td>${detalle.cantidad}</td> 
-                        <td>$${detalle.precio_unitario}</td> 
-                        <td>$${detalle.subtotal}</td> 
+                        <td>${detalle.nombre_producto}</td>
+                        <td>${detalle.categoria_nombre}</td>
+                        <td>${detalle.cantidad}</td>
+                        <td>$${detalle.precio_unitario}</td>
+                        <td>$${detalle.subtotal}</td>
                     </tr> `).join('')} 
                 </tbody> 
             </table> 
             <h3>Total: $${pedido.total}</h3> `;
         modal.classList.remove('hidden');
     };
+
     /**
      * Convierte fecha ISO a formato legible
      * 2026-04-22T16:00:55.535Z -> 22/04/2026 16:00
@@ -189,7 +190,7 @@ const gestorPedidos = (() => {
        5. FUNCIONES DE CONTROL
        ============================== */
 
-    
+
     const cerrarModal = () => {
         modal.classList.add('hidden');
     };

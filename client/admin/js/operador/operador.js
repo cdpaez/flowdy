@@ -49,7 +49,7 @@ const InterfaceVendedorModule = (function () {
         const rol = sessionStorage.getItem('rol');
 
         if (!token || rol !== 'lector') {
-            window.location.href = '/admin/index.html';
+            window.location.href = '/admin';
         }
     }
 
@@ -76,7 +76,7 @@ const InterfaceVendedorModule = (function () {
                         didClose: () => {
                             sessionStorage.clear();
                             history.replaceState(null, '', 'index.html');
-                            window.location.href = '../../index.html';
+                            window.location.href = '/admin';
                         }
                     });
                 }

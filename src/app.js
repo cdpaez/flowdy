@@ -33,6 +33,7 @@ app.get('/admin', (req, res) => {
 
 // Rutas API
 app.use('/login', require('./routes/login.routes'));
+
 app.use('/api/categorias', require('./routes/categoria.routes'));
 app.use('/api/productos', require('./routes/producto.routes'));
 app.use('/api/pedidos', require('./routes/pedido.routes'));

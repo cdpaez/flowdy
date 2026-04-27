@@ -24,6 +24,8 @@
 
     <link rel="stylesheet" href="../landing/css/components/masVendidos.css">
 
+    <link rel="stylesheet" href="../landing/css/components/formulario.css">
+
     <link rel="stylesheet" href="../landing/css/components/carrito.css">
     <link rel="stylesheet" href="../landing/css/divisor.css">
     <link rel="stylesheet" href="../landing/css/redesSociales.css">
@@ -34,7 +36,7 @@
     <link rel="stylesheet" href="../landing/css/panelFlotante.css">
     <link rel="stylesheet" href="../landing/css/header.css">
     <link rel="stylesheet" href="../landing/css/index.css">
-    <script src="../landing/js/JSF.js"></script>
+
 </head>
 
 <body>
@@ -55,14 +57,14 @@
         <div class="nav-center">
             <a href="../landing/index.html" class="logo-link">
                 <div class="logo-circle">
-                    <img src="../landing/assets/images/logos/isotipo blancoisotipo.png" alt="Logo Flowdy" class="logo">
+                    <img src="../landing/assets/images/logos/isotipo_blanco.png" alt="Logo Flowdy" class="logo">
                 </div>
             </a>
         </div>
 
         <div class="nav-right">
-            <button class="icon-btn cart-btn" onclick="openCart()">
-                <img src="../landing/assets/images/utils/carrito.png" alt="Carrito" class="nav-icon">
+            <button class="icon-btn cart-btn" id="openCartBtn">
+                <img src="../landing/assets/images/icons/carrito.png" alt="Carrito" class="nav-icon">
                 <span class="cart-badge" id="cartCount">0</span>
             </button>
         </div>
@@ -127,19 +129,31 @@
                 <p>Los favoritos de nuestros clientes</p>
             </div>
 
-            <div class="product-grid" id="productGrid">
+            <div class="product-grid" id="productGridPopular">
 
             </div>
 
         </section>
 
-        <section class="menu-fit" id="menu">
+        <section class="best-sellers" id="Nuevos">
+            <div class="section-header">
+                <h2>Atrevete a <span class="highlight">Probarlos</span></h2>
+                <p>En la novedad está el gusto</p>
+            </div>
+
+            <div class="product-grid" id="productGridNuevos">
+
+            </div>
+
+        </section>
+
+        <section class="best-sellers" id="Menu">
             <div class="section-header">
                 <h2>Disfruta de <span class="highlight">Nuestro menú</span></h2>
                 <p>Variedad de platillos a tu disposición</p>
             </div>
 
-            <div class="product-grid" id="productGrid1">
+            <div class="product-grid" id="productGridMenu">
 
             </div>
 
@@ -147,13 +161,13 @@
 
     </main>
 
-    <div id="overlay" onclick="closeAll()"></div>
+    <div id="overlay" onclick="CartModule.closeAll()"></div>
     <aside id="cartPanel" class="side-panel">
 
 
         <div class="panel-header">
             <h2>Tu carrito</h2>
-            <button onclick="closeAll()">✕</button>
+            <button onclick="CartModule.closeAll()">✕</button>
         </div>
 
         <div class="panel-content" id="cartItems">
@@ -184,12 +198,41 @@
             </div>
 
             <div class="panel-footer">
-                <button class="primary-btn">Ir a pagar</button>
+                <button id="checkoutBtn" class="primary-btn">Ir a pagar</button>
             </div>
 
         </div>
 
     </aside>
+
+    <div id="checkoutModal" class="checkout-modal">
+
+        <div class="checkout-box">
+
+            <div class="checkout-header">
+                <h3>Finalizar pedido</h3>
+                <button class="checkout-close" onclick="CartModule.cerrarCheckout()">✕</button>
+            </div>
+
+            <form id="checkoutForm" class="checkout-form">
+
+                <input name="nombre" placeholder="Nombre" required>
+                <input name="apellido" placeholder="Apellido" required>
+                <input name="telefono" placeholder="Teléfono" required>
+                <input name="email" placeholder="Email">
+
+                <input name="cedula_ruc" placeholder="Cédula / RUC">
+                <input name="direccion" placeholder="Dirección cliente">
+
+                <input name="direccion_entrega" placeholder="Dirección entrega" required>
+
+                <button type="submit">Confirmar pedido</button>
+
+            </form>
+
+        </div>
+
+    </div>
 
     <!-- OVERLAY -->
     <div id="overlay"></div>
@@ -282,8 +325,12 @@
         </div>
     </footer>
 
+
+
+    <script src="../landing/js/utils/carruselServicios.js"></script>
+    <script src="../landing/js/carrito.js"></script>
     <script src="../landing/js/obtenerProductos.js"></script>
-    <script src="../landing/js/carruselServicios.js"></script>
+
 </body>
 
 </html>

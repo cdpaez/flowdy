@@ -24,5 +24,5 @@ document.querySelectorAll('.carrusel-servicios').forEach(carrusel => {
   setInterval(() => {
     currentIndex = (currentIndex + 1) % slides.length;
     updateCarrusel();
-  }, 5000);
+  }, 2500);
 });
