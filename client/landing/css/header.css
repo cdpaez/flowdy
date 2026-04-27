@@ -121,19 +121,17 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
 
 .icon-btn:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
+    border-color:#c9a85d;
+    transform: scale(1.5);
 }
 
 .nav-icon {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1);
+    border-color:#c9a85d;
+    border-radius: 50%;
 }
 
 /* ===========================

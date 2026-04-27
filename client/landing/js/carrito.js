@@ -161,6 +161,15 @@ const CartModule = (() => {
         socialPanel.classList.add("hidden");
     };
 
+    const showSocialPanel = () => {
+
+        const socialPanel = DOM.socialPanel();
+
+        if (!socialPanel) return;
+
+        socialPanel.classList.remove("hidden");
+    };
+
     const closeAll = () => {
 
         const cartPanel = DOM.cartPanel();
@@ -170,6 +179,7 @@ const CartModule = (() => {
         overlay?.classList.remove("active");
 
         document.body.style.overflow = "";
+        showSocialPanel();
     };
 
     const openCart = () => {
@@ -288,109 +298,91 @@ const CartModule = (() => {
 
         });
 
-        const checkoutForm = DOM.checkoutForm();
-
-        if (checkoutForm) {
-
-            checkoutForm.addEventListener("submit", async (e) => {
-
-                e.preventDefault();
-
-                const formData = new FormData(checkoutForm);
-
-                const cliente = {
-                    nombre: formData.get("nombre"),
-                    apellido: formData.get("apellido"),
-                    telefono: formData.get("telefono"),
-                    email: formData.get("email"),
-                    direccion: formData.get("direccion"),
-                    cedula_ruc: formData.get("cedula_ruc")
-                };
-
-                const pedido = {
-                    direccion_entrega: formData.get("direccion_entrega")
-                };
-
-                const detalles = carrito.map(item => ({
-                    producto_id: parseInt(item.id),
-                    cantidad: item.cantidad
-                }));
-
-                const payload = {
-                    cliente,
-                    pedido,
-                    detalles
-                };
-
-                console.log("Pedido enviado:", payload);
-
-                try {
-
-                    const res = await fetch("/api/pedidos", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const data = await res.json();
-
-                    console.log(data);
-
-                } catch (error) {
-                    console.error("Error enviando pedido:", error);
-                }
-
-            });
-
-        }
-
         const checkoutBtn = DOM.checkoutBtn();
 
         if (checkoutBtn) {
             checkoutBtn.addEventListener("click", abrirCheckout);
         }
 
-        const form = DOM.checkoutForm();
+        const checkoutForm = DOM.checkoutForm();
 
-        if (form) {
+        if (!checkoutForm) return;
 
-            form.addEventListener("submit", (e) => {
+        checkoutForm.addEventListener("submit", async (e) => {
 
-                e.preventDefault();
+            e.preventDefault();
 
-                const formData = new FormData(form);
+            const formData = new FormData(checkoutForm);
 
-                const cliente = {
-                    nombre: formData.get("nombre"),
-                    apellido: formData.get("apellido"),
-                    telefono: formData.get("telefono"),
-                    email: formData.get("email"),
-                    direccion: formData.get("direccion"),
-                    cedula_ruc: formData.get("cedula_ruc")
-                };
+            const cliente = {
+                nombre: formData.get("nombre"),
+                apellido: formData.get("apellido"),
+                telefono: formData.get("telefono"),
+                email: formData.get("email"),
+                direccion: formData.get("direccion"),
+                cedula_ruc: formData.get("cedula_ruc")
+            };
 
-                const pedido = {
-                    direccion_entrega: formData.get("direccion_entrega")
-                };
+            const pedido = {
+                direccion_entrega: formData.get("direccion_entrega")
+            };
 
-                const detalles = carrito.map(item => ({
-                    producto_id: item.id,
-                    cantidad: item.cantidad
-                }));
+            const detalles = carrito.map(item => ({
+                producto_id: parseInt(item.id),
+                cantidad: item.cantidad
+            }));
 
-                const payload = {
-                    cliente,
-                    pedido,
-                    detalles
-                };
+            const payload = {
+                cliente,
+                pedido,
+                detalles
+            };
 
-                console.log(payload);
+            try {
 
-            });
+                const res = await fetch("/api/pedidos", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
 
-        }
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.message || "Error al enviar pedido");
+                }
+
+                /* ===============================
+                   PEDIDO EXITOSO
+                =============================== */
+
+                // limpiar carrito en memoria
+                carrito = [];
+
+                // limpiar almacenamiento
+                localStorage.removeItem("carrito");
+
+                // actualizar interfaz
+                renderCarrito();
+                actualizarContador();
+
+                // limpiar formulario
+                checkoutForm.reset();
+
+                // cerrar modal checkout
+                cerrarCheckout();
+
+                console.log("Pedido registrado correctamente", data);
+
+            } catch (error) {
+
+                console.error("Error enviando pedido:", error);
+
+            }
+
+        });
 
     };
 

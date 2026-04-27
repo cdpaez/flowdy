@@ -1,12 +1,16 @@
 /* ============================================
-   PANEL FLOTANTE DE REDES SOCIALES COMPARTIDO ENTRE PÁGINAS
+   PANEL FLOTANTE DE REDES
+   SOCIALES COMPARTIDO 
+   ENTRE PÁGINAS
    ============================================ */
 
 .social-panel {
     position: fixed;
     right: 0px;
     bottom: 80px;
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 14px;
     padding: 20px 5px;
     display: flex;
@@ -19,20 +23,19 @@
 
 /* Links */
 .social-panel a {
-    width: 44px;         
+    width: 44px;
     height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;    
+    overflow: hidden;
     cursor: pointer;
 }
 
 /* Iconos */
 .social-panel img {
     width: 70%;
-    height: 70%;
     object-fit: contain;
     pointer-events: none;
     transition: transform 0.25s ease, opacity 0.25s ease;
@@ -55,4 +58,30 @@
 /* Estado visible */
 .social-panel {
     transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.social-icon img {
+   width: 100%;
 }

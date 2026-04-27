@@ -102,32 +102,6 @@
     text-decoration: underline;
 }
 
-.social-icons {
-    display: flex;
-    gap: 10px;
-}
-
-.social-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
-}
-
-.social-icon img {
-    width: 90px;
-    height: 90px;
-}
-
 .footer-bottom {
     background-color: var(--primary-dark);
     padding: 25px 40px;
