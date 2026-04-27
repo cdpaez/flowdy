@@ -4,3 +4,8 @@ dist/
 build/
 coverage/
 *.log
+
+*.mp4
+*.mov
+*.avi
+client/landing/assets/video/
