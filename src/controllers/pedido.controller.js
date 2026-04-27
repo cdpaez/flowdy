@@ -26,7 +26,6 @@ const crearPedido = async (req, res) => {
 
     } else {
 
-      // opcional: actualizar datos si cambiaron
       await clienteDB.update({
         nombre: cliente.nombre,
         apellido: cliente.apellido,
@@ -57,9 +56,18 @@ const crearPedido = async (req, res) => {
       total: 0
     }, { transaction: t });
 
-    // 3. Crear detalles
+    // 3. Crear detalles con SNAPSHOT
+    console.log("🔥 DETALLES QUE LLEGAN:", detalles);
     for (const item of detalles) {
-      const producto = await Producto.findByPk(item.producto_id);
+
+      const producto = await Producto.findByPk(item.producto_id, {
+        include: [{
+          model: Categoria,
+          as: 'categoria',   // 👈 ESTO ES LO QUE FALTA
+          attributes: ['nombre']
+        }],
+        transaction: t
+      });
 
       if (!producto) {
         throw new Error(`Producto ${item.producto_id} no existe`);
@@ -73,11 +81,20 @@ const crearPedido = async (req, res) => {
 
       await DetallePedido.create({
         pedido_id: nuevoPedido.id,
-        producto_id: producto.id,
+        producto_id: producto.id, // referencia opcional
+        nombre_producto: producto.nombre, // snapshot
+        categoria_nombre: producto.categoria?.nombre || 'Sin categoría', // snapshot
         cantidad,
-        precio_unitario: precio,
+        precio_unitario: precio, // snapshot
         subtotal
       }, { transaction: t });
+
+      console.log("🧾 DETALLE GUARDADO:", {
+        pedido_id: nuevoPedido.id,
+        producto_id: producto.id,
+        nombre_producto: producto.nombre
+      });
+
     }
 
     // 4. Actualizar total
@@ -86,6 +103,12 @@ const crearPedido = async (req, res) => {
     }, { transaction: t });
 
     await t.commit();
+
+    const test = await DetallePedido.findAll({
+      where: { pedido_id: nuevoPedido.id }
+    });
+
+    console.log("🔥 DETALLES EN BD:", test);
 
     res.status(201).json({
       mensaje: 'Pedido creado correctamente',
@@ -113,19 +136,7 @@ const getPedidos = async (req, res) => {
         },
         {
           model: DetallePedido,
-          as: 'detalles',
-          include: [
-            {
-              model: Producto,
-              as: 'producto',
-              include: [
-                {
-                  model: Categoria,
-                  as: 'categoria'
-                }
-              ]
-            }
-          ]
+          as: 'detalles'
         },
         {
           model: Pago,
@@ -137,7 +148,11 @@ const getPedidos = async (req, res) => {
     res.json(pedidos);
 
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("🔥 ERROR REAL:", error);
+    return res.status(500).json({
+      message: error.message,
+      stack: error.stack
+    });
   }
 };
 

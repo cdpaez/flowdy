@@ -23,17 +23,22 @@ module.exports = {
 
       producto_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'productos',
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
+      },
+      // SNAPSHOT HISTORICO
+      nombre_producto: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
 
-      cantidad: {
-        type: Sequelize.INTEGER,
+      categoria_nombre: {
+        type: Sequelize.STRING,
         allowNull: false
       },
 
@@ -42,11 +47,15 @@ module.exports = {
         allowNull: false
       },
 
+      cantidad: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+
       subtotal: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false
       }
-
     });
   },
 

@@ -1,0 +1,69 @@
+/* ===== MODAL CHECKOUT ===== */
+
+.checkout-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.checkout-modal.active {
+    display: flex;
+}
+
+.checkout-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* header modal */
+
+.checkout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checkout-header h3 {
+    font-size: 18px;
+}
+
+.checkout-close {
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* formulario */
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.checkout-form input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.checkout-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #2a9d8f;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}

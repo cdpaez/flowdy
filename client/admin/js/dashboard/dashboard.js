@@ -48,7 +48,7 @@ const DashboardModule = (function () {
         const rol = sessionStorage.getItem('rol');
 
         if (!token || rol !== 'admin') {
-            window.location.href = '../../index.html';
+            window.location.href = '/admin';
         }
     }
 
@@ -82,7 +82,7 @@ const DashboardModule = (function () {
                     didClose: () => {
                         sessionStorage.clear();
                         history.replaceState(null, '', 'index.html');
-                        window.location.href = '../../index.html';
+                        window.location.href = '/admin';
                     }
                 });
             }

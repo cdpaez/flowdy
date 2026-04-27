@@ -5,7 +5,7 @@ const GestorProductos = (() => {
        ============================== */
     let todosLosProductos = [];
     let paginaActual = 1;
-    const productosPorPagina = 20;
+    const productosPorPagina = 10;
     let busquedaAvanzadaRealizada = false;
 
     /* ==============================

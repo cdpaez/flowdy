@@ -28,14 +28,35 @@ module.exports = { crearProducto };
 // 🔹 Obtener todos los productos
 const getProductos = async (req, res) => {
   try {
+
+    const { popular, nuevo, activo } = req.query;
+
+    const where = {};
+
+    // 🔥 filtro populares (landing)
+    if (popular === 'true') {
+      where.es_popular = true;
+    }
+    // opcional: solo activos
+    if (nuevo === 'true') {
+      where.es_nuevo = true;
+    }
+
+    // 🧠 opcional: solo activos
+    if (activo === 'true') {
+      where.activo = true;
+    }
+
     const productos = await Producto.findAll({
+      where,
       include: [
         {
           model: Categoria,
           as: 'categoria',
           attributes: ['id', 'nombre']
         }
-      ]
+      ],
+      order: [['id', 'DESC']]
     });
 
     res.json(productos);
