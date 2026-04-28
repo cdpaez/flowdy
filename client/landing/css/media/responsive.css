@@ -8,6 +8,61 @@
         width: 95%;
         padding: 25px;
     }
+
+    .carrusel-servicios {
+        height: 100%;
+    }
+
+    .carrusel-items-servicios {
+        height: 25%;
+    }
+
+    .slide-servicios img {
+        width: 25%;
+        height: 100%;
+        aspect-ratio: 4/3;
+        padding: 0.5em;
+    }
+
+    /*
+        carrito de compras
+    **/
+    .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .cart-info strong {
+        font-size: 1.5em;
+        font-weight: 1000;
+    }
+
+    .panel-content {
+
+        padding: 1em;
+
+    }
+
+    .panel-content p {
+        font-size: 2em;
+        margin: 0;
+    }
+
+    .row span {
+        font-size: 2em;
+    }
+
+    .cart-summary .total {
+        font-size: 2em;
+    }
+
+    .cart-controls span {
+        font-size: 2em;
+    }
+
 }
 
 /* ============================================
@@ -17,8 +72,9 @@
     .navbar {
         padding: 0 20px;
     }
-    
-    .footer-content, .footer-bottom-content {
+
+    .footer-content,
+    .footer-bottom-content {
         padding: 0 20px;
     }
 }
@@ -27,36 +83,36 @@
     .navbar {
         height: 70px;
     }
-    
+
     .nav-right {
         gap: 10px;
     }
-    
+
     .icon-btn {
         width: 35px;
         height: 35px;
     }
-    
+
     .nav-icon {
         width: 20px;
         height: 20px;
     }
-    
+
     .logo-circle {
         width: 50px;
         height: 50px;
     }
-    
+
     .logo {
         width: 35px;
         height: 35px;
     }
-    
+
     .footer-content {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-    
+
     .footer-bottom-content {
         flex-direction: column;
         text-align: center;
@@ -69,12 +125,12 @@
         bottom: 20px;
         right: 20px;
     }
-    
+
     .whatsapp-btn img {
         width: 50px;
         height: 50px;
     }
-    
+
     .nav-right {
         gap: 8px;
     }
@@ -84,19 +140,23 @@
    RESPONSIVE - PÁGINA PRINCIPAL
    ============================================ */
 @media (max-width: 992px) {
-    .hero-section, .gustico-section, .best-sellers, 
-    .delivery-platforms, .content-article {
+
+    .hero-section,
+    .gustico-section,
+    .best-sellers,
+    .delivery-platforms,
+    .content-article {
         padding: 60px 20px;
     }
-    
+
     .main-title {
         font-size: 4rem;
     }
-    
+
     .gustico-title {
         font-size: 4rem;
     }
-    
+
     .product-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
@@ -106,45 +166,45 @@
     .video-container {
         height: 300px;
     }
-    
+
     .main-title {
         font-size: 3rem;
     }
-    
+
     .gustico-title {
         font-size: 3rem;
     }
-    
+
     .subtitle {
         font-size: 1.5rem;
     }
-    
+
     .gustico-subtitle {
         font-size: 1.4rem;
     }
-    
+
     .menu-categories {
         flex-direction: column;
         align-items: center;
         gap: 30px;
     }
-    
+
     .category-card {
         max-width: 100%;
     }
-    
+
     .section-header h2 {
         font-size: 3.5rem;
     }
-    
+
     .section-header p {
         font-size: 2rem;
     }
-    
+
     .platforms-grid {
         gap: 20px;
     }
-    
+
     .platform-card {
         width: 150px;
         height: 80px;
@@ -152,35 +212,39 @@
 }
 
 @media (max-width: 480px) {
-    .hero-section, .gustico-section, .best-sellers, 
-    .delivery-platforms, .content-article {
+
+    .hero-section,
+    .gustico-section,
+    .best-sellers,
+    .delivery-platforms,
+    .content-article {
         padding: 40px 15px;
     }
-    
+
     .main-title {
         font-size: 2.5rem;
     }
-    
+
     .gustico-title {
         font-size: 2.5rem;
     }
-    
+
     .subtitle {
         font-size: 1.2rem;
     }
-    
+
     .gustico-subtitle {
         font-size: 1.1rem;
     }
-    
+
     .product-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .section-header h2 {
         font-size: 2.5rem;
     }
-    
+
     .section-header p {
         font-size: 1.5rem;
     }
@@ -193,23 +257,23 @@
     .menu-container {
         padding: 30px 15px 60px;
     }
-    
+
     .menu-title {
         font-size: 4.5rem;
     }
-    
+
     .menu-subtitle {
         font-size: 1.8rem;
     }
-    
+
     .menu-section .section-header h2 {
         font-size: 3.8rem;
     }
-    
+
     .menu-section .section-header p {
         font-size: 1.6rem;
     }
-    
+
     .menu-grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 25px;
@@ -221,48 +285,48 @@
         padding: 60px 15px 40px;
         margin-bottom: 40px;
     }
-    
+
     .menu-title {
         font-size: 3.5rem;
     }
-    
+
     .menu-subtitle {
         font-size: 1.5rem;
     }
-    
+
     .menu-section {
         margin-bottom: 70px;
     }
-    
+
     .menu-section .section-header h2 {
         font-size: 3rem;
     }
-    
+
     .menu-section .section-header p {
         font-size: 1.4rem;
     }
-    
+
     .menu-grid {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 20px;
     }
-    
+
     .menu-card-image {
         height: 200px;
     }
-    
+
     .menu-card-info {
         padding: 20px;
     }
-    
+
     .menu-card-header h3 {
         font-size: 1.4rem;
     }
-    
+
     .menu-card-price {
         font-size: 1.6rem;
     }
-    
+
     .menu-card-description {
         font-size: 1rem;
     }
@@ -272,42 +336,42 @@
     .menu-container {
         padding: 20px 10px 50px;
     }
-    
+
     .menu-title {
         font-size: 2.8rem;
     }
-    
+
     .menu-subtitle {
         font-size: 1.3rem;
     }
-    
+
     .menu-section .section-header h2 {
         font-size: 2.5rem;
     }
-    
+
     .menu-section .section-header p {
         font-size: 1.2rem;
     }
-    
+
     .menu-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .menu-card {
         max-width: 100%;
     }
-    
+
     .menu-card-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .menu-card-price {
         margin-left: 0;
         margin-top: 5px;
     }
-    
+
     .menu-card-details {
         flex-direction: column;
         align-items: flex-start;
@@ -323,29 +387,29 @@
         padding: 10px;
         background-attachment: scroll;
     }
-    
+
     .registration-page .modal-header {
         padding: 25px;
     }
-    
+
     .registration-page .modal-content {
         padding: 30px;
     }
-    
+
     .registration-page .logo-container h1 {
         font-size: 1.8rem;
     }
-    
+
     .registration-page .form-grid {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-    
+
     .registration-page .social-btn {
         padding: 14px;
         font-size: 0.95rem;
     }
-    
+
     .registration-page .btn-submit,
     .registration-page .btn-cancel {
         padding: 14px;
@@ -356,51 +420,51 @@
     .registration-page {
         padding: 5px;
     }
-    
+
     .registration-page .modal-header {
         padding: 20px;
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
     }
-    
+
     .registration-page .logo-container {
         width: 100%;
         justify-content: center;
     }
-    
+
     .registration-page .close-modal {
         position: absolute;
         top: 20px;
         right: 20px;
     }
-    
+
     .registration-page .modal-content {
         padding: 25px;
     }
-    
+
     .registration-page .modal-content h2 {
         font-size: 1.6rem;
     }
-    
+
     .registration-page .social-btn {
         padding: 12px;
         font-size: 0.9rem;
     }
-    
+
     .registration-page .social-btn span {
         font-size: 0.85rem;
     }
-    
+
     .registration-page .form-actions {
         flex-direction: column;
     }
-    
+
     .registration-page .btn-submit,
     .registration-page .btn-cancel {
         width: 100%;
     }
-    
+
     .registration-page .open-modal-btn {
         bottom: 20px;
         right: 20px;
@@ -416,40 +480,40 @@
     .cart-container {
         padding: 20px 15px;
     }
-    
+
     .cart-header {
         padding: 20px;
     }
-    
+
     .cart-title {
         font-size: 2.5rem;
     }
-    
+
     .delivery-section {
         flex-direction: column;
         gap: 20px;
     }
-    
+
     .delivery-item {
         min-width: 100%;
     }
-    
+
     .empty-cart {
         padding: 40px 20px;
     }
-    
+
     .empty-cart-title {
         font-size: 2rem;
     }
-    
+
     .empty-cart-message {
         font-size: 1.1rem;
     }
-    
+
     .recommended-title {
         font-size: 1.8rem;
     }
-    
+
     .recommended-grid {
         grid-template-columns: 1fr;
     }
@@ -459,15 +523,15 @@
     .cart-title {
         font-size: 2rem;
     }
-    
+
     .promo-input-group {
         flex-direction: column;
     }
-    
+
     .empty-cart-title {
         font-size: 1.7rem;
     }
-    
+
     .explore-btn {
         padding: 12px 30px;
         font-size: 1rem;
@@ -481,20 +545,22 @@
     .about-container {
         padding: 30px 20px;
     }
-    
+
     .about-hero {
         padding: 40px 30px;
     }
-    
+
     .about-title {
         font-size: 4rem;
     }
-    
-    .mission-values-grid, .commitment-grid {
+
+    .mission-values-grid,
+    .commitment-grid {
         gap: 30px;
     }
-    
-    .mission-card, .values-card {
+
+    .mission-card,
+    .values-card {
         padding: 30px;
     }
 }
@@ -503,35 +569,36 @@
     .about-content {
         flex-direction: column;
     }
-    
+
     .profile-image-container {
         flex: 0 0 auto;
         width: 100%;
         max-width: 300px;
         margin: 0 auto;
     }
-    
+
     .about-title {
         font-size: 3.2rem;
     }
-    
+
     .about-text p {
         font-size: 1.2rem;
         text-align: left;
     }
-    
-    .mission-header h2, .values-header h2 {
+
+    .mission-header h2,
+    .values-header h2 {
         font-size: 2rem;
     }
-    
+
     .mission-content p {
         font-size: 1.2rem;
     }
-    
+
     .commitment-grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
-    
+
     .commitment-card {
         padding: 25px;
     }
@@ -541,29 +608,29 @@
     .about-container {
         padding: 20px 15px;
     }
-    
+
     .about-hero {
         padding: 30px 20px;
     }
-    
+
     .about-title {
         font-size: 2.5rem;
     }
-    
+
     .mission-values-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .commitment-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .values-list li {
         flex-direction: column;
         text-align: center;
         align-items: center;
     }
-    
+
     .value-icon {
         margin-bottom: 10px;
     }

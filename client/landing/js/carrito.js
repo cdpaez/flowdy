@@ -59,14 +59,15 @@ const CartModule = (() => {
         const subtotalEl = DOM.subtotal();
         const totalEl = DOM.total();
         const shippingSelect = DOM.shipping();
-
-        if (!subtotalEl || !totalEl || !shippingSelect) return;
+        // TODO: Si no hay opción de envío, asumir costo 0
+        if (!subtotalEl || !totalEl ) return;
 
         const subtotal = carrito.reduce((acc, item) => {
             return acc + (item.price * item.cantidad);
         }, 0);
 
-        const envio = parseFloat(shippingSelect.value);
+        // const envio = parseFloat(shippingSelect.value);
+        const envio = 0; // Asumir costo 0 si no hay opción de envío
 
         const total = subtotal + envio;
 
@@ -105,7 +106,7 @@ const CartModule = (() => {
 
                 <div class="cart-info">
                     <strong>${item.name}</strong>
-                    <p>$${item.price}</p>
+                    <p>$${item.price.toFixed(2)}</p>
 
                     <div class="cart-controls">
 
