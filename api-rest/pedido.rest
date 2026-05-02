@@ -36,3 +36,8 @@ GET http://localhost:5001/api/pedidos
 GET http://localhost:5001/api/pedidos/8
 ### borrar pedido
 DELETE http://localhost:5001/api/pedidos/8
+
+### obtener cantidad de pedidos por semana
+GET http://localhost:5001/api/estadisticas/pedidos-semana
+### obtener stock por categoria
+GET http://localhost:5001/api/estadisticas/stock-productos

@@ -38,6 +38,7 @@ app.use('/api/categorias', require('./routes/categoria.routes'));
 app.use('/api/productos', require('./routes/producto.routes'));
 app.use('/api/pedidos', require('./routes/pedido.routes'));
 app.use('/api/estados-pedidos', require('./routes/estadosPedido.routes'));
+app.use('/api/estadisticas', require('./routes/estadisticas.routes'));
 app.use('/usuarios', require('./routes/usuario.routes'));
 
 // Error de multer (archivos pesados)

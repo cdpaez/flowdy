@@ -226,9 +226,9 @@
           <nav class="panel-estadisticas">
             <div class="pestanas-estadisticas">
 
-              <button onclick="mostrarSeccionStats('ventas-x-usuario')">👤 Actas</button>
-              <button onclick="mostrarSeccionStats('ventas-x-producto')">📦 Ventas</button>
-              <button onclick="mostrarSeccionStats('ventas-x-total')">💰 Ingresos</button>
+              <button onclick="mostrarSeccionStats('pedidos')">Pedidos</button>
+              <button onclick="mostrarSeccionStats('stock')">Stock</button>
+              <button onclick="mostrarSeccionStats('ingresos')">Ingresos</button>
 
             </div>
           </nav>
@@ -237,30 +237,30 @@
             <input type="date" id="fecha-desde" placeholder="Desde">
             <input type="date" id="fecha-hasta" placeholder="Hasta">
             <button id="resetear-filtro">🔄 Resetear Filtro</button>
-            <div id="mensaje-vacio-actas" class="mensaje-alerta" style="display: none;">
-              ⚠️ No se encontraron actas registradas en este rango de fechas.
+            <div id="mensaje-vacio-pedidos" class="mensaje-alerta" style="display: none;">
+              ⚠️ No se encontraron datos en este rango de fechas.
             </div>
-            <div id="mensaje-vacio-equipos" class="mensaje-alerta" style="display: none;">
-              ⚠️ No se encontraron equipos entregados en este período.
+            <div id="mensaje-vacio-stock" class="mensaje-alerta" style="display: none;">
+              ⚠️ No se encontraron datos en este período.
             </div>
-            <div id="mensaje-vacio-totales" class="mensaje-alerta" style="display: none;">
-              ⚠️ No se registraron ingresos en este período.
+            <div id="mensaje-vacio-ingresos" class="mensaje-alerta" style="display: none;">
+              ⚠️ No se registraron datos en este período.
             </div>
           </div>
 
           <!-- Contenedor de gráficos -->
           <div class="graficas">
-            <div id="ventas-x-usuario" class="grafica-card activa">
-              <canvas id="grafica-mis-ventas"></canvas>
+            <div id="pedidos" class="grafica-card activa">
+              <canvas id="grafica-pedidos"></canvas>
             </div>
 
-            <div id="ventas-x-producto" class="grafica-card">
+            <div id="stock" class="grafica-card">
               <canvas id="grafica-mis-productos"></canvas>
-            </div>
+            </div> 
 
-            <div id="ventas-x-total" class="grafica-card">
+            <!-- <div id="ingresos" class="grafica-card">
               <canvas id="totalGeneradoPorUsuario"></canvas>
-            </div>
+            </div> -->
           </div>
 
         </div>
@@ -342,12 +342,16 @@
   <script src="../js/dashboard/pedidos.js"></script>
   <script src="../js/dashboard/dashboard.js"></script>
   <script src="../js/nav.js"></script>
-  <script src="../js/dashboard/nav-stats.js"></script>
+  
 
+  <!-- estadisticas -->
+   <script src="../js/dashboard/chart.js"></script>
+   <script src="../js/dashboard/nav-stats.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <div id="loader-modal" class="loader"></div>
+
   <!-- Toast Notification Container -->
   <div id="toast-container" class="toast-container"></div>
 

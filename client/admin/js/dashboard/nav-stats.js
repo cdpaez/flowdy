@@ -1,12 +1,15 @@
-// bloque encargado de navegar entre las secciones
 function mostrarSeccionStats(id) {
-  // Oculta todas las secciones
-  const secciones = document.querySelectorAll('.grafica-card');
-  secciones.forEach(seccion => seccion.classList.remove('activa'));
 
-  // Muestra la que se seleccionó
-  const seccionActiva = document.getElementById(id);
-  if (seccionActiva) {
-    seccionActiva.classList.add('activa');
-  }
+  const secciones = document.querySelectorAll('.grafica-card');
+  secciones.forEach(s => s.classList.remove('activa'));
+
+  const activa = document.getElementById(id);
+  if (activa) activa.classList.add('activa');
+
+  setTimeout(() => {
+    if (window.graficos) {
+      const chart = window.graficos[id]?.();
+      chart?.resize?.();
+    }
+  }, 80);
 }
