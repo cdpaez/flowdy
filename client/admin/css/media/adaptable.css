@@ -117,13 +117,13 @@
     /* area productos */
     .barra-productos {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         padding: .5rem;
         margin: 0;
     }
 
     .barra-productos input[type="text"] {
-        width: 100%;
+        width: 85%;
     }
 
     .barra-productos__contenedor-botones {
