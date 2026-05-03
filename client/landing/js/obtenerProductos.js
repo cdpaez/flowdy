@@ -3,7 +3,7 @@ const GestorProductos = (() => {
     /* ==============================
        1. ESTADO DEL MODULO
        ============================== */
-    
+
 
 
     /* ==============================
@@ -117,6 +117,18 @@ const GestorProductos = (() => {
         if (openCartBtn) {
             openCartBtn.addEventListener("click", CartModule.openCart);
         }
+
+        // Bounce en botones Agregar
+        document.addEventListener("click", (e) => {
+
+            const btn = e.target.closest(".add-btn");
+            if (!btn) return;
+
+            btn.classList.remove("bounce");
+            void btn.offsetWidth;
+            btn.classList.add("bounce");
+
+        });
     };
 
 

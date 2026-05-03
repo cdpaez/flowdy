@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flowdy - Comida Saludable</title>
     <link rel="icon" href="../landing/assets/favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../landing/css/main.css">
 </head>
 
@@ -202,15 +203,26 @@
 
             <form id="checkoutForm" class="checkout-form">
 
-                <input name="nombre" placeholder="Nombre" required>
-                <input name="apellido" placeholder="Apellido" required>
-                <input name="telefono" placeholder="Teléfono" required>
-                <input name="email" placeholder="Email">
+                <input type="text" name="nombre" placeholder="Nombre" required minlength="2" maxlength="50"
+                    pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingrese solo letras. Mínimo 2 caracteres.">
 
-                <input name="cedula_ruc" placeholder="Cédula / RUC">
-                <input name="direccion" placeholder="Dirección cliente">
+                <input type="text" name="apellido" placeholder="Apellido" required minlength="2" maxlength="50"
+                    pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingrese solo letras. Mínimo 2 caracteres.">
 
-                <input name="direccion_entrega" placeholder="Dirección entrega" required>
+                <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{10}" maxlength="10"
+                    inputmode="numeric" title="Ingrese un número de teléfono de 10 dígitos.">
+
+                <input type="email" name="email" placeholder="Email" maxlength="100"
+                    title="Ingrese un correo electrónico válido. Ejemplo: usuario@email.com">
+
+                <input type="text" name="cedula_ruc" placeholder="Cédula / RUC" pattern="[0-9]{10,13}" maxlength="13"
+                    inputmode="numeric" title="Ingrese una cédula de 10 dígitos o un RUC de 13 dígitos.">
+
+                <input type="text" name="direccion" placeholder="Dirección cliente" minlength="5" maxlength="150"
+                    title="Ingrese una dirección válida (mínimo 5 caracteres).">
+
+                <input type="text" name="direccion_entrega" placeholder="Dirección entrega" required minlength="5"
+                    maxlength="150" title="Ingrese la dirección de entrega (mínimo 5 caracteres).">
 
                 <button type="submit">Confirmar pedido</button>
 
