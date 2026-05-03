@@ -292,31 +292,41 @@ const CartModule = (() => {
 
         document.addEventListener("click", (e) => {
 
-            if (e.target.classList.contains("add-btn")) {
+            const addBtn = e.target.closest(".add-btn");
+            const plusBtn = e.target.closest(".plus");
+            const minusBtn = e.target.closest(".minus");
+            const removeBtn = e.target.closest(".remove");
+
+            if (addBtn) {
 
                 const producto = {
-                    id: e.target.dataset.id,
-                    name: e.target.dataset.name,
-                    price: parseFloat(e.target.dataset.price),
-                    image: e.target.dataset.image
+                    id: addBtn.dataset.id,
+                    name: addBtn.dataset.name,
+                    price: parseFloat(addBtn.dataset.price),
+                    image: addBtn.dataset.image
                 };
 
                 agregarProducto(producto);
+                return;
             }
 
-            if (e.target.classList.contains("plus")) {
-                aumentarCantidad(e.target.dataset.id);
+            if (plusBtn) {
+                aumentarCantidad(plusBtn.dataset.id);
+                return;
             }
 
-            if (e.target.classList.contains("minus")) {
-                disminuirCantidad(e.target.dataset.id);
+            if (minusBtn) {
+                disminuirCantidad(minusBtn.dataset.id);
+                return;
             }
 
-            if (e.target.classList.contains("remove")) {
-                eliminarProducto(e.target.dataset.id);
+            if (removeBtn) {
+                eliminarProducto(removeBtn.dataset.id);
+                return;
             }
 
         });
+
 
         const checkoutBtn = DOM.checkoutBtn();
 

@@ -2,7 +2,7 @@
             RESPONSIVE
     =========================== */
 
-@media (max-width: 480px) {
+@media (max-width: 360px) {
 
     /*  ===========================
                 HERO
@@ -91,6 +91,12 @@
     .cart-info strong {
         font-size: 1.5em;
         font-weight: 1000;
+    }
+
+    .side-panel {
+        
+        width: 80%;
+        
     }
 
     .panel-content {
