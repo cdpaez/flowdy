@@ -9,38 +9,49 @@ const EstadoPedido = db.EstadoPedido;
 const obtenerPedidosPorEstado = async (req, res) => {
     try {
 
-        const hoy = new Date();
+        const { desde, hasta } = req.query;
 
-        const dia = hoy.getDay();
-        const diffLunes = hoy.getDate() - dia + (dia === 0 ? -6 : 1);
+        /*
+        =========================================================
+        CONSTRUCCION CONDICIONAL DEL FILTRO
+        =========================================================
+        */
+        const where = {};
 
-        const lunes = new Date(hoy.setDate(diffLunes));
-        lunes.setHours(0, 0, 0, 0);
+        if (desde && hasta) {
+            const inicio = new Date(desde);
+            const fin = new Date(hasta);
+            fin.setHours(23, 59, 59, 999);
 
-        const jueves = new Date(lunes);
-        jueves.setDate(lunes.getDate() + 3);
-        jueves.setHours(23, 59, 59, 999);
+            where.fecha = {
+                [Op.between]: [inicio, fin]
+            };
+        }
 
+        /*
+        =========================================================
+        CONSULTA
+        =========================================================
+        */
         const resultado = await Pedido.findAll({
             attributes: [
                 'estado_id',
                 [db.Sequelize.fn('COUNT', db.Sequelize.col('Pedido.id')), 'total']
             ],
-            where: {
-                fecha: {
-                    [Op.between]: [lunes, jueves]
-                }
-            },
-            include: [
-                {
-                    model: EstadoPedido,
-                    as: 'estado',
-                    attributes: ['nombre']
-                }
-            ],
+            where,
+            include: [{
+                model: EstadoPedido,
+                as: 'estado',
+                attributes: ['nombre']
+            }],
             group: ['estado_id', 'estado.id']
         });
 
+        /*
+        =========================================================
+        NORMALIZACION
+        =========================================================
+        */
         const estadisticas = {
             pendiente: 0,
             hecho: 0,
@@ -48,24 +59,22 @@ const obtenerPedidosPorEstado = async (req, res) => {
         };
 
         resultado.forEach(item => {
-            const estado = item.estado.nombre;
-            const total = parseInt(item.dataValues.total);
+            const estado = item.estado?.nombre;
+            const total = parseInt(item.dataValues.total, 10) || 0;
 
             if (estado === "pendiente") estadisticas.pendiente = total;
-            if (estado === "hecho") estadisticas.hecho = total;
-            if (estado === "entregado") estadisticas.entregado = total;
+            else if (estado === "hecho") estadisticas.hecho = total;
+            else if (estado === "entregado") estadisticas.entregado = total;
         });
 
-        res.json(estadisticas);
+        res.json({
+            estadisticas,
+            filtro: (desde && hasta) ? { desde, hasta } : null
+        });
 
     } catch (error) {
-
         console.error(error);
-
-        res.status(500).json({
-            error: "Error al obtener pedidos por estado"
-        });
-
+        res.status(500).json({ error: "Error al obtener pedidos" });
     }
 };
 
@@ -99,7 +108,48 @@ const obtenerStockPorProducto = async (req, res) => {
     }
 };
 
+const obtenerIngresosMensuales = async (req, res) => {
+    try {
+
+        const ingresos = await Pedido.findAll({
+            attributes: [
+                [db.Sequelize.fn('TO_CHAR', db.Sequelize.col('fecha'), 'YYYY-MM'), 'mes'],
+                [db.Sequelize.fn('SUM', db.Sequelize.col('total')), 'ingresos']
+            ],
+            where: {
+                fecha: {
+                    [Op.ne]: null
+                }
+            },
+            group: [
+                db.Sequelize.fn('TO_CHAR', db.Sequelize.col('fecha'), 'YYYY-MM')
+            ],
+            order: [
+                [db.Sequelize.fn('TO_CHAR', db.Sequelize.col('fecha'), 'YYYY-MM'), 'ASC']
+            ]
+        });
+
+        const labels = ingresos.map(i => i.dataValues.mes);
+        const data = ingresos.map(i => parseFloat(i.dataValues.ingresos || 0));
+
+        res.json({
+            labels,
+            data
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            error: "Error al obtener ingresos mensuales"
+        });
+
+    }
+};
+
 module.exports = {
     obtenerPedidosPorEstado,
-    obtenerStockPorProducto
+    obtenerStockPorProducto,
+    obtenerIngresosMensuales
 };

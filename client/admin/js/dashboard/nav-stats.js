@@ -1,15 +1,38 @@
-function mostrarSeccionStats(id) {
+function mostrarSeccionStats(tab) {
 
-  const secciones = document.querySelectorAll('.grafica-card');
-  secciones.forEach(s => s.classList.remove('activa'));
+  // Tabs activos
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.classList.toggle('activo', btn.dataset.tab === tab);
+  });
 
-  const activa = document.getElementById(id);
-  if (activa) activa.classList.add('activa');
+  // Vistas
+  document.querySelectorAll('.chart-view').forEach(view => {
+    view.classList.remove('activa');
+  });
 
+  const target = document.getElementById(`tab-${tab}`);
+  if (target) {
+    target.classList.add('activa');
+  }
+
+  // Fix Chart.js resize
   setTimeout(() => {
-    if (window.graficos) {
-      const chart = window.graficos[id]?.();
-      chart?.resize?.();
-    }
+    const canvas = document.getElementById(`chart-${tab}`);
+    const chart = canvas ? Chart.getChart(canvas) : null;
+    if (chart) chart.resize();
   }, 80);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // conectar tabs con la función
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      mostrarSeccionStats(tab);
+    });
+  });
+
+  // activar tab inicial
+  mostrarSeccionStats('pedidos');
+});

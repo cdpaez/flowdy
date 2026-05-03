@@ -110,7 +110,7 @@ const gestorPedidos = (() => {
             const fila = document.createElement('tr');
 
             fila.innerHTML = `
-            <td>${pedido.id}</td>
+            
             <td>${pedido.cliente.nombre} ${pedido.cliente.apellido}</td>
             <td>${pedido.cliente.telefono}</td>
             <td>${pedido.cliente.cedula_ruc}</td>
@@ -129,7 +129,7 @@ const gestorPedidos = (() => {
                 Ver Detalles
                 </button>
             </td>
-            <td>${pedido.total}</td>
+            <td>$${pedido.total}</td>
         `;
 
             tablaPedidos.appendChild(fila);

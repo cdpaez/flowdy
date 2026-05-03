@@ -2,10 +2,27 @@ const db = require('../database/models');
 const { Pedido, DetallePedido, Producto, Cliente, Categoria, Pago, EstadoPedido } = db;
 
 const crearPedido = async (req, res) => {
-  const t = await db.sequelize.transaction();
+
+  const { cliente, pedido, detalles } = req.body;
+
+  // validacion de datos
+  // Validar estructura básica
+  if (!cliente || !pedido) {
+    return res.status(400).json({
+      error: "Datos de cliente o pedido incompletos"
+    });
+  }
+
+  // Validar carrito
+  if (!Array.isArray(detalles) || detalles.length === 0) {
+    return res.status(400).json({
+      error: "El pedido debe contener al menos un producto"
+    });
+  }
 
   try {
-    const { cliente, pedido, detalles } = req.body;
+
+    const t = await db.sequelize.transaction();
 
     // 1. Crear cliente
     let clienteDB = await Cliente.findOne({

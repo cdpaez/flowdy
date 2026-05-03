@@ -16,7 +16,7 @@
   <!-- estilos generales  -->
   <link rel="stylesheet" href="../css/components/modalActa.css">
   <link rel="stylesheet" href="../css/components/nav-estadisticas.css">
-  <link rel="stylesheet" href="../css/components/stat-graficos.css">
+  <link rel="stylesheet" href="../css/components/estadisticas.css">
   <link rel="stylesheet" href="../css/dashboard.css">
   <link rel="stylesheet" href="../css/media/adaptable.css">
 
@@ -62,7 +62,7 @@
             <div class="barra-productos__contenedor-botones">
               <!-- <button id="abrirDialogo">Aplicar Filtros</button> -->
               <button id="abrir-modal">+ Agregar producto</button>
-              <button id="importar-datos">📦 Importar</button>
+              <!-- <button id="importar-datos">📦 Importar</button> -->
             </div>
           </div>
           <dialog id="dialogoBusqueda">
@@ -94,7 +94,7 @@
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <!-- <th>ID</th> -->
                   <th>Nombre</th>
                   <th>Categoría</th>
                   <th>Descripción</th>
@@ -169,7 +169,7 @@
           </div>
 
           <!-- Modal de importación -->
-          <div class="modal importar" id="modal-importar">
+          <!-- <div class="modal importar" id="modal-importar">
             <div class="modal-contenido importar">
 
               <h3>📁 Importar productos</h3>
@@ -178,11 +178,12 @@
                 <button type="submit">📤 Subir archivo</button>
               </form>
             </div>
-          </div>
+          </div> -->
+
         </div>
 
         <div id="actas" class="seccion">
-          <h2>🧾Pedidos</h2>
+          <h2>Pedidos</h2>
           <div class="filtros-ventas">
             <input type="date" id="fecha-inicio" placeholder="Desde">
             <input type="date" id="fecha-fin" placeholder="Hasta">
@@ -193,7 +194,7 @@
             <table id="tabla-pedidos">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <!-- <th>ID</th> -->
                   <th>Cliente</th>
                   <th>Teléfono</th>
                   <th>Cédula</th>
@@ -221,46 +222,44 @@
         </div>
 
         <div id="estadisticas" class="seccion">
-          <h2>📊 Estadísticas</h2>
 
-          <nav class="panel-estadisticas">
-            <div class="pestanas-estadisticas">
+          <h2>Estadísticas</h2>
 
-              <button onclick="mostrarSeccionStats('pedidos')">Pedidos</button>
-              <button onclick="mostrarSeccionStats('stock')">Stock</button>
-              <button onclick="mostrarSeccionStats('ingresos')">Ingresos</button>
-
-            </div>
-          </nav>
-          <!-- Filtros -->
-          <div class="filtros-estadisticas">
-            <input type="date" id="fecha-desde" placeholder="Desde">
-            <input type="date" id="fecha-hasta" placeholder="Hasta">
-            <button id="resetear-filtro">🔄 Resetear Filtro</button>
-            <div id="mensaje-vacio-pedidos" class="mensaje-alerta" style="display: none;">
-              ⚠️ No se encontraron datos en este rango de fechas.
-            </div>
-            <div id="mensaje-vacio-stock" class="mensaje-alerta" style="display: none;">
-              ⚠️ No se encontraron datos en este período.
-            </div>
-            <div id="mensaje-vacio-ingresos" class="mensaje-alerta" style="display: none;">
-              ⚠️ No se registraron datos en este período.
-            </div>
+          <!-- Tabs -->
+          <div class="tabs-estadisticas">
+            <button data-tab="pedidos" class="tab activo">Pedidos</button>
+            <button data-tab="stock" class="tab">Stock</button>
+            <button data-tab="ingresos" class="tab">Ingresos</button>
           </div>
 
-          <!-- Contenedor de gráficos -->
-          <div class="graficas">
-            <div id="pedidos" class="grafica-card activa">
-              <canvas id="grafica-pedidos"></canvas>
-            </div>
+          <!-- Filtros globales -->
+          <div class="filtros-estadisticas">
+            <input type="date" id="fecha-desde">
+            <input type="date" id="fecha-hasta">
+            <button id="resetear-filtro">Reset</button>
+          </div>
 
-            <div id="stock" class="grafica-card">
-              <canvas id="grafica-mis-productos"></canvas>
-            </div> 
+          <!-- Mensaje único reutilizable -->
+          <div id="mensaje-vacio" class="mensaje-alerta" hidden>
+            ⚠️ No hay datos en el rango seleccionado.
+          </div>
 
-            <!-- <div id="ingresos" class="grafica-card">
-              <canvas id="totalGeneradoPorUsuario"></canvas>
-            </div> -->
+          <!-- Contenido -->
+          <div class="charts-container">
+
+            <section id="tab-pedidos" class="chart-view activa">
+              <h3 id="titulo-grafico"></h3>
+              <canvas id="chart-pedidos"></canvas>
+            </section>
+
+            <section id="tab-stock" class="chart-view">
+              <canvas id="chart-stock"></canvas>
+            </section>
+
+            <section id="tab-ingresos" class="chart-view">
+              <canvas id="chart-ingresos"></canvas>
+            </section>
+
           </div>
 
         </div>
@@ -342,11 +341,11 @@
   <script src="../js/dashboard/pedidos.js"></script>
   <script src="../js/dashboard/dashboard.js"></script>
   <script src="../js/nav.js"></script>
-  
+
 
   <!-- estadisticas -->
-   <script src="../js/dashboard/chart.js"></script>
-   <script src="../js/dashboard/nav-stats.js"></script>
+  <script src="../js/dashboard/chart.test.js"></script>
+  <script src="../js/dashboard/nav-stats.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

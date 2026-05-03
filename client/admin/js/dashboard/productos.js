@@ -273,7 +273,6 @@ const GestorProductos = (() => {
             const fila = document.createElement('tr');
 
             fila.innerHTML = `
-        <td>${p.id}</td>
         <td>${p.nombre}</td>
         <td>${p.categoria?.nombre || '-'}</td>
         <td>${p.descripcion ?? ''}</td>
@@ -521,12 +520,15 @@ const GestorProductos = (() => {
         document.getElementById('abrir-modal').addEventListener('click', abrirModalCreacion);
         document.getElementById('form-modal-producto').addEventListener('submit', manejarSubmitProducto);
         document.querySelector('.cerrar-modal').addEventListener('click', cerrarModal);
-        document.getElementById('importar-datos').addEventListener('click', () => {
-            document.getElementById('modal-importar').style.display = 'flex';
-        });
-        document.getElementById('modal-importar').addEventListener('click', cerrarModalImportar);
+        // TODO: desarrollar la logica para el modal de importacion
+        // document.getElementById('importar-datos').addEventListener('click', () => {
+        //     document.getElementById('modal-importar').style.display = 'flex';
+        // });
+        
+        // document.getElementById('modal-importar').addEventListener('click', cerrarModalImportar);
+        // document.getElementById('form-importar').addEventListener('submit', importarProductos);
         document.addEventListener('keydown', cerrarModalEscape);
-        document.getElementById('form-importar').addEventListener('submit', importarProductos);
+        
         document.getElementById('buscador-productos').addEventListener('input', buscarProductos);
         document.getElementById('limpiarBusqueda').addEventListener('click', limpiarBusqueda);
         document.querySelectorAll('.busqueda-avanzada input').forEach(i => i.addEventListener('input', filtrarProductos));
