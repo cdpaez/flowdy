@@ -1,22 +1,3 @@
-/* =====================================================
-   CARRITO – ESTILOS ESPECÍFICOS (carrito2.html)
-   Estructura del archivo:
-
-   1. Panel lateral del carrito
-   2. Layout principal del carrito
-   3. Información de entrega
-   4. Código promocional
-   5. Ubicación
-   6. Carrito vacío
-   7. Productos recomendados
-===================================================== */
-
-
-/* =====================================================
-   1. PANEL LATERAL DEL CARRITO
-   Panel deslizante desde la derecha
-===================================================== */
-
 .side-panel {
     position: fixed;
     top: 0;
