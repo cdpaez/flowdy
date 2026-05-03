@@ -1,8 +1,61 @@
-/* ===========================
-   RESPONSIVE
-=========================== */
+/*  ===========================
+            RESPONSIVE
+    =========================== */
 
 @media (max-width: 480px) {
+
+    /*  ===========================
+                HERO
+    =========================== */
+    .hero-section {
+        padding: 40px 20px;
+    }
+
+    .main-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    .subtitle {
+        font-size: 2.2rem;
+    }
+
+    /*  ===========================
+                GUSTICO
+    =========================== */
+    .gustico-section {
+        padding: 40px 20px;
+    }
+
+    .gustico-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .gustico-subtitle {
+        font-size: 2.2rem;
+    }
+
+    .category-info h3 {
+        font-size: 2.5rem;
+    }
+
+    .category-info p {
+
+        font-size: 1.8rem;
+    }
+
+    .section-header h2 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: var(--text-dark);
+    }
+
+    .section-header p {
+        font-size: 1.5rem;
+        color: var(--text-medium);
+    }
 
     .modal-box {
         width: 95%;
@@ -70,20 +123,6 @@
 
 }
 
-/* ============================================
-   RESPONSIVE - GENERAL (APLICA A TODAS LAS PÁGINAS)
-   ============================================ */
-@media (max-width: 992px) {
-    .navbar {
-        padding: 0 20px;
-    }
-
-    .footer-content,
-    .footer-bottom-content {
-        padding: 0 20px;
-    }
-}
-
 @media (max-width: 768px) {
     .navbar {
         height: 70px;
@@ -125,295 +164,13 @@
     }
 }
 
-@media (max-width: 480px) {
-    .whatsapp-btn {
-        bottom: 20px;
-        right: 20px;
-    }
-
-    .whatsapp-btn img {
-        width: 50px;
-        height: 50px;
-    }
-
-    .nav-right {
-        gap: 8px;
-    }
-}
-
-/* ============================================
-   RESPONSIVE - PÁGINA PRINCIPAL
-   ============================================ */
 @media (max-width: 992px) {
-
-    .hero-section,
-    .gustico-section,
-    .best-sellers,
-    .delivery-platforms,
-    .content-article {
-        padding: 60px 20px;
+    .navbar {
+        padding: 0 20px;
     }
 
-    .main-title {
-        font-size: 4rem;
-    }
-
-    .gustico-title {
-        font-size: 4rem;
-    }
-
-    .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .video-container {
-        height: 300px;
-    }
-
-    .main-title {
-        font-size: 3rem;
-    }
-
-    .gustico-title {
-        font-size: 3rem;
-    }
-
-    .subtitle {
-        font-size: 1.5rem;
-    }
-
-    .gustico-subtitle {
-        font-size: 1.4rem;
-    }
-
-    .menu-categories {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-
-    .category-card {
-        max-width: 100%;
-    }
-
-    .section-header h2 {
-        font-size: 3.5rem;
-    }
-
-    .section-header p {
-        font-size: 2rem;
-    }
-
-    .platforms-grid {
-        gap: 20px;
-    }
-
-    .platform-card {
-        width: 150px;
-        height: 80px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .hero-section,
-    .gustico-section,
-    .best-sellers,
-    .delivery-platforms,
-    .content-article {
-        padding: 40px 15px;
-    }
-
-    .main-title {
-        font-size: 2.5rem;
-    }
-
-    .gustico-title {
-        font-size: 2.5rem;
-    }
-
-    .subtitle {
-        font-size: 1.2rem;
-    }
-
-    .gustico-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section-header h2 {
-        font-size: 2.5rem;
-    }
-
-    .section-header p {
-        font-size: 1.5rem;
-    }
-}
-
-/* ============================================
-   RESPONSIVE - PÁGINA DEL CARRITO
-   ============================================ */
-@media (max-width: 768px) {
-    .cart-container {
-        padding: 20px 15px;
-    }
-
-    .cart-header {
-        padding: 20px;
-    }
-
-    .cart-title {
-        font-size: 2.5rem;
-    }
-
-    .delivery-section {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .delivery-item {
-        min-width: 100%;
-    }
-
-    .empty-cart {
-        padding: 40px 20px;
-    }
-
-    .empty-cart-title {
-        font-size: 2rem;
-    }
-
-    .empty-cart-message {
-        font-size: 1.1rem;
-    }
-
-    .recommended-title {
-        font-size: 1.8rem;
-    }
-
-    .recommended-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .cart-title {
-        font-size: 2rem;
-    }
-
-    .promo-input-group {
-        flex-direction: column;
-    }
-
-    .empty-cart-title {
-        font-size: 1.7rem;
-    }
-
-    .explore-btn {
-        padding: 12px 30px;
-        font-size: 1rem;
-    }
-}
-
-/* ============================================
-   RESPONSIVE - PÁGINA QUIÉNES SOMOS
-   ============================================ */
-@media (max-width: 992px) {
-    .about-container {
-        padding: 30px 20px;
-    }
-
-    .about-hero {
-        padding: 40px 30px;
-    }
-
-    .about-title {
-        font-size: 4rem;
-    }
-
-    .mission-values-grid,
-    .commitment-grid {
-        gap: 30px;
-    }
-
-    .mission-card,
-    .values-card {
-        padding: 30px;
-    }
-}
-
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-    }
-
-    .profile-image-container {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-
-    .about-title {
-        font-size: 3.2rem;
-    }
-
-    .about-text p {
-        font-size: 1.2rem;
-        text-align: left;
-    }
-
-    .mission-header h2,
-    .values-header h2 {
-        font-size: 2rem;
-    }
-
-    .mission-content p {
-        font-size: 1.2rem;
-    }
-
-    .commitment-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    .commitment-card {
-        padding: 25px;
-    }
-}
-
-@media (max-width: 480px) {
-    .about-container {
-        padding: 20px 15px;
-    }
-
-    .about-hero {
-        padding: 30px 20px;
-    }
-
-    .about-title {
-        font-size: 2.5rem;
-    }
-
-    .mission-values-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .commitment-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .values-list li {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-
-    .value-icon {
-        margin-bottom: 10px;
+    .footer-content,
+    .footer-bottom-content {
+        padding: 0 20px;
     }
 }

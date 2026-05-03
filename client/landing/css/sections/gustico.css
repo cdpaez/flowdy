@@ -21,3 +21,19 @@
     color: var(--text-medium);
     font-size: 1.8rem;
 }
+
+.category-info {
+    padding: 25px;
+    background-color: white;
+}
+
+.category-info h3 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.category-info p {
+    color: var(--text-light);
+    font-size: 2rem;
+}

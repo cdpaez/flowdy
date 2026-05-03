@@ -10,14 +10,14 @@
 }
 
 .section-header h2 {
-    font-size: 5.2rem;
+    font-size: 6rem;
     margin-bottom: 10px;
     color: var(--text-dark);
 }
 
 .section-header p {
+    font-size: 3rem;
     color: var(--text-medium);
-    font-size: 3.1rem;
 }
 
 .product-grid {
