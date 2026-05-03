@@ -3,19 +3,19 @@
    ============================================ */
 @font-face {
     font-family: 'Principal';
-    src: url('../assets/fonts/Vibur-Regular.ttf') format('truetype');
+    src: url('../../assets/fonts/Vibur-Regular.ttf') format('truetype');
     font-weight: normal;
 }
 
 @font-face {
     font-family: 'Secundaria';
-    src: url('../assets/fonts/GreatVibes-Regular.ttf') format('truetype');
+    src: url('../../assets/fonts/GreatVibes-Regular.ttf') format('truetype');
     font-weight: bold;
 }
 
 @font-face {
     font-family: 'Texto';
-    src: url('../assets/fonts/Gabriola.ttf') format('truetype');
+    src: url('../../assets/fonts/Gabriola.ttf') format('truetype');
     font-weight: normal;
 }
 

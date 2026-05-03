@@ -1,0 +1,33 @@
+/* Base */
+@import 'base/reset.css';
+
+
+/* Layout */
+@import 'layout/header.css';
+@import 'layout/footer.css';
+
+/* Components */
+@import 'components/botones/botones.css';
+@import 'components/carrito/carrito.css';
+@import 'components/carrito/logoCarrito.css';
+@import 'components/carrusel/carrusel.css';
+@import 'components/formulario/formulario.css';
+@import 'components/menu/menu.css';
+@import 'components/modal/modal.css';
+@import 'components/overlay/overlay.css';
+@import 'components/panel_flotante/panelFlotante.css';
+@import 'components/redes_sociales/redesSociales.css';
+@import 'components/toast/toast.css';
+
+/* Sections */
+@import 'sections/hero.css';
+@import 'sections/gustico.css';
+@import 'sections/masVendidos.css';
+@import 'sections/quienesSomos.css';
+
+/* Pages */
+
+/* Media */
+@import 'media/responsive.css';
+
+/* Utils */

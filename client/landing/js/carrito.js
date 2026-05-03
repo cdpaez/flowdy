@@ -60,7 +60,7 @@ const CartModule = (() => {
         const totalEl = DOM.total();
         const shippingSelect = DOM.shipping();
         // TODO: Si no hay opción de envío, asumir costo 0
-        if (!subtotalEl || !totalEl ) return;
+        if (!subtotalEl || !totalEl) return;
 
         const subtotal = carrito.reduce((acc, item) => {
             return acc + (item.price * item.cantidad);
@@ -137,7 +137,26 @@ const CartModule = (() => {
        5. FUNCIONES DE CONTROL
        ============================== */
 
+    function mostrarToast(mensaje) {
+
+        const toast = document.getElementById("toast");
+        if (!toast) return;
+
+        toast.textContent = mensaje;
+        toast.classList.add("show");
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 3000);
+    }
+
     const abrirCheckout = () => {
+
+        // validar carrito
+        if (carrito.length === 0) {
+            mostrarToast("Debe agregar al menos un producto al carrito");
+            return;
+        }
 
         const modal = DOM.checkoutModal();
         if (!modal) return;

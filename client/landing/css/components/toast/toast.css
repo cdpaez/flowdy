@@ -1,0 +1,22 @@
+.toast{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  font-size: 2rem;
+
+  background: #333;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 6px;
+
+  opacity: 0;
+  transition: opacity .3s;
+
+  z-index: 9999;
+}
+
+.toast.show{
+  opacity: 1;
+}
