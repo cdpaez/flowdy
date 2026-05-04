@@ -8,68 +8,100 @@ const EstadoPedido = db.EstadoPedido;
 
 const obtenerPedidosPorEstado = async (req, res) => {
     try {
+        const { desde, hasta, año } = req.query;
 
-        const { desde, hasta } = req.query;
-
-        /*
-        =========================================================
-        CONSTRUCCION CONDICIONAL DEL FILTRO
-        =========================================================
-        */
-        const where = {};
+        // Construir filtro de fecha
+        let whereFecha = {};
 
         if (desde && hasta) {
-            const inicio = new Date(desde);
-            const fin = new Date(hasta);
-            fin.setHours(23, 59, 59, 999);
-
-            where.fecha = {
-                [Op.between]: [inicio, fin]
+            // Filtro por rango de fechas específico
+            whereFecha = {
+                [Op.gte]: db.Sequelize.literal(`'${desde} 00:00:00-05'::timestamptz`),
+                [Op.lte]: db.Sequelize.literal(`'${hasta} 23:59:59.999-05'::timestamptz`)
+            };
+        } else if (año) {
+            // Filtro por año completo
+            whereFecha = {
+                [Op.gte]: db.Sequelize.literal(`'${año}-01-01 00:00:00-05'`),
+                [Op.lte]: db.Sequelize.literal(`'${año}-12-31 23:59:59.999-05'`)
+            };
+        } else {
+            // Por defecto: año actual
+            const añoActual = new Date().getFullYear();
+            whereFecha = {
+                [Op.gte]: db.Sequelize.literal(`'${añoActual}-01-01 00:00:00-05'`),
+                [Op.lte]: db.Sequelize.literal(`'${añoActual}-12-31 23:59:59.999-05'`)
             };
         }
 
-        /*
-        =========================================================
-        CONSULTA
-        =========================================================
-        */
+        // Consulta agrupada por mes y estado
         const resultado = await Pedido.findAll({
             attributes: [
+                [db.Sequelize.fn('EXTRACT', db.Sequelize.literal('MONTH FROM fecha')), 'mes'],
+                [db.Sequelize.fn('EXTRACT', db.Sequelize.literal('YEAR FROM fecha')), 'año'],
                 'estado_id',
                 [db.Sequelize.fn('COUNT', db.Sequelize.col('Pedido.id')), 'total']
             ],
-            where,
             include: [{
-                model: EstadoPedido,
+                model: db.EstadoPedido,
                 as: 'estado',
-                attributes: ['nombre']
+                attributes: ['nombre', 'color']
             }],
-            group: ['estado_id', 'estado.id']
+            where: { fecha: whereFecha },
+            group: ['mes', 'año', 'estado_id', 'estado.id', 'estado.nombre', 'estado.color'],
+            order: [[db.Sequelize.literal('mes'), 'ASC']]
         });
 
-        /*
-        =========================================================
-        NORMALIZACION
-        =========================================================
-        */
-        const estadisticas = {
-            pendiente: 0,
-            hecho: 0,
-            entregado: 0
-        };
+        // Obtener todos los estados disponibles
+        const estadosDisponibles = await db.EstadoPedido.findAll({
+            attributes: ['id', 'nombre', 'color'],
+            order: [['id', 'ASC']]
+        });
 
+        // Inicializar estructura
+        const meses = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+
+        const dataPorEstado = {};
+        estadosDisponibles.forEach(estado => {
+            dataPorEstado[estado.nombre] = Array(12).fill(0);
+        });
+
+        // Llenar datos
         resultado.forEach(item => {
-            const estado = item.estado?.nombre;
-            const total = parseInt(item.dataValues.total, 10) || 0;
+            const mes = parseInt(item.dataValues.mes, 10) - 1;
+            const total = parseInt(item.dataValues.total, 10);
+            const nombreEstado = item.estado?.nombre;
 
-            if (estado === "pendiente") estadisticas.pendiente = total;
-            else if (estado === "hecho") estadisticas.hecho = total;
-            else if (estado === "entregado") estadisticas.entregado = total;
+            if (nombreEstado && dataPorEstado[nombreEstado]) {
+                dataPorEstado[nombreEstado][mes] += total;
+            }
         });
+
+        // Construir datasets
+        const datasets = estadosDisponibles.map(estado => ({
+            label: estado.nombre,
+            data: dataPorEstado[estado.nombre],
+            backgroundColor: estado.color || getColorPorEstado(estado.nombre),
+            borderWidth: 1
+        }));
+
+        // Determinar título
+        let titulo = '';
+        if (desde && hasta) {
+            titulo = `Pedidos por estado - ${desde} al ${hasta}`;
+        } else {
+            const añoMostrar = año || new Date().getFullYear();
+            titulo = `Pedidos por mes y estado - ${añoMostrar}`;
+        }
 
         res.json({
-            estadisticas,
-            filtro: (desde && hasta) ? { desde, hasta } : null
+            titulo: titulo,
+            labels: meses,
+            datasets: datasets,
+            filtrosActivos: { desde, hasta, año }
         });
 
     } catch (error) {

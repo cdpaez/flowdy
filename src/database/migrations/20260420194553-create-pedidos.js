@@ -41,6 +41,30 @@ module.exports = {
       direccion_entrega: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      snapshot_nombre: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+
+      snapshot_apellido: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+
+      snapshot_telefono: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+
+      snapshot_email: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+
+      snapshot_cedula_ruc: {
+        type: Sequelize.STRING,
+        allowNull: true
       }
 
     });

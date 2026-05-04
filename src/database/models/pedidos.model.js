@@ -31,8 +31,32 @@ module.exports = (sequelize, DataTypes) => {
     direccion_entrega: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    // 🔥 NUEVOS CAMPOS SNAPSHOT (datos del cliente en el momento del pedido)
+    snapshot_nombre: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
 
+    snapshot_apellido: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+
+    snapshot_telefono: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+
+    snapshot_email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+
+    snapshot_cedula_ruc: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   }, {
     tableName: 'pedidos',
     timestamps: false

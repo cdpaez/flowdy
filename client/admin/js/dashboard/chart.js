@@ -1,20 +1,42 @@
 const GraficosModule = (function () {
 
-    let chartPedidos = null;
-    let chartStock = null;
-    let chartIngresos = null;
+    /*
+    =========================================================
+    ESTADO INTERNO
+    =========================================================
+    */
+    let charts = {
+        pedidos: null,
+        stock: null,
+        ingresos: null
+    };
 
-    let ctxPedidos = null;
-    let ctxStock = null;
-    let ctxIngresos = null;
+    let ctx = {
+        pedidos: null,
+        stock: null,
+        ingresos: null
+    };
 
-    // pluggin global
+    let filtros = {
+        desde: null,
+        hasta: null
+    };
+
+    const inputDesde = document.getElementById('fecha-desde');
+    const inputHasta = document.getElementById('fecha-hasta');
+    const btnReset = document.getElementById('resetear-filtro');
+
+    /*
+    =========================================================
+    PLUGIN GLOBAL (FONDO OSCURO)
+    =========================================================
+    */
     const chartDarkBackground = {
         id: 'chartDarkBackground',
         beforeDraw: (chart) => {
             const { ctx, width, height } = chart;
             ctx.save();
-            ctx.fillStyle = '#0f0f10'; // fondo oscuro consistente
+            ctx.fillStyle = '#0f0f10';
             ctx.fillRect(0, 0, width, height);
             ctx.restore();
         }
@@ -22,91 +44,115 @@ const GraficosModule = (function () {
 
     Chart.register(chartDarkBackground);
 
+    /*
+    =========================================================
+    UTIL: DESTRUIR CHART DE FORMA SEGURA
+    =========================================================
+    */
+    function destroyChart(chart) {
+        if (chart) chart.destroy();
+    }
+
+    /*
+    =========================================================
+    PEDIDOS POR ESTADO (FILTRABLE POR FECHA)
+    =========================================================
+    */
     async function cargarGraficoPedidos() {
         try {
-            const res = await fetch('/api/estadisticas/pedidos-semana');
+            // Construir URL con filtros
+            const params = new URLSearchParams();
+
+            if (filtros.desde && filtros.hasta) {
+                // Si hay filtros de rango de fechas
+                params.append('desde', filtros.desde);
+                params.append('hasta', filtros.hasta);
+            } else {
+                // Si no hay filtros, mostrar año actual
+                params.append('año', new Date().getFullYear());
+            }
+
+            const url = `/api/estadisticas/pedidos?${params.toString()}`;
+            const res = await fetch(url);
+
+            if (!res.ok) {
+                console.warn('Respuesta no válida:', res.status);
+                return;
+            }
+
             const data = await res.json();
 
-            const inicio = new Date(data.rango.inicio);
-            const fin = new Date(data.rango.fin);
+            destroyChart(charts.pedidos);
 
-            const titulo = `Semana del ${inicio.toLocaleDateString()} al ${fin.toLocaleDateString()}`;
-            if (chartPedidos) chartPedidos.destroy();
-
-            chartPedidos = new Chart(ctxPedidos, {
+            charts.pedidos = new Chart(ctx.pedidos, {
                 type: 'bar',
                 data: {
-                    labels: ['Pedidos'], // eje único
-                    datasets: [
-                        {
-                            label: 'Pendientes',
-                            data: [data.pendiente || 0],
-                            backgroundColor: 'rgba(255,193,7,0.7)'
-                        },
-                        {
-                            label: 'Hechos',
-                            data: [data.hecho || 0],
-                            backgroundColor: 'rgba(23,162,184,0.7)'
-                        },
-                        {
-                            label: 'Entregados',
-                            data: [data.entregado || 0],
-                            backgroundColor: 'rgba(40,167,69,0.7)'
-                        }
-                    ]
+                    labels: data.labels,
+                    datasets: data.datasets
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-
                     plugins: {
                         legend: {
-                            position: 'right',
-                            labels: {
-                                color: '#fff'
-                            }
+                            position: 'top',
+                            labels: { color: '#fff' }
+                        },
+                        title: {
+                            display: true,
+                            text: data.titulo,
+                            color: '#fff',
+                            font: { size: 16 }
                         },
                         tooltip: {
                             callbacks: {
-                                title: () => `Semana actual`,
-                                label: (context) => {
-                                    return `Total: ${context.raw}`;
+                                label: function (context) {
+                                    const label = context.dataset.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: ${value} pedido${value !== 1 ? 's' : ''}`;
                                 }
                             }
                         }
                     },
-
                     scales: {
                         x: {
-                            ticks: { color: '#fff' },
+                            ticks: { color: '#fff', rotation: 45 },
                             grid: { color: 'rgba(255,255,255,0.1)' }
                         },
                         y: {
                             beginAtZero: true,
-                            suggestedMin: 0,
-                            suggestedMax: undefined,
                             ticks: { color: '#fff', precision: 0 },
-                            grid: { color: 'rgba(255,255,255,0.1)' }
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            title: {
+                                display: true,
+                                text: 'Cantidad de pedidos',
+                                color: '#fff'
+                            }
                         }
                     }
                 },
-
                 plugins: [chartDarkBackground]
             });
 
         } catch (err) {
-            console.error('Error pedidos:', err);
+            console.error('[Pedidos] error:', err);
         }
     }
 
+    /*
+    =========================================================
+    STOCK POR PRODUCTO
+    =========================================================
+    */
     async function cargarGraficoStock() {
         try {
+
             const res = await fetch('/api/estadisticas/stock-productos');
             const data = await res.json();
 
-            if (chartStock) chartStock.destroy();
+            destroyChart(charts.stock);
 
-            chartStock = new Chart(ctxStock, {
+            charts.stock = new Chart(ctx.stock, {
                 type: 'pie',
                 data: {
                     labels: data.labels || [],
@@ -136,25 +182,15 @@ const GraficosModule = (function () {
                         legend: {
                             position: 'right',
                             labels: {
-                                color: '#ffffff',
+                                color: '#fff',
                                 usePointStyle: true,
                                 padding: 15
                             }
                         },
-
                         title: {
                             display: true,
                             text: 'Stock por producto',
-                            color: '#ffffff'
-                        },
-
-                        tooltip: {
-                            enabled: true,
-                            backgroundColor: '#111',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            borderColor: '#333',
-                            borderWidth: 1
+                            color: '#fff'
                         }
                     }
                 },
@@ -163,18 +199,24 @@ const GraficosModule = (function () {
             });
 
         } catch (err) {
-            console.error('Error gráfico stock:', err);
+            console.error('[Stock] error:', err);
         }
     }
 
+    /*
+    =========================================================
+    INGRESOS MENSUALES
+    =========================================================
+    */
     async function cargarGraficoIngresos() {
         try {
+
             const res = await fetch('/api/estadisticas/ingresos-mensuales');
             const data = await res.json();
 
-            if (chartIngresos) chartIngresos.destroy();
+            destroyChart(charts.ingresos);
 
-            chartIngresos = new Chart(ctxIngresos, {
+            charts.ingresos = new Chart(ctx.ingresos, {
                 type: 'line',
                 data: {
                     labels: data.labels || [],
@@ -186,47 +228,90 @@ const GraficosModule = (function () {
                         borderWidth: 2
                     }]
                 },
+
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+
                     plugins: {
-                        legend: { labels: { color: '#fff' } },
+                        legend: {
+                            labels: { color: '#fff' }
+                        },
                         title: {
                             display: true,
-                            text: 'Ingresos',
-                            color: '#fff'
+                            text: 'Ingresos mensuales'
                         },
                         tooltip: {
                             callbacks: {
-                                label: function (context) {
-                                    const value = context.parsed.y;
+                                label: (context) => {
+                                    const value = context.parsed.y || 0;
                                     return `Ingresos: $${value.toFixed(2)}`;
                                 }
                             }
                         }
                     },
+
                     scales: {
                         x: {
-                            ticks: { color: '#ffffff' },
-                            grid: { color: 'rgba(255,255,255,0.1)' },
-                            border: { color: '#ffffff' }
+                            ticks: { color: '#fff' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
                         },
                         y: {
-                            ticks: { color: '#ffffff' },
-                            grid: { color: 'rgba(255,255,255,0.1)' },
-                            border: { color: '#ffffff' },
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: { color: '#fff' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
                         }
                     }
                 },
+
                 plugins: [chartDarkBackground]
             });
 
         } catch (err) {
-            console.error('Error ingresos:', err);
+            console.error('[Ingresos] error:', err);
         }
     }
 
+    /*
+    =========================================================
+    FILTROS DE FECHA
+    =========================================================
+    */
+    function initFiltros() {
+
+        inputDesde?.addEventListener('change', (e) => {
+            filtros.desde = e.target.value;
+
+            if (filtros.desde && filtros.hasta) {
+                cargarGraficoPedidos();
+            }
+        });
+
+        inputHasta?.addEventListener('change', (e) => {
+            filtros.hasta = e.target.value;
+
+            if (filtros.desde && filtros.hasta) {
+                cargarGraficoPedidos();
+            }
+        });
+
+        btnReset?.addEventListener('click', () => {
+
+            filtros.desde = null;
+            filtros.hasta = null;
+
+            inputDesde.value = '';
+            inputHasta.value = '';
+
+            cargarGraficoPedidos();
+        });
+    }
+
+    /*
+    =========================================================
+    INICIALIZACION
+    =========================================================
+    */
     function init() {
 
         const canvasPedidos = document.getElementById('chart-pedidos');
@@ -238,15 +323,22 @@ const GraficosModule = (function () {
             return;
         }
 
-        ctxPedidos = canvasPedidos.getContext('2d');
-        ctxStock = canvasStock.getContext('2d');
-        ctxIngresos = canvasIngresos.getContext('2d');
+        ctx.pedidos = canvasPedidos.getContext('2d');
+        ctx.stock = canvasStock.getContext('2d');
+        ctx.ingresos = canvasIngresos.getContext('2d');
+
+        initFiltros();
 
         cargarGraficoPedidos();
         cargarGraficoStock();
         cargarGraficoIngresos();
     }
 
+    /*
+    =========================================================
+    API PUBLICA
+    =========================================================
+    */
     return {
         init,
         refreshPedidos: cargarGraficoPedidos,
@@ -256,6 +348,11 @@ const GraficosModule = (function () {
 
 })();
 
+/*
+=========================================================
+BOOTSTRAP
+=========================================================
+*/
 document.addEventListener('DOMContentLoaded', () => {
     GraficosModule.init();
 });
