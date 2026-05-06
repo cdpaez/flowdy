@@ -1,31 +1,3 @@
-/* Productos Más Vendidos */
-.best-sellers {
-    padding: 80px 40px;
-    background-color: var(--background-white);
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.section-header h2 {
-    font-size: 6rem;
-    margin-bottom: 10px;
-    color: var(--text-dark);
-}
-
-.section-header p {
-    font-size: 3rem;
-    color: var(--text-medium);
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-}
-
 .product-card {
     background-color: white;
     border-radius: 15px;
@@ -167,17 +139,4 @@
 
 .product-image {
     position: relative;
-}
-
-/* esquina izquierda */
-.badge-popular {
-    width: 120px;
-    left: 10px;
-    background: var(--primary-color);
-}
-
-/* esquina derecha */
-.badge-nuevo {
-    right: 10px;
-    background: var(--primary-color);
 }

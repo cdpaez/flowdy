@@ -1,0 +1,27 @@
+/* esquina izquierda */
+.badge-popular {
+    width: 120px;
+    left: 10px;
+    background: var(--primary-color);
+}
+
+/* esquina derecha */
+.badge-nuevo {
+    right: 10px;
+    background: var(--primary-color);
+}
+
+/* esquina derecha inferior */
+.badge-fit {
+    position: absolute;
+    width: 60px;
+    left: 5%;
+    top: 75%;
+
+    background-color: blue;
+    color: white;
+
+    padding: 5px 12px;
+    border-radius: 0;
+
+}

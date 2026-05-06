@@ -51,6 +51,10 @@ const GestorProductos = (() => {
                     ${producto.es_nuevo
                     ? '<div class="product-badge badge-nuevo">Nuevo</div>'
                     : ''}
+
+                    ${producto.activo
+                    ? '<div class="product-badge badge-fit">FIT</div>'
+                    : ''}
                 </div>
 
                 <div class="product-info">

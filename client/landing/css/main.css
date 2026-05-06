@@ -4,9 +4,11 @@
 
 /* Layout */
 @import 'layout/header.css';
+@import 'layout/grid_cards.css';
 @import 'layout/footer.css';
 
 /* Components */
+@import 'components/badge/badge.css';
 @import 'components/botones/botones.css';
 @import 'components/carrito/carrito.css';
 @import 'components/carrito/logoCarrito.css';
@@ -22,7 +24,6 @@
 /* Sections */
 @import 'sections/hero.css';
 @import 'sections/gustico.css';
-@import 'sections/masVendidos.css';
 @import 'sections/quienesSomos.css';
 
 /* Pages */
