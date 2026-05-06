@@ -56,11 +56,11 @@ const CartModule = (() => {
 
     const calcularTotal = () => {
 
-        const subtotalEl = DOM.subtotal();
+        // const subtotalEl = DOM.subtotal();
         const totalEl = DOM.total();
         const shippingSelect = DOM.shipping();
         // TODO: Si no hay opción de envío, asumir costo 0
-        if (!subtotalEl || !totalEl) return;
+        if (!totalEl) return;
 
         const subtotal = carrito.reduce((acc, item) => {
             return acc + (item.price * item.cantidad);
@@ -71,7 +71,7 @@ const CartModule = (() => {
 
         const total = subtotal + envio;
 
-        subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+        // subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
         totalEl.textContent = `$${total.toFixed(2)}`;
     };
 
@@ -86,7 +86,7 @@ const CartModule = (() => {
 
             cartItems.innerHTML = `<p>Tu carrito está vacío</p>`;
 
-            DOM.subtotal().textContent = "$0.00";
+            // DOM.subtotal().textContent = "$0.00";
             DOM.total().textContent = "$0.00";
 
             actualizarContador();

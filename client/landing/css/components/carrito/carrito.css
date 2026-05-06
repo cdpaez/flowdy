@@ -30,6 +30,10 @@
     padding: 16px;
     border-bottom: 1px solid #eee;
 }
+.panel-header h2 {
+    font-size: clamp(1em, 2em, 3em);
+    font-weight: 600;   
+}
 
 /* Contenido scrollable */
 .panel-content {
@@ -70,6 +74,9 @@
     align-items: center;
     font-size: 14px;
 }
+.row span {
+    font-size: clamp(1em, 2em, 3em);
+}
 
 /* Select de envío */
 .cart-summary select {
@@ -86,6 +93,10 @@
     font-size: 18px;
     padding-top: 10px;
     border-top: 1px solid #ddd;
+}
+.total strong {
+    font-size: clamp(1em, 2em, 3em);
+
 }
 
 /* =====================================================
@@ -117,7 +128,7 @@
 }
 
 .cart-info strong {
-    font-size: 14px;
+    font-size: clamp(1em, 2em, 3em);
     font-weight: 600;
 }
 
@@ -146,7 +157,7 @@
     background: #fff;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: clamp(1em, 2em, 3em);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,7 +171,7 @@
 .cart-controls span {
     min-width: 20px;
     text-align: center;
-    font-size: 14px;
+    font-size: clamp(1em, 2em, 3em);
 }
 
 /* Botón eliminar */
@@ -195,7 +206,7 @@
 
 .panel-content p {
     text-align: center;
-    font-size: 14px;
+    font-size: clamp(1em, 2em, 3em);
     color: #777;
     margin-top: 40px;
 }
