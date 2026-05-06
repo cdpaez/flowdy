@@ -1,0 +1,17 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install"
+
+[deploy]
+startCommand = "npm start"
+
+# Servir los archivos estáticos del frontend
+[deploy.static]
+path = "/"
+publicDir = "client"
+
+# Habilitar WebSockets (ya que usas 'ws')
+websocket = true
+
+[variables]
+NODE_VERSION = "20"
