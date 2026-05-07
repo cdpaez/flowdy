@@ -24,10 +24,12 @@ const crearPedido = async (req, res) => {
       error: "La cédula/RUC es obligatoria"
     });
   }
+  
+  let t;
 
   try {
 
-    const t = await db.sequelize.transaction();
+    t = await db.sequelize.transaction();
 
     // 1. Buscar o CREAR cliente (NUNCA ACTUALIZAR datos personales)
     let clienteDB = await Cliente.findOne({

@@ -3,12 +3,74 @@
     width: 120px;
     left: 10px;
     background: var(--primary-color);
+    padding: 6px 14px;
+
+    border-radius: 999px;
+
+    background: linear-gradient(135deg,
+            #ffb703,
+            #fb8500);
+
+    color: white;
+
+    font-size: 0.8rem;
+    font-weight: 700;
+
+    box-shadow:
+        0 4px 12px rgba(251, 133, 0, 0.4);
+
+    backdrop-filter: blur(4px);
+}
+
+.badge-popular::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(120deg,
+            transparent 20%,
+            rgba(255, 255, 255, 0.4),
+            transparent 80%);
+
+    transform: translateX(-100%);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    to {
+        transform: translateX(100%);
+    }
 }
 
 /* esquina derecha */
 .badge-nuevo {
     right: 10px;
-    background: var(--primary-color);
+    background: red;
+    clip-path: polygon(50% 0%,
+            60% 15%,
+            75% 5%,
+            70% 25%,
+            90% 20%,
+            80% 40%,
+            100% 50%,
+            80% 60%,
+            90% 80%,
+            70% 75%,
+            75% 95%,
+            60% 85%,
+            50% 100%,
+            40% 85%,
+            25% 95%,
+            30% 75%,
+            10% 80%,
+            20% 60%,
+            0% 50%,
+            20% 40%,
+            10% 20%,
+            30% 25%,
+            25% 5%,
+            40% 15%);
 }
 
 /* esquina derecha inferior */
@@ -23,5 +85,11 @@
 
     padding: 5px 12px;
     border-radius: 0;
+
+    clip-path: polygon(100% 0,
+            80% 50%,
+            100% 100%,
+            0 100%,
+            0 0);
 
 }

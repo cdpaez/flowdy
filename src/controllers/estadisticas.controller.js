@@ -115,9 +115,6 @@ const obtenerStockPorProducto = async (req, res) => {
 
         const productos = await Producto.findAll({
             attributes: ['nombre', 'stock'],
-            where: {
-                activo: true
-            },
             order: [['stock', 'DESC']]
         });
 
