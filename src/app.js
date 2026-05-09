@@ -9,6 +9,7 @@ const app = express();
 
 // Middlewares
 app.use("/api", apiLimiter);
+app.set('trust proxy', 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
