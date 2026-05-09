@@ -1,5 +1,6 @@
 const db = require('../database/models');
 const { Pedido, DetallePedido, Producto, Cliente, Categoria, Pago, EstadoPedido } = db;
+const { enviarCorreoPedido } = require('../services/email.service');
 
 const crearPedido = async (req, res) => {
 
@@ -24,7 +25,7 @@ const crearPedido = async (req, res) => {
       error: "La cédula/RUC es obligatoria"
     });
   }
-  
+
   let t;
 
   try {
@@ -85,6 +86,9 @@ const crearPedido = async (req, res) => {
       snapshot_cedula_ruc: cliente.cedula_ruc
     }, { transaction: t });
 
+    // arreglo para construir el email
+    const detallesCorreo = [];
+
     // 3. Crear detalles con SNAPSHOT de productos
     for (const item of detalles) {
 
@@ -118,6 +122,15 @@ const crearPedido = async (req, res) => {
         subtotal: subtotal
       }, { transaction: t });
 
+      // datos para el correo
+      detallesCorreo.push({
+        nombre_producto: producto.nombre,
+        categoria_nombre: producto.categoria?.nombre || 'Sin categoría',
+        cantidad,
+        precio_unitario: precio,
+        subtotal
+      });
+
     }
 
     // 4. Actualizar el total del pedido
@@ -126,6 +139,22 @@ const crearPedido = async (req, res) => {
     }, { transaction: t });
 
     await t.commit();
+
+    // TODO: servicio de correo activado
+    try {
+
+      await enviarCorreoPedido(cliente.email, {
+        id: nuevoPedido.id,
+        total: totalPedido,
+        direccion_entrega: pedido.direccion_entrega,
+        snapshot_nombre: cliente.nombre,
+        snapshot_apellido: cliente.apellido,
+        detalles: detallesCorreo
+      });
+
+    } catch (emailError) {
+      console.error("Error enviando correo:", emailError.message);
+    }
 
     // Respuesta exitosa
     res.status(201).json({

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
+const { pedidoLimiter } = require("../middlewares/rateLimit");
+const validateEmail = require("../middlewares/validateEmail");
 const {
   obtenerPedidoPorId,
   crearPedido,
@@ -11,7 +12,7 @@ const {
 } = require('../controllers/pedido.controller');
 
 // POST crear pedido
-router.post('/', crearPedido);
+router.post('/', pedidoLimiter, validateEmail, crearPedido);
 
 // GET todos
 router.get('/', obtenerHistorialPedidos);

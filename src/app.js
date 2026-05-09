@@ -2,10 +2,13 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const { apiLimiter } = require("./middlewares/rateLimit");
+
 
 const app = express();
 
 // Middlewares
+app.use("/api", apiLimiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
