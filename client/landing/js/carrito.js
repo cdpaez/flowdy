@@ -403,6 +403,8 @@ const CartModule = (() => {
 
                 // cerrar modal checkout
                 cerrarCheckout();
+                
+                mostrarToast("Pedido registrado correctamente");
 
                 console.log("Pedido registrado correctamente", data);
 
