@@ -4,8 +4,8 @@ dns.setDefaultResultOrder("ipv4first");
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.sendinblue.com",
-  port: 587,
+  host: "smtp-relay.brevo.com",
+  port: 2525,
   secure: false, // STARTTLS
   auth: {
     user: process.env.BREVO_SMTP_USER,
