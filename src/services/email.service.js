@@ -4,13 +4,12 @@ dns.setDefaultResultOrder("ipv4first");
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: "smtp-relay.sendinblue.com",
   port: 587,
   secure: false, // STARTTLS
-  family: 4, // fuerza IPv4
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_PASS
   }
 });
 
@@ -27,7 +26,7 @@ async function enviarCorreoPedido(destinatario, pedido) {
   `).join("");
 
   const mailOptions = {
-    from: `"Flowdy" <${process.env.EMAIL_USER}>`,
+    from: `"Flowdy" <noreply@flowdy.fit>`,
     to: destinatario,
     subject: `Confirmación de pedido #${pedido.id}`,
     html: `
