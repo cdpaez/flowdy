@@ -12,13 +12,10 @@
 
   <!-- estilos para iconos con fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
-  <!-- estilos generales  -->
-  <link rel="stylesheet" href="../css/components/modalActa.css">
-  <link rel="stylesheet" href="../css/components/nav-estadisticas.css">
-  <link rel="stylesheet" href="../css/components/estadisticas.css">
-  <link rel="stylesheet" href="../css/dashboard.css">
-  <link rel="stylesheet" href="../css/media/adaptable.css">
+  <!-- estilos generales -->
+  <link rel="stylesheet" href="../css/main.css">
 
   <title>Inventario - Panel</title>
 
@@ -54,41 +51,25 @@
 
       <section class="area-contenido">
 
+        <!-- seccion productos -->
         <div id="productos" class="seccion activa">
           <h2>Productos</h2>
+
           <!-- Filtros y botón agregar -->
           <div class="barra-productos">
-            <input type="text" id="buscador-productos" placeholder="buscar por nombre o precio">
+            <span class="material-symbols-outlined">
+              search
+              <input type="text" id="buscador-productos" placeholder="Nombre o Precio">
+            </span>
+            
+
             <div class="barra-productos__contenedor-botones">
-              <!-- <button id="abrirDialogo">Aplicar Filtros</button> -->
+
               <button id="abrir-modal">+ Agregar producto</button>
-              <!-- <button id="importar-datos">📦 Importar</button> -->
+
             </div>
+
           </div>
-          <dialog id="dialogoBusqueda">
-            <div class="busqueda-avanzada">
-              <div class="busqueda-avanzada__inputs">
-                <input type="text" placeholder="Marca" id="filtroMarca" />
-                <input type="text" placeholder="Modelo" id="filtroModelo" />
-                <input type="text" placeholder="Procesador" id="filtroProcesador" />
-                <input type="text" placeholder="Tamano" id="filtroTamano" />
-                <input type="text" placeholder="Disco" id="filtroDisco" />
-                <input type="text" placeholder="Ram" id="filtroRam" />
-              </div>
-              <div class="busqueda-avanzada__interacciones">
-                <p id="contadorResultados">0 resultados encontrados</p>
-                <p id="contadorDisponibles">0 Disponibles</p>
-                <p id="contadorVendidos">0 Vendidos</p>
-
-                <button id="cerrarDialogo">Cerrar</button>
-                <button id="limpiarBusqueda">Limpiar</button>
-              </div>
-
-
-
-
-            </div>
-          </dialog>
 
           <div class="tabla-productos">
             <table>
@@ -182,13 +163,25 @@
 
         </div>
 
+        <!-- seccion pedidos -->
         <div id="actas" class="seccion">
           <h2>Pedidos</h2>
           <div class="filtros-ventas">
-            <input type="date" id="fecha-inicio" placeholder="Desde">
-            <input type="date" id="fecha-fin" placeholder="Hasta">
-            <input type="text" id="buscador-ventas" placeholder="precio, cedula o nombre cliente">
-            <!-- <button id="exportar-ventas">📁 Exportar</button> -->
+            <span class="material-symbols-outlined">
+              date_range
+              <input type="date" id="fecha-inicio" placeholder="Desde">
+            </span>
+            
+            <span class="material-symbols-outlined">
+              date_range
+              <input type="date" id="fecha-fin" placeholder="Hasta">
+            </span>
+            
+            <span class="material-symbols-outlined">
+              search
+              <input type="text" id="buscador-ventas" placeholder="precio, cedula o nombre">
+            </span>
+            
           </div>
           <div class="tabla-actas">
             <table id="tabla-pedidos">

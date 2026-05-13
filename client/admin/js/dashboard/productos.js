@@ -521,27 +521,13 @@ const GestorProductos = (() => {
         document.getElementById('form-modal-producto').addEventListener('submit', manejarSubmitProducto);
         document.querySelector('.cerrar-modal').addEventListener('click', cerrarModal);
         // TODO: desarrollar la logica para el modal de importacion
-        // document.getElementById('importar-datos').addEventListener('click', () => {
-        //     document.getElementById('modal-importar').style.display = 'flex';
-        // });
-        
-        // document.getElementById('modal-importar').addEventListener('click', cerrarModalImportar);
-        // document.getElementById('form-importar').addEventListener('submit', importarProductos);
         document.addEventListener('keydown', cerrarModalEscape);
         
         document.getElementById('buscador-productos').addEventListener('input', buscarProductos);
-        document.getElementById('limpiarBusqueda').addEventListener('click', limpiarBusqueda);
-        document.querySelectorAll('.busqueda-avanzada input').forEach(i => i.addEventListener('input', filtrarProductos));
+        
         cargarCategorias();
-        cargarProductos().then(() => {
-            mostrarContador(
-                todosLosProductos.length,
-                todosLosProductos.filter(p => p.stock === 'disponible').length,
-                todosLosProductos.filter(p => p.stock === 'vendido').length
-            );
-        });
+        cargarProductos();
         conectarWebSocket();
-        // manejarDialogoBusqueda();
 
     };
 

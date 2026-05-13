@@ -137,19 +137,76 @@ const obtenerStockPorProducto = async (req, res) => {
     }
 };
 
+// const obtenerIngresosMensuales = async (req, res) => {
+//     try {
+
+//         const ingresos = await Pedido.findAll({
+//             attributes: [
+//                 [db.Sequelize.fn('TO_CHAR', db.Sequelize.col('fecha'), 'YYYY-MM'), 'mes'],
+//                 [db.Sequelize.fn('SUM', db.Sequelize.col('total')), 'ingresos']
+//             ],
+//             where: {
+//                 fecha: {
+//                     [Op.ne]: null
+//                 }
+//             },
+//             group: [
+//                 db.Sequelize.fn('TO_CHAR', db.Sequelize.col('fecha'), 'YYYY-MM')
+//             ],
+//             order: [
+//                 [db.Sequelize.fn('TO_CHAR', db.Sequelize.col('fecha'), 'YYYY-MM'), 'ASC']
+//             ]
+//         });
+
+//         const labels = ingresos.map(i => i.dataValues.mes);
+//         const data = ingresos.map(i => parseFloat(i.dataValues.ingresos || 0));
+
+//         res.json({
+//             labels,
+//             data
+//         });
+
+//     } catch (error) {
+
+//         console.error(error);
+
+//         res.status(500).json({
+//             error: "Error al obtener ingresos mensuales"
+//         });
+
+//     }
+// };
 const obtenerIngresosMensuales = async (req, res) => {
     try {
+
+        const { desde, hasta } = req.query;
+
+        const where = {
+            fecha: {
+                [Op.ne]: null
+            }
+        };
+
+        if (desde && hasta) {
+            where.fecha = {
+                [Op.between]: [desde, hasta]
+            };
+        } else if (desde) {
+            where.fecha = {
+                [Op.gte]: desde
+            };
+        } else if (hasta) {
+            where.fecha = {
+                [Op.lte]: hasta
+            };
+        }
 
         const ingresos = await Pedido.findAll({
             attributes: [
                 [db.Sequelize.fn('TO_CHAR', db.Sequelize.col('fecha'), 'YYYY-MM'), 'mes'],
                 [db.Sequelize.fn('SUM', db.Sequelize.col('total')), 'ingresos']
             ],
-            where: {
-                fecha: {
-                    [Op.ne]: null
-                }
-            },
+            where,
             group: [
                 db.Sequelize.fn('TO_CHAR', db.Sequelize.col('fecha'), 'YYYY-MM')
             ],

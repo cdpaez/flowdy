@@ -1,0 +1,47 @@
+/* =========================
+   1. Base (reset, tipografía, variables)
+========================= */
+
+
+/* =========================
+   2. Utilidades
+========================= */
+
+
+/* =========================
+   3. Layout global
+========================= */
+
+
+/* =========================
+   4. Componentes reutilizables
+========================= */
+@import url("./components/btnFlotanteStock.css");
+@import url("./components/estadisticas.css");
+@import url("./components/menuContextual.css");
+@import url("./components/modalActa.css");
+@import url("./components/nav-estadisticas.css");
+@import url("./components/registrarActa.css");
+@import url("./components/tablas/tablaProductos.css");
+@import url("./components/tablas/tablaPedidos.css");
+
+/* =========================
+   5. Secciones
+========================= */
+
+
+/* =========================
+   6. Páginas específicas
+========================= */
+@import url("./pages/dashboard.css");
+
+
+/* =========================
+   7. Media queries globales
+========================= */
+@import url("./media/adaptable.css");
+
+/* =========================
+   8. Iconos
+========================= */
+@import url("./icons/icons.css");

@@ -1,10 +1,5 @@
 const GraficosModule = (function () {
 
-    /*
-    =========================================================
-    ESTADO INTERNO
-    =========================================================
-    */
     let charts = {
         pedidos: null,
         stock: null,
@@ -26,11 +21,6 @@ const GraficosModule = (function () {
     const inputHasta = document.getElementById('fecha-hasta');
     const btnReset = document.getElementById('resetear-filtro');
 
-    /*
-    =========================================================
-    PLUGIN GLOBAL (FONDO OSCURO)
-    =========================================================
-    */
     const chartDarkBackground = {
         id: 'chartDarkBackground',
         beforeDraw: (chart) => {
@@ -44,31 +34,19 @@ const GraficosModule = (function () {
 
     Chart.register(chartDarkBackground);
 
-    /*
-    =========================================================
-    UTIL: DESTRUIR CHART DE FORMA SEGURA
-    =========================================================
-    */
     function destroyChart(chart) {
         if (chart) chart.destroy();
     }
 
-    /*
-    =========================================================
-    PEDIDOS POR ESTADO (FILTRABLE POR FECHA)
-    =========================================================
-    */
     async function cargarGraficoPedidos() {
         try {
-            // Construir URL con filtros
+
             const params = new URLSearchParams();
 
             if (filtros.desde && filtros.hasta) {
-                // Si hay filtros de rango de fechas
                 params.append('desde', filtros.desde);
                 params.append('hasta', filtros.hasta);
             } else {
-                // Si no hay filtros, mostrar año actual
                 params.append('año', new Date().getFullYear());
             }
 
@@ -139,11 +117,6 @@ const GraficosModule = (function () {
         }
     }
 
-    /*
-    =========================================================
-    STOCK POR PRODUCTO
-    =========================================================
-    */
     async function cargarGraficoStock() {
         try {
 
@@ -172,12 +145,10 @@ const GraficosModule = (function () {
                         hoverOffset: 12
                     }]
                 },
-
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     cutout: '40%',
-
                     plugins: {
                         legend: {
                             position: 'right',
@@ -194,7 +165,6 @@ const GraficosModule = (function () {
                         }
                     }
                 },
-
                 plugins: [chartDarkBackground]
             });
 
@@ -203,15 +173,15 @@ const GraficosModule = (function () {
         }
     }
 
-    /*
-    =========================================================
-    INGRESOS MENSUALES
-    =========================================================
-    */
     async function cargarGraficoIngresos() {
         try {
 
-            const res = await fetch('/api/estadisticas/ingresos-mensuales');
+            const params = new URLSearchParams();
+
+            if (filtros.desde) params.append('desde', filtros.desde);
+            if (filtros.hasta) params.append('hasta', filtros.hasta);
+
+            const res = await fetch(`/api/estadisticas/ingresos-mensuales?${params.toString()}`);
             const data = await res.json();
 
             destroyChart(charts.ingresos);
@@ -228,11 +198,9 @@ const GraficosModule = (function () {
                         borderWidth: 2
                     }]
                 },
-
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-
                     plugins: {
                         legend: {
                             labels: { color: '#fff' }
@@ -250,7 +218,6 @@ const GraficosModule = (function () {
                             }
                         }
                     },
-
                     scales: {
                         x: {
                             ticks: { color: '#fff' },
@@ -263,7 +230,6 @@ const GraficosModule = (function () {
                         }
                     }
                 },
-
                 plugins: [chartDarkBackground]
             });
 
@@ -272,11 +238,6 @@ const GraficosModule = (function () {
         }
     }
 
-    /*
-    =========================================================
-    FILTROS DE FECHA
-    =========================================================
-    */
     function initFiltros() {
 
         inputDesde?.addEventListener('change', (e) => {
@@ -284,6 +245,7 @@ const GraficosModule = (function () {
 
             if (filtros.desde && filtros.hasta) {
                 cargarGraficoPedidos();
+                cargarGraficoIngresos();
             }
         });
 
@@ -292,6 +254,7 @@ const GraficosModule = (function () {
 
             if (filtros.desde && filtros.hasta) {
                 cargarGraficoPedidos();
+                cargarGraficoIngresos();
             }
         });
 
@@ -304,14 +267,10 @@ const GraficosModule = (function () {
             inputHasta.value = '';
 
             cargarGraficoPedidos();
+            cargarGraficoIngresos();
         });
     }
 
-    /*
-    =========================================================
-    INICIALIZACION
-    =========================================================
-    */
     function init() {
 
         const canvasPedidos = document.getElementById('chart-pedidos');
@@ -334,11 +293,6 @@ const GraficosModule = (function () {
         cargarGraficoIngresos();
     }
 
-    /*
-    =========================================================
-    API PUBLICA
-    =========================================================
-    */
     return {
         init,
         refreshPedidos: cargarGraficoPedidos,
@@ -348,11 +302,6 @@ const GraficosModule = (function () {
 
 })();
 
-/*
-=========================================================
-BOOTSTRAP
-=========================================================
-*/
 document.addEventListener('DOMContentLoaded', () => {
     GraficosModule.init();
 });
