@@ -8,6 +8,11 @@
     <link rel="icon" href="../landing/assets/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <!-- GOOGLE FONTS -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=shopping_cart_checkout" />
+
+    <!-- ESTILOS -->
     <link rel="stylesheet" href="../landing/css/main.css">
 </head>
 
@@ -17,15 +22,7 @@
     <header class="navbar">
         <div class="nav-left">
             <div class="flowdy-container">
-                <button class="menu-btn" onclick="toggleMenu()">
-                    <!-- <span>☰</span> -->
                     FLOWDY
-                </button>
-                <nav id="menu" class="dropdown-menu">
-                    <a href="../landing/index.html">Inicio</a>
-                    <a href="../landing/pages/menu.html">Menú</a>
-                    <a href="../landing/pages/quienes_somos.html">Quiénes somos</a>
-                </nav>
             </div>
         </div>
 
@@ -39,7 +36,9 @@
 
         <div class="nav-right">
             <button class="icon-btn cart-btn" id="openCartBtn">
-                <img src="../landing/assets/gif/tienda-online.gif" alt="Carrito" class="nav-icon">
+                <span class="material-symbols-sharp">
+                    shopping_cart_checkout
+                </span>
                 <span class="cart-badge" id="cartCount">0</span>
             </button>
         </div>
@@ -101,7 +100,7 @@
                         </div>
                     </a>
                 </div>
-                
+
             </div>
         </section>
 

@@ -20,6 +20,7 @@
 @import 'components/panel_flotante/panelFlotante.css';
 @import 'components/redes_sociales/redesSociales.css';
 @import 'components/toast/toast.css';
+@import 'components/icons/icons.css';
 
 /* Sections */
 @import 'sections/hero.css';

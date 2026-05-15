@@ -1,0 +1,8 @@
+.material-symbols-sharp {
+    color: var(--background-light);
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 500,
+        'GRAD' -25,
+        'opsz' 24
+}
