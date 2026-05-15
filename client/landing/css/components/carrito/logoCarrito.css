@@ -3,6 +3,7 @@
 ========================= */
 .cart-btn {
     position: relative;
+    border: 2px solid var(--background-light);
 }
 
 .cart-badge {
