@@ -8,32 +8,76 @@ function setupWebSocket(server) {
   const wss = new WebSocket.Server({ server, path: '/ws' });
 
   wss.on('connection', (ws, req) => {
-    const token = new URL(req.url, `ws://${req.headers.host}`).searchParams.get('token');
 
-    try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const userId = decoded.id;
+    const token = new URL(
+      req.url,
+      `ws://${req.headers.host}`
+    ).searchParams.get('token');
 
-      // Guardar conexión
-      if (!activeConnections.has(userId)) {
-        activeConnections.set(userId, new Set());
+    // 🔐 ADMIN AUTENTICADO
+    if (token) {
+
+      try {
+
+        const decoded = jwt.verify(
+          token,
+          process.env.JWT_SECRET
+        );
+
+        const userId = decoded.id;
+
+        if (!activeConnections.has(userId)) {
+          activeConnections.set(userId, new Set());
+        }
+
+        activeConnections.get(userId).add(ws);
+
+        ws.send(JSON.stringify({
+          type: 'connection_established'
+        }));
+
+        ws.on('close', () => {
+          activeConnections.get(userId)?.delete(ws);
+
+          if (
+            activeConnections.get(userId)?.size === 0
+          ) {
+            activeConnections.delete(userId);
+          }
+        });
+
+      } catch (error) {
+
+        console.error(
+          'Conexión WS no autorizada:',
+          error
+        );
+
+        ws.close(4001, 'Autenticación fallida');
       }
-      activeConnections.get(userId).add(ws);
 
-      // Confirmar conexión
-      ws.send(JSON.stringify({ type: 'connection_established' }));
+    } else {
 
-      // Limpiar al cerrar
+      // 🌍 LANDING PÚBLICA
+      if (!activeConnections.has('public')) {
+        activeConnections.set('public', new Set());
+      }
+
+      activeConnections.get('public').add(ws);
+
+      ws.send(JSON.stringify({
+        type: 'connection_established'
+      }));
+
       ws.on('close', () => {
-        activeConnections.get(userId)?.delete(ws);
-        if (activeConnections.get(userId)?.size === 0) {
-          activeConnections.delete(userId);
+        activeConnections.get('public')?.delete(ws);
+
+        if (
+          activeConnections.get('public')?.size === 0
+        ) {
+          activeConnections.delete('public');
         }
       });
-
-    } catch (error) {
-      console.error('Conexión WS no autorizada:', error);
-      ws.close(4001, 'Autenticación fallida');
     }
   });
 }

@@ -1,6 +1,7 @@
 const db = require('../database/models');
 const { Producto, Categoria } = db;
 const { subirImagen, eliminarImagen } = require('../services/uploadImage');
+const { emitEventoGlobal } = require('../services/websocket');
 
 const crearProducto = async (req, res) => {
   try {
@@ -15,6 +16,8 @@ const crearProducto = async (req, res) => {
       ...req.body,
       imagen: imagenUrl
     });
+
+    emitEventoGlobal('producto_creado', producto);
 
     res.status(201).json(producto);
 
@@ -112,6 +115,8 @@ const actualizarProducto = async (req, res) => {
       imagen: imagenUrl
     });
 
+    emitEventoGlobal('producto_actualizado', producto);
+
     res.json({
       message: 'Producto actualizado',
       producto
@@ -134,6 +139,10 @@ const eliminarProducto = async (req, res) => {
     }
 
     await producto.destroy();
+
+    emitEventoGlobal('producto_eliminado', {
+      id: producto.id
+    });
 
     res.json({ mensaje: 'Producto eliminado' });
 
@@ -159,6 +168,11 @@ const cambiarEstadoProducto = async (req, res) => {
 
     producto.activo = activo;
     await producto.save();
+
+    emitEventoGlobal('producto_estado', {
+      id: producto.id,
+      activo: producto.activo
+    });
 
     res.json({ mensaje: 'Estado actualizado', activo });
 
