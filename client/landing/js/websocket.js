@@ -1,7 +1,7 @@
 const wsBaseURL =
     window.location.hostname === 'localhost'
         ? 'ws://localhost:5001'
-        : 'wss://flowdy.fit';
+        : 'wss://www.flowdy.fit';
 
 const socket = new WebSocket(`${wsBaseURL}/ws`);
 

@@ -8,7 +8,7 @@ const WebSocketModule = (function () {
 
         const wsBaseURL = window.location.hostname === 'localhost'
             ? 'ws://localhost:5001'
-            : 'wss://flowdy.fit';
+            : 'wss://www.flowdy.fit';
 
         socket = new WebSocket(`${wsBaseURL}/ws?token=${token}`);
 
