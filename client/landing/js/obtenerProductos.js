@@ -25,6 +25,12 @@ const GestorProductos = (() => {
         return await res.json();
     };
 
+    const recargarProductos = () => {
+        cargarPopulares();
+        cargarNuevos();
+        cargarMenu();
+    };
+
 
     /* ==============================
        4. FUNCIONES DE RENDERIZADO
@@ -147,7 +153,7 @@ const GestorProductos = (() => {
         initEventos();
     };
 
-    return { init };
+    return { init, recargarProductos};
 
 })();
 

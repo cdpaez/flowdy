@@ -8,7 +8,7 @@ const WebSocketModule = (function () {
 
         const wsBaseURL = window.location.hostname === 'localhost'
             ? 'ws://localhost:5001'
-            : 'wss://copter-2-0-0.onrender.com';
+            : 'wss://flowdy.fit';
 
         socket = new WebSocket(`${wsBaseURL}/ws?token=${token}`);
 
@@ -35,7 +35,6 @@ const WebSocketModule = (function () {
                 console.warn('⛔ Usuario deshabilitado por el servidor');
                 cerrarSesionConMotivo();
             }
-            
 
         } catch (err) {
             console.error('❌ Error al parsear mensaje WebSocket:', err);
@@ -63,7 +62,7 @@ const WebSocketModule = (function () {
         if (socket) socket.close();
 
         setTimeout(() => {
-            window.location.href = '/index.html';
+            window.location.href = '../index.html';
         }, 100);
     }
 
