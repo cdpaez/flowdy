@@ -210,8 +210,8 @@ const UsuariosModule = (() => {
           </label>
         </td>
         <td class="acciones">
-          <button class="btn-editar-usuario" data-id="${usuario.id}">✏️ Editar</button>
-          <button class="btn-eliminar-usuario" data-id="${usuario.id}">🗑️ Eliminar</button>
+          <button class="btn-editar-usuario" data-id="${usuario.id}">✏️</button>
+          <button class="btn-eliminar-usuario" data-id="${usuario.id}">🗑️</button>
         </td>
       `;
             tablaBody.appendChild(fila);
@@ -302,7 +302,7 @@ const UsuariosModule = (() => {
                 toast.className = 'toast-confirm';
                 toast.innerHTML = `
           <div class="toast-confirm-content">
-            <p>¿Eliminar este producto?</p>
+            <p>¿Eliminar este usuario?</p>
             <div class="toast-confirm-buttons">
               <button id="toast-confirmar">Sí, eliminar</button>
               <button id="toast-cancelar">Cancelar</button>

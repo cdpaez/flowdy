@@ -1,0 +1,14 @@
+
+/* preview imagen */
+.preview-imagen {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+#preview-imagen {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 4px;
+  background: #fafafa;
+}

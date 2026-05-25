@@ -19,7 +19,6 @@
 
   <title>Inventario - Panel</title>
 
-
 </head>
 
 <body>
@@ -40,7 +39,7 @@
           <h2>Menú</h2>
 
           <button onclick="mostrarSeccion('productos',this)">Productos</button>
-          <button onclick="mostrarSeccion('actas',this)"> Pedidos</button>
+          <button onclick="mostrarSeccion('pedidos',this)"> Pedidos</button>
           <button onclick="mostrarSeccion('estadisticas',this)"> Estadísticas</button>
           <button onclick="mostrarSeccion('usuarios',this)"> Usuarios</button>
           <button id="logout-btn">Cerrar sesión</button>
@@ -53,15 +52,16 @@
 
         <!-- seccion productos -->
         <div id="productos" class="seccion activa">
-          <h2>Productos</h2>
+
 
           <!-- Filtros y botón agregar -->
           <div class="barra-productos">
+            <h2>Productos</h2>
+
             <span class="material-symbols-outlined">
               search
               <input type="text" id="buscador-productos" placeholder="Nombre o Precio">
             </span>
-            
 
             <div class="barra-productos__contenedor-botones">
 
@@ -149,41 +149,33 @@
 
           </div>
 
-          <!-- Modal de importación -->
-          <!-- <div class="modal importar" id="modal-importar">
-            <div class="modal-contenido importar">
-
-              <h3>📁 Importar productos</h3>
-              <form id="form-importar" enctype="multipart/form-data">
-                <input type="file" name="archivo" accept=".csv" required />
-                <button type="submit">📤 Subir archivo</button>
-              </form>
-            </div>
-          </div> -->
-
         </div>
 
         <!-- seccion pedidos -->
-        <div id="actas" class="seccion">
-          <h2>Pedidos</h2>
+        <div id="pedidos" class="seccion">
+
           <div class="filtros-ventas">
+
+            <h2>Pedidos</h2>
+
             <span class="material-symbols-outlined">
               date_range
               <input type="date" id="fecha-inicio" placeholder="Desde">
             </span>
-            
+
             <span class="material-symbols-outlined">
               date_range
               <input type="date" id="fecha-fin" placeholder="Hasta">
             </span>
-            
+
             <span class="material-symbols-outlined">
               search
-              <input type="text" id="buscador-ventas" placeholder="precio, cedula o nombre">
+              <input type="text" id="buscador-pedidos" placeholder="precio, cedula o cliente">
             </span>
-            
+
           </div>
-          <div class="tabla-actas">
+
+          <div class="tabla-pedidos__container">
             <table id="tabla-pedidos">
               <thead>
                 <tr>
@@ -197,16 +189,16 @@
                   <th>Total</th>
                 </tr>
               </thead>
-              <tbody id="tabla-actas"></tbody>
+              <tbody id="tabla-pedidos-body"></tbody>
             </table>
           </div>
 
-          <!-- modal que muestra la informacion de cada acta -->
-          <div id="modalActa" class="modal__acta hidden">
-            <div class="modal-content">
+          <!-- que muestra la informacion de cada acta -->
+          <div id="modalPedidos" class="modal_pedidos hidden">
+            <div class="modal-content__pedidos">
               <span id="cerrarModal" class="cerrar">&times;</span>
               <h2>Detalles del pedido</h2>
-              <div id="detalleActa">
+              <div id="detallePedidos">
                 <!-- Aquí se llenarán los datos dinámicamente -->
               </div>
             </div>
@@ -214,6 +206,7 @@
 
         </div>
 
+        <!-- seccion Estadisticas -->
         <div id="estadisticas" class="seccion">
 
           <h2>Estadísticas</h2>
@@ -257,10 +250,12 @@
 
         </div>
 
+        <!-- seccion Usuarios -->
         <div id="usuarios" class="seccion">
-          <h2>👤 Gestión de Usuarios</h2>
+
 
           <div class="barra-usuarios">
+            <h2>Usuarios</h2>
             <input type="text" id="buscador-usuarios" placeholder="nombre o correo">
             <div class="barra-usuarios__contenedor-acciones">
               <select id="filtro-estado">
@@ -268,7 +263,11 @@
                 <option value="activo">Activos</option>
                 <option value="inactivo">Inactivos</option>
               </select>
-              <button id="abrir-modal-usuario">+ Nuevo Usuario</button>
+              <button id="abrir-modal-usuario">
+                <span class="material-symbols-outlined">
+                  person_add
+                </span>
+              </button>
             </div>
 
           </div>
@@ -319,6 +318,7 @@
         </div>
 
       </section>
+
     </main>
 
     <footer>
@@ -340,6 +340,7 @@
   <script src="../js/dashboard/chart.js"></script>
   <script src="../js/dashboard/nav-stats.js"></script>
 
+  <!-- librerias externas para UX -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <div id="loader-modal" class="loader"></div>

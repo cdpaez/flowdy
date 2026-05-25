@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+  color: #2c3e50;
+}
+
+.envoltorio__principal {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: clamp(0.8rem, 1.8vw, 3rem);
+  height: clamp(60px, 4vw, 200px);
+  flex-shrink: 0;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+footer {
+  background: #2c3e50;
+  color: #f4f6f8;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: clamp(.7rem, 1.2vw, 3rem);
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* --- CONTENIDO DINÁMICO --- */
+.area-contenido {
+  flex: 1;
+  padding: clamp(.5rem, 1rem, 2rem);
+  background-color: #fff;
+  min-height: 0;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.seccion {
+  display: none;
+}
+
+.seccion.activa {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+
+/* botones */
+.acciones-modal {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.acciones-modal button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform .1s, opacity .2s;
+}
+
+/* guardar */
+.acciones-modal button[type="submit"] {
+  background: #22c55e;
+  color: white;
+}
+
+/* cancelar */
+.acciones-modal .cerrar-modal {
+  background: #e5e7eb;
+}
+
+/* hover */
+.acciones-modal button:hover {
+  opacity: .9;
+  transform: translateY(-1px);
+}

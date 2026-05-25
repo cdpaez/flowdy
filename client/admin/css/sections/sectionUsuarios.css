@@ -1,0 +1,270 @@
+/* =========================================
+   BARRA USUARIOS
+========================================= */
+
+.barra-usuarios {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1.2rem 1.4rem;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.05);
+
+}
+
+
+/* =========================================
+   TITULO
+========================================= */
+
+.barra-usuarios h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  color: #1e293b;
+
+  margin-right: auto;
+
+  letter-spacing: 0.3px;
+}
+
+
+/* =========================================
+   INPUT BUSCADOR
+========================================= */
+
+#buscador-usuarios {
+  min-width: 260px;
+
+  padding: 0.85rem 1rem;
+
+  border-radius: 14px;
+  border: 1px solid #dbe3ec;
+
+  background: #f8fafc;
+
+  outline: none;
+
+  font-size: 1rem;
+
+  color: #1e293b;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* hover */
+
+#buscador-usuarios:hover {
+  transform: translateY(-1px);
+
+  border-color: #94a3b8;
+
+  box-shadow:
+    0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+
+/* focus */
+
+#buscador-usuarios:focus {
+  border-color: #3b82f6;
+
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+
+/* placeholder */
+
+#buscador-usuarios::placeholder {
+  color: #94a3b8;
+}
+
+
+/* =========================================
+   CONTENEDOR ACCIONES
+========================================= */
+
+.barra-usuarios__contenedor-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+
+/* =========================================
+   SELECT
+========================================= */
+
+#filtro-estado {
+  padding: 0.85rem 1rem;
+
+  border-radius: 14px;
+  border: 1px solid #dbe3ec;
+
+  background: #f8fafc;
+
+  outline: none;
+
+  font-size: 0.95rem;
+  font-family: inherit;
+
+  color: #1e293b;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* hover */
+
+#filtro-estado:hover {
+  transform: translateY(-1px);
+
+  border-color: #94a3b8;
+
+  box-shadow:
+    0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+
+/* focus */
+
+#filtro-estado:focus {
+  border-color: #3b82f6;
+
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+
+/* =========================================
+   BOTÓN NUEVO USUARIO
+========================================= */
+
+#abrir-modal-usuario {
+  border: none;
+  outline: none;
+
+  padding: 0.9rem 1.2rem;
+
+  border-radius: 14px;
+
+  background: #1e293b;
+  color: #ffffff;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* hover */
+
+#abrir-modal-usuario:hover {
+  background: white;
+  color: #2c3e50;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 20px rgba(37, 99, 235, 0.22);
+}
+
+
+/* active */
+
+#abrir-modal-usuario:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================================
+   ANIMACIONES SUAVES
+========================================= */
+
+#buscador-usuarios,
+#filtro-estado,
+#abrir-modal-usuario {
+  animation: fadeIn 0.3s ease;
+}
+
+.tabla-usuarios {
+  overflow-x: auto;
+}
+
+.tabla-usuarios table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla-usuarios thead {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabla-usuarios tbody tr:hover {
+  background-color: #d6eaf8;
+  transition: background-color 0.3s ease;
+}
+
+.tabla-usuarios button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.estado-usuario {
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.estado-usuario.activo {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.estado-usuario.inactivo {
+  background-color: #e74c3c;
+  color: white;
+}

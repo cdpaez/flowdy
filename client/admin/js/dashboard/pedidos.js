@@ -10,12 +10,12 @@ const gestorPedidos = (() => {
        2. SELECTORES DEL DOM
        ============================== */
     const tablaPedidos = document.querySelector('#tabla-pedidos tbody');
-    const modal = document.getElementById('modalActa');
-    const contenedorDetalle = document.getElementById('detalleActa');
+    const modal = document.getElementById('modalPedidos');
+    const contenedorDetalle = document.getElementById('detallePedidos');
     const cerrarModalBtn = document.getElementById('cerrarModal');
     const inputFechaInicio = document.querySelector('#fecha-inicio');
     const inputFechaFin = document.querySelector('#fecha-fin');
-    const inputBuscador = document.querySelector('#buscador-ventas');
+    const inputBuscador = document.querySelector('#buscador-pedidos');
 
     /* ==============================
        3. FUNCIONES DE DATOS (API)

@@ -1,12 +1,19 @@
 /* =========================
    1. Base (reset, tipografía, variables)
 ========================= */
-
+@import url("./base/reset.css");
+@import url("./base/typography.css");
+@import url("./base/variables.css");
+@import url("./base/animations.css");
 
 /* =========================
    2. Utilidades
 ========================= */
-
+@import url("./utils/nav-estadisticas.css");
+@import url("./utils/filtrosPedidos.css");
+@import url("./utils/notifier.css");
+@import url("./utils/paginacion.css");
+@import url("./utils/previewImage.css");
 
 /* =========================
    3. Layout global
@@ -14,26 +21,30 @@
 
 
 /* =========================
-   4. Componentes reutilizables
+   4. Componentes
 ========================= */
-@import url("./components/btnFlotanteStock.css");
-@import url("./components/estadisticas.css");
-@import url("./components/menuContextual.css");
-@import url("./components/modalActa.css");
-@import url("./components/nav-estadisticas.css");
-@import url("./components/registrarActa.css");
+@import url("./components/panel-lateral-izquierdo/panelLateralIzquierdo.css");
+@import url("./components/modal/modalLoader.css");
+@import url("./components/botones/btnEditarEliminar.css");
+
 @import url("./components/tablas/tablaProductos.css");
+@import url("./components/forms/addEditProduct.css");
+
 @import url("./components/tablas/tablaPedidos.css");
+@import url("./components/modal/modalDetallePedidos.css");
 
 /* =========================
    5. Secciones
 ========================= */
-
+@import url("./sections/sectionProductos.css");
+@import url("./sections/sectionPedidos.css");
+@import url("./sections/sectionEstadisticas.css");
+@import url("./sections/sectionUsuarios.css");
 
 /* =========================
    6. Páginas específicas
 ========================= */
-@import url("./pages/dashboard.css");
+
 
 
 /* =========================

@@ -1,0 +1,338 @@
+/* =========================================
+   MODAL PEDIDOS
+========================================= */
+
+.modal_pedidos {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1rem;
+
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+
+  z-index: 9999;
+
+  animation: modalPop 0.2s ease;
+}
+
+
+/* =========================================
+   CONTENIDO MODAL
+========================================= */
+
+.modal-content__pedidos {
+  position: relative;
+
+  width: min(900px, 100%);
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  padding: 2rem;
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.18);
+
+  animation: modalPop 0.25s ease;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.modal-content__pedidos h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  color: #1e293b;
+
+  margin-bottom: 1.5rem;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  padding-bottom: 0.8rem;
+}
+
+
+/* =========================================
+   BOTÓN CERRAR
+========================================= */
+
+.cerrar {
+  position: absolute;
+
+  top: 18px;
+  right: 22px;
+
+  font-size: 2rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  color: #64748b;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cerrar:hover {
+  color: #ef4444;
+  transform: scale(1.08);
+}
+
+
+/* =========================================
+   CONTENIDO DETALLES
+========================================= */
+
+#detallePedidos h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  color: #334155;
+
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+.detalle-cliente {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(240px, 1fr));
+
+  gap: 1rem;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 16px;
+
+  padding: 1.5rem;
+
+  margin-bottom: 1.5rem;
+}
+
+
+/* título interno */
+
+.detalle-cliente h3 {
+  grid-column: 1 / -1;
+
+  margin-top: 0;
+}
+
+
+/* datos */
+
+.detalle-cliente p {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.3rem;
+
+  padding: 0.8rem;
+
+  background: #ffffff;
+
+  border-radius: 12px;
+
+  border: 1px solid #edf2f7;
+
+  color: #475569;
+
+  font-size: 0.95rem;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.detalle-cliente p:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 18px rgba(15, 23, 42, 0.05);
+}
+
+.detalle-cliente strong {
+  color: #0f172a;
+}
+
+/* =========================================
+   TABLA PRODUCTOS
+========================================= */
+
+.tabla-detalles {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  overflow: hidden;
+
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  margin-top: 1rem;
+}
+
+
+/* header */
+
+.tabla-detalles thead {
+  background: #f1f5f9;
+}
+
+.tabla-detalles th {
+  padding: 1rem;
+
+  text-align: center;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  color: #334155;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+
+/* body */
+
+.tabla-detalles td {
+  padding: 1rem;
+
+  text-align: center;
+
+  color: #475569;
+
+  font-size: 0.93rem;
+
+  border-bottom: 1px solid #edf2f7;
+
+  vertical-align: middle;
+}
+
+/* hover fila */
+
+.tabla-detalles tbody tr {
+  transition: background 0.2s ease;
+}
+
+.tabla-detalles tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* primera columna */
+
+.tabla-detalles td:first-child,
+.tabla-detalles th:first-child {
+  text-align: left;
+
+  padding-left: 1.3rem;
+
+  font-weight: 500;
+
+  color: #1e293b;
+}
+
+/* =========================================
+   TOTAL
+========================================= */
+
+#detallePedidos>h3:last-of-type {
+  margin-top: 1.5rem;
+
+  padding: 1rem 1.2rem;
+
+  background: #eff6ff;
+
+  border: 1px solid #bfdbfe;
+
+  border-radius: 14px;
+
+  color: #1d4ed8;
+
+  text-align: right;
+
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   MENSAJE INFORMATIVO
+========================================= */
+
+#detallePedidos small {
+  display: block;
+
+  margin-top: 1rem;
+
+  color: #64748b;
+
+  font-size: 0.85rem;
+
+  text-align: center;
+}
+
+/* =========================================
+   BOTÓN CERRAR
+========================================= */
+
+.cerrar {
+  position: absolute;
+
+  top: 18px;
+  right: 22px;
+
+  font-size: 2rem;
+
+  cursor: pointer;
+
+  color: #64748b;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cerrar:hover {
+  color: #ef4444;
+
+  transform: scale(1.08);
+}
+
+/* =========================================
+   SCROLL
+========================================= */
+
+.modal-content__pedidos::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content__pedidos::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* =========================================
+   UTILIDAD
+========================================= */
+
+.hidden {
+  display: none;
+}

@@ -1,32 +1,31 @@
-/* Estilos del botón hamburguesa */
-.hamburger-btn {
-    display: none;
-    /* Oculto en desktop */
-    position: fixed;
-    top: 3%;
-    right: 20px;
-    z-index: 1001;
-    width: 40px;
-    height: 30px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.hamburger-btn span {
-    display: block;
-    width: 100%;
-    height: 4px;
-    background: #f6f4f8;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
 /* --- Responsive --- */
 @media (width <=768px) {
+
+    .hamburger-btn {
+        display: none;
+        /* Oculto en desktop */
+        position: fixed;
+        top: 3%;
+        right: 20px;
+        z-index: 1001;
+        width: 40px;
+        height: 30px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .hamburger-btn span {
+        display: block;
+        width: 100%;
+        height: 4px;
+        background: #f6f4f8;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
 
     /* Panel lateral */
     .panel-lateral {
@@ -117,9 +116,17 @@
     /* area productos */
     .barra-productos {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         padding: .5rem;
         margin: 0;
+    }
+
+    .barra-productos h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0;
+        letter-spacing: 0.3px;
     }
 
     .barra-productos input[type="text"] {
@@ -137,6 +144,27 @@
         text-align: center;
     }
 
+    .filtros-ventas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1.2rem 1.4rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .filtros-ventas h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0;
+        letter-spacing: 0.3px;
+    }
+
     .filtros-estadisticas {
         padding: .5rem;
     }
@@ -146,7 +174,7 @@
         width: 100%;
     }
 
-    .panel-estadisticas button {   
+    .panel-estadisticas button {
         font-size: .8rem;
     }
 
@@ -186,18 +214,6 @@
         padding: 0;
     }
 
-    .busqueda-avanzada__inputs {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-    }
-
-    .busqueda-avanzada__interacciones {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-    }
-
     .area-contenido {
         flex: 1;
         padding: 0;
@@ -233,25 +249,162 @@
         justify-content: center;
         align-content: center;
     }
+
+    .modal-content__pedidos {
+        padding: 1.3rem;
+        border-radius: 14px;
+    }
+
+    .modal-content__pedidos h2 {
+        font-size: 1.2rem;
+    }
+
+    #detallePedidos {
+        font-size: 0.9rem;
+    }
+
+    .cerrar {
+        font-size: 1.7rem;
+        top: 14px;
+        right: 18px;
+    }
+
+    /* Overlay */
+    .modal_pedidos {
+        align-items: flex-start;
+
+        padding:
+            1rem 0.7rem;
+
+        overflow-y: auto;
+    }
+
+    /* Modal */
+    .modal-content__pedidos {
+        width: 100%;
+
+        max-height: unset;
+
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        border-radius: 16px;
+
+        padding: 1.2rem;
+    }
+
+    /* Header */
+    .modal-content__pedidos h2 {
+        font-size: 1.25rem;
+
+        padding-right: 2rem;
+
+        line-height: 1.4;
+
+        margin-bottom: 1rem;
+    }
+
+    /* Botón cerrar */
+    .cerrar {
+        top: 14px;
+        right: 16px;
+
+        font-size: 1.7rem;
+    }
+
+    /* Bloque cliente */
+    .detalle-cliente {
+        grid-template-columns: 1fr;
+
+        gap: 0.8rem;
+
+        padding: 1rem;
+
+        border-radius: 14px;
+    }
+
+    .detalle-cliente p {
+        padding: 0.75rem;
+
+        font-size: 0.9rem;
+    }
+
+    .detalle-cliente strong {
+        font-size: 0.92rem;
+    }
+
+    /* Títulos internos */
+    #detallePedidos h3 {
+        font-size: 1rem;
+
+        margin-top: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    /* Tabla responsive */
+    .tabla-detalles {
+        overflow-x: auto;
+
+        white-space: nowrap;
+
+        border-radius: 14px;
+    }
+
+    .tabla-detalles table {
+        min-width: 650px;
+    }
+
+    .tabla-detalles th,
+    .tabla-detalles td {
+        padding: 0.8rem;
+
+        font-size: 0.88rem;
+    }
+
+    .tabla-detalles td:first-child,
+    .tabla-detalles th:first-child {
+        padding-left: 1rem;
+    }
+
+    /* Total */
+    #detallePedidos>h3:last-of-type {
+        font-size: 1rem;
+
+        text-align: center;
+
+        padding: 0.9rem 1rem;
+    }
+
+    /* Texto informativo */
+    #detallePedidos small {
+        font-size: 0.8rem;
+
+        line-height: 1.4;
+    }
+
+    /* Scroll personalizado */
+    .tabla-detalles::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .tabla-detalles::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+
+        border-radius: 10px;
+    }
 }
 
 @media (1024px <=width <=1440px) {
-    .floating-btn {
-        bottom: 10%;
-        right: 3%;
-        width: 10%;
-        height: 5%;
-        font-size: 12px;
-        padding: 0;
-    }
-
-    dialog {
-        border: none;
-        border-radius: 8px;
-        padding: 1rem;
-        max-width: 700px;
-        width: 90%;
-        margin: auto;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    .filtros-ventas {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1.2rem 1.4rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
     }
 }
