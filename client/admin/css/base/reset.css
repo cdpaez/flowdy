@@ -23,13 +23,15 @@ body {
 }
 
 header {
-  background: #2c3e50;
-  color: white;
+  background: var(--bg-color-primary);
+  color: var(--text-color-secondary);
   padding: 1rem 2rem;
-  font-size: clamp(0.8rem, 1.8vw, 3rem);
+
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-family: titulo, sans-serif;
+
   height: clamp(60px, 4vw, 200px);
   flex-shrink: 0;
-  font-family: sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -32,6 +32,7 @@
 
 #tabla-pedidos thead {
   background: #1f2937;
+  font-family: texto-tablas, sans-serif;
 }
 
 #tabla-pedidos th {

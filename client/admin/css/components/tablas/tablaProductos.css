@@ -7,8 +7,11 @@
   width: 100%;
   border-collapse: collapse;
   background-color: #ecf0f1;
-  border-radius: 8px;
   font-size: clamp(.8rem, .9vw, 2rem);
+}
+
+.tabla-productos thead {
+  font-family: texto-tablas, sans-serif;
 }
 
 .tabla-productos th,

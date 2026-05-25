@@ -1,0 +1,15 @@
+@font-face {
+    font-family: titulo;
+    src: url('../../assets/fonts/LEMONMILK-Regular.otf') format('truetype');
+    font-weight: normal;
+}
+@font-face {
+    font-family: subtitulo;
+    src: url('../../assets/fonts/AlteHaasGroteskRegular.ttf') format('truetype');
+    font-weight: normal;
+}
+@font-face {
+    font-family: texto-tablas;
+    src: url('../../assets/fonts/Quicksand_Book.otf') format('truetype');
+    font-weight: normal;
+}
