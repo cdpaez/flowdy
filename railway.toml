@@ -1,9 +1,9 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "npm install"
+buildCommand = "pnpm install"
 
 [deploy]
-startCommand = "npm install && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm start"
+startCommand = "pnpm install && pnpm sequelize-cli db:migrate && pnpm sequelize-cli db:seed:all && pnpm start"
 
 # Servir los archivos estáticos del frontend
 [deploy.static]
