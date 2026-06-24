@@ -1,14 +1,17 @@
 /* --- Responsive --- */
-@media (width <=768px) {
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 0.6rem;
+        text-align: center;
+    }
 
     .hamburger-btn {
-        display: none;
-        /* Oculto en desktop */
+        display: flex;
         position: fixed;
         top: 3%;
         right: 20px;
         z-index: 1001;
-        width: 40px;
+        width: 5px;
         height: 30px;
         background: transparent;
         border: none;
@@ -16,6 +19,13 @@
         padding: 0;
         flex-direction: column;
         justify-content: space-between;
+    }
+
+    .hamburger-btn.active {
+
+        width: 40px;
+        height: 30px;
+
     }
 
     .hamburger-btn span {
@@ -80,10 +90,6 @@
 
     #logout-btn:hover {
         background: rgba(239, 68, 68, 0.3);
-    }
-
-    .hamburger-btn {
-        display: flex;
     }
 
     .panel-lateral {
@@ -205,15 +211,6 @@
     }
 
     /* bloque encargado de los estilos en operador */
-    .floating-btn {
-        bottom: 10%;
-        right: 3%;
-        width: 20%;
-        height: 5%;
-        font-size: 1rem;
-        padding: 0;
-    }
-
     .area-contenido {
         flex: 1;
         padding: 0;
@@ -223,50 +220,9 @@
         max-width: 768px;
         width: 100vw;
     }
-
-    .actas h2 {
-        font-size: clamp(1.5rem, 1vw, 2rem);
-    }
-
-    #actaForm {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .fieldset-container {
-        width: 100%;
-    }
-
-    .actas__cliente,
-    .actas__equipos,
-    .actas__hardware,
-    .actas__software,
-    .actas__adicionales {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-    }
-
-    .modal-content__pedidos {
-        padding: 1.3rem;
-        border-radius: 14px;
-    }
-
-    .modal-content__pedidos h2 {
-        font-size: 1.2rem;
-    }
-
+    
     #detallePedidos {
         font-size: 0.9rem;
-    }
-
-    .cerrar {
-        font-size: 1.7rem;
-        top: 14px;
-        right: 18px;
     }
 
     /* Overlay */
@@ -393,20 +349,24 @@
         border-radius: 10px;
     }
 }
-
-@media (1024px <=width <=1440px) {
-    .filtros-ventas {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 1.2rem 1.4rem;
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 18px;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+@media (min-width: 769px) and (max-width: 1440px) {
+    header h1 {
+        font-size: 2rem;
+        text-align: center;
     }
+
+    .hamburger-btn {
+        display: none;
+    }
+}
+
+@media (min-width: 1441px) {
+    header h1 {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+
     .hamburger-btn {
         display: none;
     }
