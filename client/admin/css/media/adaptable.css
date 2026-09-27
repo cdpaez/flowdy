@@ -220,7 +220,7 @@
         max-width: 768px;
         width: 100vw;
     }
-    
+
     #detallePedidos {
         font-size: 0.9rem;
     }
@@ -349,7 +349,9 @@
         border-radius: 10px;
     }
 }
+
 @media (min-width: 769px) and (max-width: 1440px) {
+
     header h1 {
         font-size: 2rem;
         text-align: center;
@@ -357,6 +359,19 @@
 
     .hamburger-btn {
         display: none;
+    }
+
+    .filtros-ventas {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1.2rem 1.4rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
     }
 }
 
@@ -369,5 +384,18 @@
 
     .hamburger-btn {
         display: none;
+    }
+
+    .filtros-ventas {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1.2rem 1.4rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
     }
 }
