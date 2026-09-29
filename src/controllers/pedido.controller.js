@@ -62,7 +62,7 @@ const crearPedido = async (req, res) => {
 
     // Obtener estado "pendiente"
     const estadoPendiente = await EstadoPedido.findOne({
-      where: { nombre: 'pendiente' },
+      where: { nombre: 'Pendiente' },
       transaction: t
     });
 
